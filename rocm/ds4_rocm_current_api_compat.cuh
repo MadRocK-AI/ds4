@@ -320,3 +320,8 @@ extern "C" int ds4_gpu_routed_moe_set_selected_override(
     g_routed_moe_selected_override_n = n_selected;
     return 1;
 }
+
+extern "C" void ds4_rocm_halo_set_model(bool enabled) {
+    const char *policy = getenv("DS4_ROCM_HALO_PREFILL");
+    g_halo_prefill_model = enabled && !(policy && policy[0] == '0');
+}

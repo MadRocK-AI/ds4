@@ -245,6 +245,13 @@ extern "C" int ds4_gpu_attention_prefill_raw_heads_tensor(ds4_gpu_tensor *heads,
         !g_quality_mode &&
         ((window != 0u ? window : n_tokens) <= 768u)) {
         dim3 grid(n_tokens, (n_head + 7u) / 8u, 1);
+        if (g_halo_prefill_model && !g_glm_model && !g_ssd_streaming_mode && ds4_rocm_is_gfx1151() &&
+            ds4_rocm_halo_static_query_shape(n_tokens, 0, window, 1, n_head, head_dim)) {
+            halo_static_query::static_q_reg_kernel<<<grid, 256>>>((float *)heads->ptr,
+                sinks, (const float *)q->ptr, (const float *)raw_kv->ptr,
+                (const float *)raw_kv->ptr, n_tokens, 0, window, 1, n_head, head_dim);
+            return cuda_ok(cudaGetLastError(), "Halo static query launch");
+        }
         attention_static_mixed_heads8_online_kernel<<<grid, 256>>>((float *)heads->ptr,
                                                                    sinks,
                                                                    (const float *)q->ptr,
@@ -372,6 +379,16 @@ static int attention_decode_batch_launch(
     if (use_wmma_ring && !use_comp_mask && n_tokens > 1u &&
         head_dim == 512u && fast_window_attention) {
         dim3 grid(n_tokens, (n_head + 31u) / 32u, 1);
+        if (g_halo_prefill_model && !g_glm_model && !g_ssd_streaming_mode && ds4_rocm_is_gfx1151() &&
+            ds4_rocm_halo_direct_qk_shape(n_tokens, pos0, n_raw, raw_cap, raw_start,
+                n_comp, 0, window, ratio, n_head, head_dim, 0)) {
+            halo_direct_qk::bdqk_native<2, 32><<<grid, 512>>>((float *)heads->ptr,
+                sinks, (const float *)q->ptr, (const float *)raw_kv->ptr,
+                n_comp ? (const float *)comp_kv->ptr : (const float *)raw_kv->ptr,
+                NULL, n_tokens, pos0, n_raw, raw_cap, raw_start, n_comp, 0,
+                window, ratio, n_head, head_dim);
+            return cuda_ok(cudaGetLastError(), "Halo direct QK ring launch");
+        }
         attention_mixed_heads16_wmma_kernel<2, 32><<<grid, 512>>>((float *)heads->ptr,
                                                                   sinks,
                                                                   (const float *)q->ptr,
@@ -577,6 +594,16 @@ extern "C" int ds4_gpu_attention_indexed_mixed_batch_heads_tensor(
                 const bool use_vec2 =
                         ds4_rocm_gfx1151_flag("DS4_ROCM_ATTN_F32_VEC2");
                 if (use_vec2) {
+                    if (g_halo_prefill_model && !g_glm_model && !g_ssd_streaming_mode && ds4_rocm_is_gfx1151() &&
+                        ds4_rocm_halo_direct_qk_shape(n_tokens, pos0, n_raw, raw_cap, raw_start,
+                            n_comp, top_k, window, ratio, n_head, head_dim, 1)) {
+                        halo_direct_qk::bdqk_native<1, 32, true><<<grid, 512>>>((float *)heads->ptr,
+                            sinks, (const float *)q->ptr, (const float *)raw_kv->ptr,
+                            (const float *)comp_kv->ptr, topk_ptr, n_tokens, pos0,
+                            n_raw, raw_cap, raw_start, n_comp, top_k, window, ratio,
+                            n_head, head_dim);
+                        return cuda_ok(cudaGetLastError(), "Halo direct QK indexed launch");
+                    }
                     attention_mixed_heads16_wmma_kernel<1, 32, true><<<grid, 512>>>((float *)heads->ptr,
                                                                             sinks,
                                                                             (const float *)q->ptr,
@@ -883,6 +910,15 @@ static int attention_prefill_mixed_launch(
                                                                       head_dim);
         } else {
             dim3 grid(n_tokens, (n_head + 7u) / 8u, 1);
+            if (g_halo_prefill_model && !g_glm_model && !g_ssd_streaming_mode &&
+                ds4_rocm_is_gfx1151() &&
+                ds4_rocm_halo_static_query_shape(n_tokens, n_comp, window, ratio, n_head, head_dim)) {
+                halo_static_query::static_q_reg_kernel<<<grid, 256>>>((float *)heads->ptr,
+                    sinks, (const float *)q->ptr, (const float *)raw_kv->ptr,
+                    n_comp ? (const float *)comp_kv->ptr : (const float *)raw_kv->ptr,
+                    n_tokens, n_comp, window, ratio, n_head, head_dim);
+                return cuda_ok(cudaGetLastError(), "Halo mixed static query launch");
+            }
             attention_static_mixed_heads8_online_kernel<<<grid, 256>>>((float *)heads->ptr,
                                                                        sinks,
                                                                        (const float *)q->ptr,

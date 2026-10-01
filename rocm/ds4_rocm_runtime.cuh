@@ -34,6 +34,7 @@ static int g_rocblas_attention_b_solution_disabled;
 #endif
 static int g_quality_mode;
 static int g_glm_model;
+static int g_halo_prefill_model;
 
 enum {
     DS4_ROCM_N_EXPERT = 256u,

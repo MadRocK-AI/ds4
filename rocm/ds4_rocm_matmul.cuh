@@ -547,7 +547,7 @@ static int cuda_matmul_q8_0_tensor_labeled(ds4_gpu_tensor *out, const void *mode
             return cuda_ok(cudaGetLastError(),
                            "matmul_q8_0 f32 tiny exact8 launch");
         }
-        if (!g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
+        if (g_halo_prefill_model && !g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
             ds4_rocm_is_gfx1151() &&
             ((uintptr_t)x->ptr & 7u) == 0u &&
             ds4_rocm_halo_q8_shape(n_tok, in_dim, out_dim)) {
@@ -568,7 +568,7 @@ static int cuda_matmul_q8_0_tensor_labeled(ds4_gpu_tensor *out, const void *mode
                 return cuda_ok(cudaGetLastError(), "Halo cooperative Q8 launch");
             }
         }
-        if (!g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
+        if (g_halo_prefill_model && !g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
             ds4_rocm_is_gfx1151() &&
             ((uintptr_t)x->ptr & 7u) == 0u &&
             ds4_rocm_halo_qa_shape(n_tok, in_dim, out_dim)) {
@@ -1011,7 +1011,7 @@ static int cuda_matmul_q8_0_hc_expand_tensor_labeled(
     return cuda_ok(cudaGetLastError(), "matmul_q8_0_hc_expand rows launch");
 }
 
-extern "C" int ds4_gpu_matmul_f16_tensor(ds4_gpu_tensor *out, const void *model_map, uint64_t model_size, uint64_t weight_offset, uint64_t in_dim, uint64_t out_dim, const ds4_gpu_tensor *x, uint64_t n_tok) {
+static int halo_matmul_f16_impl(ds4_gpu_tensor *out, const void *model_map, uint64_t model_size, uint64_t weight_offset, uint64_t in_dim, uint64_t out_dim, const ds4_gpu_tensor *x, uint64_t n_tok, const ds4_gpu_tensor *rms_input, float rms_eps) {
     if (!out || !x || !model_map ||
         in_dim == 0u || out_dim == 0u || n_tok == 0u ||
         in_dim > UINT32_MAX || out_dim > UINT32_MAX || n_tok > UINT32_MAX) return 0;
@@ -1037,7 +1037,12 @@ extern "C" int ds4_gpu_matmul_f16_tensor(ds4_gpu_tensor *out, const void *model_
         const uint64_t xh_count = n_tok * in_dim;
         __half *xh = (__half *)cuda_tmp_alloc(xh_count * sizeof(__half), "f16 gemm activations");
         if (!xh) return 0;
-        f32_to_f16_kernel<<<(xh_count + 255) / 256, 256>>>(xh, (const float *)x->ptr, xh_count);
+        if (rms_input) {
+            halo_hc::hch_rms_half_kernel<<<(uint32_t)n_tok, 256>>>(xh,
+                (const float *)rms_input->ptr, (uint32_t)in_dim, (uint32_t)n_tok, rms_eps);
+        } else {
+            f32_to_f16_kernel<<<(xh_count + 255) / 256, 256>>>(xh, (const float *)x->ptr, xh_count);
+        }
         if (!cuda_ok(cudaGetLastError(), "f16 activation convert launch")) return 0;
 #ifdef __HIP_PLATFORM_AMD__
         if ((n_tok == 2048u || n_tok == 4096u) &&
@@ -1178,6 +1183,41 @@ extern "C" int ds4_gpu_matmul_f16_tensor(ds4_gpu_tensor *out, const void *model_
     }
     matmul_f16_kernel<<<grid, 256>>>((float *)out->ptr, w, (const float *)x->ptr, in_dim, out_dim, n_tok);
     return cuda_ok(cudaGetLastError(), "matmul_f16 launch");
+}
+
+extern "C" int ds4_gpu_matmul_f16_tensor(ds4_gpu_tensor *out, const void *map,
+        uint64_t model_size, uint64_t offset, uint64_t k, uint64_t n,
+        const ds4_gpu_tensor *x, uint64_t rows) {
+    return halo_matmul_f16_impl(out, map, model_size, offset, k, n, x, rows, nullptr, 0.0f);
+}
+
+static bool halo_ranges_disjoint(const void *a, uint64_t an, const void *b, uint64_t bn) {
+    const uintptr_t x = (uintptr_t)a, y = (uintptr_t)b;
+    return x && y && an <= UINTPTR_MAX - x && bn <= UINTPTR_MAX - y &&
+        (x + an <= y || y + bn <= x);
+}
+
+extern "C" int ds4_rocm_halo_hc_project(ds4_gpu_tensor *out, ds4_gpu_tensor *norm,
+        const void *map, uint64_t model_size, uint64_t offset, uint64_t k, uint64_t n,
+        const ds4_gpu_tensor *x, uint32_t rows, float eps) {
+    /* Only the native batched BLAS branch consumes half activations. Its
+     * dispatch, weight mapping, temporary allocation and GEMM stay unchanged.
+     * The normalization scratch is dead after this HC-only call. */
+    const uint64_t xb = (uint64_t)rows * 16384u * sizeof(float);
+    const uint64_t ob = (uint64_t)rows * 24u * sizeof(float);
+    const bool select = g_halo_prefill_model && ds4_rocm_halo_hc_shape(rows, k, n) &&
+        ds4_rocm_is_gfx1151() && !g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
+        g_cublas_ready && isfinite(eps) && eps > 0.0f && out && norm && x &&
+        out->bytes >= ob && norm->bytes >= xb && x->bytes >= xb &&
+        !(((uintptr_t)x->ptr | (uintptr_t)norm->ptr | (uintptr_t)out->ptr) & 3u) &&
+        halo_ranges_disjoint(norm->ptr, xb, x->ptr, xb) &&
+        halo_ranges_disjoint(out->ptr, ob, x->ptr, xb) &&
+        halo_ranges_disjoint(out->ptr, ob, norm->ptr, xb);
+    if (select) {
+        return halo_matmul_f16_impl(out, map, model_size, offset, k, n, norm, rows, x, eps);
+    }
+    return ds4_gpu_rms_norm_plain_rows_tensor(norm, x, (uint32_t)k, rows, eps) &&
+        ds4_gpu_matmul_f16_tensor(out, map, model_size, offset, k, n, norm, rows);
 }
 
 extern "C" int ds4_gpu_matmul_f16_pair_tensor(

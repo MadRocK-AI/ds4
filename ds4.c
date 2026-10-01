@@ -30519,6 +30519,13 @@ static bool metal_graph_hc_rms_scale_project(
         return true;
     }
 #endif
+#if defined(DS4_ROCM_BUILD)
+    if (weight->type == DS4_TENSOR_F16) {
+        return ds4_rocm_halo_hc_project(out, norm_scratch, model->map, model->size,
+                weight->abs_offset, in_dim, 2u * DS4_N_HC + DS4_N_HC * DS4_N_HC,
+                x, n_tokens, DS4_RMS_EPS) != 0;
+    }
+#endif
     bool ok = ds4_gpu_rms_norm_plain_rows_tensor(
                   norm_scratch,
                   x,
@@ -71204,6 +71211,7 @@ static int ds4_engine_open_internal(ds4_engine **out,
              */
             ds4_gpu_set_glm_model(
                     DS4_MODEL_FAMILY == DS4_MODEL_FAMILY_GLM_DSA);
+            ds4_rocm_halo_set_model(false);
 #endif
             (void)ds4_gpu_set_model_fd(e->model.fd);
 
@@ -71240,6 +71248,10 @@ static int ds4_engine_open_internal(ds4_engine **out,
         }
         ds4_gpu_set_quality(e->quality);
         ds4_gpu_set_glm_model(DS4_MODEL_FAMILY == DS4_MODEL_FAMILY_GLM_DSA);
+#ifdef DS4_ROCM_BUILD
+        ds4_rocm_halo_set_model(DS4_MODEL_FAMILY == DS4_MODEL_FAMILY_DEEPSEEK4 &&
+                DS4_N_LAYER == 43 && DS4_N_EMBD == 4096 && DS4_N_HC == 4);
+#endif
         ds4_gpu_set_ssd_streaming(e->ssd_streaming);
         if (!ds4_engine_configure_streaming_auto_cache(e, opt->context_size)) {
             ds4_engine_close(e);
