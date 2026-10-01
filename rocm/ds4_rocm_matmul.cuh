@@ -547,6 +547,38 @@ static int cuda_matmul_q8_0_tensor_labeled(ds4_gpu_tensor *out, const void *mode
             return cuda_ok(cudaGetLastError(),
                            "matmul_q8_0 f32 tiny exact8 launch");
         }
+        if (!g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
+            ds4_rocm_is_gfx1151() &&
+            ((uintptr_t)x->ptr & 7u) == 0u &&
+            ds4_rocm_halo_q8_shape(n_tok, in_dim, out_dim)) {
+            const uint64_t count = n_tok * in_dim;
+            _Float16 *xh = (_Float16 *)cuda_tmp_alloc(
+                count * sizeof(_Float16), "Halo cooperative Q8 activations");
+            /* No work has been queued on a failed allocation. Keep the native
+             * route available. Once conversion launches, errors must propagate. */
+            if (xh) {
+                halo_q8::d_convert_x<<<(count + 511u) / 512u, 256>>>(
+                    (const float *)x->ptr, xh, count);
+                if (!cuda_ok(cudaGetLastError(), "Halo Q8 conversion launch")) return 0;
+                dim3 grid((out_dim + 127u) / 128u, (n_tok + 127u) / 128u, 1);
+                halo_q8::d_cooperative_k16<<<grid, 256>>>(
+                    (float *)out->ptr, (const unsigned char *)wptr, xh,
+                    (uint32_t)n_tok, (uint32_t)in_dim, (uint32_t)out_dim,
+                    blocks * 34u);
+                return cuda_ok(cudaGetLastError(), "Halo cooperative Q8 launch");
+            }
+        }
+        if (!g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
+            ds4_rocm_is_gfx1151() &&
+            ((uintptr_t)x->ptr & 7u) == 0u &&
+            ds4_rocm_halo_qa_shape(n_tok, in_dim, out_dim)) {
+            dim3 grid((out_dim + 127u) / 128u, (n_tok + 63u) / 64u, 1);
+            halo_qa::native_qa_k16_kernel<128u, 8u><<<grid, 256>>>(
+                (float *)out->ptr, (const unsigned char *)wptr,
+                (const float *)x->ptr, (uint32_t)n_tok,
+                (uint32_t)in_dim, (uint32_t)out_dim, blocks * 34u);
+            return cuda_ok(cudaGetLastError(), "Halo Q-A K16 launch");
+        }
         if (!g_quality_mode && (in_dim % 32u) == 0u &&
             out_dim >= 1024u &&
             n_tok >= 256u &&

@@ -133,6 +133,7 @@ extern "C" int ds4_gpu_dspark_gfx1151_fast_path(void) {
 }
 
 #include "rocm/ds4_rocm_q8.cuh"
+#include "rocm/ds4_rocm_halo_q8.cuh"
 
 #include "rocm/ds4_rocm_norm_rope.cuh"
 
