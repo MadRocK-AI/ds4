@@ -548,6 +548,60 @@ static int next_frontier(const bench_config *c, int cur) {
     return next;
 }
 
+/* Optional qualification readbacks run outside the prefill/decode timers.
+ * Keep binary payloads local: they contain user prompt and model state. */
+static int write_qualification_payload(ds4_engine *engine, ds4_session *session,
+        int frontier, const char *phase, const int *tokens, int token_count) {
+    const char *dir = getenv("DS4_BENCH_DUMP_PAYLOAD_DIR");
+    if (!dir) return 0;
+    char path[PATH_MAX], err[256];
+    int n = snprintf(path, sizeof(path), "%s/frontier_%06d.%s.state", dir, frontier, phase);
+    if (n <= 0 || (size_t)n >= sizeof(path)) return 1;
+    FILE *fp = fopen(path, "wb");
+    if (!fp) return 1;
+    int rc = ds4_session_save_payload(session, fp, err, sizeof(err));
+    if (fclose(fp) != 0) rc = 1;
+    if (rc != 0) {
+        fprintf(stderr, "ds4-bench: qualification state dump failed (%s)\n", phase);
+        return 1;
+    }
+    int vocab = ds4_engine_vocab_size(engine);
+    float *logits = malloc((size_t)vocab * sizeof(float));
+    if (!logits || ds4_session_copy_logits(session, logits, vocab) != vocab) {
+        free(logits);
+        return 1;
+    }
+    n = snprintf(path, sizeof(path), "%s/frontier_%06d.%s.logits.f32", dir, frontier, phase);
+    if (n <= 0 || (size_t)n >= sizeof(path)) { free(logits); return 1; }
+    fp = fopen(path, "wb");
+    if (!fp) { free(logits); return 1; }
+    rc = fwrite(logits, sizeof(float), (size_t)vocab, fp) != (size_t)vocab;
+    if (fclose(fp) != 0) rc = 1;
+    free(logits);
+    if (rc) return 1;
+    n = snprintf(path, sizeof(path), "%s/frontier_%06d.%s.tokens.i32", dir, frontier, phase);
+    if (n <= 0 || (size_t)n >= sizeof(path)) return 1;
+    fp = fopen(path, "wb");
+    if (!fp) return 1;
+    rc = token_count != 0 && fwrite(tokens, sizeof(int), (size_t)token_count, fp) != (size_t)token_count;
+    if (fclose(fp) != 0) rc = 1;
+    return rc;
+}
+
+static int write_qualification_timing(int frontier, int previous, int generated,
+        double prefill_s, double generation_s, double first_s, double steady_s) {
+    const char *path = getenv("DS4_BENCH_TIMING_CSV");
+    if (!path) return 0;
+    FILE *fp = fopen(path, previous == 0 ? "wb" : "ab");
+    if (!fp) return 1;
+    if (previous == 0)
+        fputs("frontier,prefill_tokens,gen_tokens,prefill_s,generation_s,first_token_s,steady_s\n", fp);
+    int rc = fprintf(fp, "%d,%d,%d,%.12f,%.12f,%.12f,%.12f\n", frontier,
+        frontier - previous, generated, prefill_s, generation_s, first_s, steady_s) < 0;
+    if (fclose(fp) != 0) rc = 1;
+    return rc;
+}
+
 static void log_context_memory(ds4_backend backend,
                                int         ctx_size,
                                uint32_t    prefill_chunk,
@@ -843,6 +897,11 @@ int main(int argc, char **argv) {
             break;
         }
 
+        if (write_qualification_payload(engine, session, frontier, "prefill", prefix.v, frontier)) {
+            rc = 1;
+            break;
+        }
+
         const bool need_restore_after_generation =
             cfg.gen_tokens > 0 && frontier < cfg.ctx_max;
         bool have_snapshot = false;
@@ -875,9 +934,13 @@ int main(int argc, char **argv) {
         double gen_steady_sec = 0.0;
         int gen_first_tokens = 0;
         int gen_done = 0;
-        int *gen_token_buf = cfg.show_output && cfg.gen_tokens > 0
+        int *gen_token_buf = (cfg.show_output || getenv("DS4_BENCH_DUMP_PAYLOAD_DIR")) && cfg.gen_tokens > 0
             ? malloc((size_t)cfg.gen_tokens * sizeof(gen_token_buf[0]))
             : NULL;
+        if (cfg.gen_tokens > 0 && getenv("DS4_BENCH_DUMP_PAYLOAD_DIR") && !gen_token_buf) {
+            rc = 1;
+            break;
+        }
         int gen_token_count = 0;
         int cuda_profile_start = -1;
         int cuda_profile_tokens = 0;
@@ -982,6 +1045,8 @@ int main(int argc, char **argv) {
             }
         }
         const double gen_t1 = bench_now_sec();
+        if (rc == 0 && write_qualification_payload(engine, session, frontier,
+                "decode", gen_token_buf, gen_token_count)) rc = 1;
         if (cfg.show_output && gen_token_buf && gen_token_count > 0) {
             fprintf(stderr, "ds4-bench: gen[ctx=%d] decoded text: \"", frontier);
             for (int i = 0; i < gen_token_count; i++) {
@@ -1014,7 +1079,12 @@ int main(int argc, char **argv) {
             }
         }
 
+        if (need_restore_after_generation && write_qualification_payload(engine,
+                session, frontier, "restored", prefix.v, frontier)) { rc = 1; break; }
+
         const double gen_sec = gen_t1 - gen_t0;
+        if (write_qualification_timing(frontier, previous, gen_done, prefill_sec,
+                gen_sec, gen_first_sec, gen_steady_sec)) { rc = 1; break; }
         const int gen_steady_tokens = gen_done > gen_first_tokens ?
             gen_done - gen_first_tokens : 0;
         fprintf(out,

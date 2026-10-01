@@ -86,3 +86,7 @@ __pycache__/
 
 /tests/test_qwen4_conv_parallel
 /tests/test_q8_prefill_variants
+
+# Local Halo admission and existing SSD sizing harness products.
+/tests/test_halo_shapes
+/tests/test_ssd_cache
