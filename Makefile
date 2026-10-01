@@ -1093,3 +1093,9 @@ clean:
 
 # The active tokenizer includes generated Unicode classes.
 ds4.o ds4_cpu.o ds4_cpu_test_hooks.o: ds4_qwen4_unicode.inc
+
+.PHONY: test-halo-shapes
+tests/test_halo_shapes: tests/test_halo_shapes.c rocm/ds4_rocm_halo_shapes.h
+	$(CC) $(QUALITY_CFLAGS) -o $@ $<
+test-halo-shapes: tests/test_halo_shapes
+	./tests/test_halo_shapes
