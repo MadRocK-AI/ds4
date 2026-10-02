@@ -1,6 +1,6 @@
 # Evidence boundaries
 
-The source/evidence matrix was assembled before selecting public claims. [sources.json](halo/sources.json) binds each component to its original source SHA256, port path/SHA256, historical checkpoint and upstream base. All new integrated GPU entries are **PENDING**. The accompanying source records include transformations such as namespace changes, architecture guards, extracted helpers and new native lifetime bindings; whole-file hash differences are expected.
+The source/evidence matrix was assembled before selecting public claims. [sources.json](halo/sources.json) binds each component to its original source SHA256, port path/SHA256, historical checkpoint and upstream base. New integrated GPU executions remain **NOT RUN**; historical results were accepted by the owner for this private preparation. [Release status](HALO_RELEASE.md) records that decision and the successful local build/link. The accompanying source records include transformations such as namespace changes, architecture guards, extracted helpers and new native lifetime bindings; whole-file hash differences are expected.
 
 ## Historical chain
 
@@ -28,4 +28,4 @@ Do not pool this table with incremental suffix, resident4K, first-load, ordinary
 
 ## New integrated candidate
 
-CPU build, focused CPU checks, ROCm C frontend, production kernel compilation and source/module reconstruction have separate statuses in [qualification](HALO_QUALIFICATION.md). Full SDK linking and GPU numeric/state/restore/decode/cache/memory/performance gates remain pending. The historical table is not a performance claim for this fork.
+CPU build, focused CPU checks, ROCm C frontend, production kernel compilation and source/module reconstruction have separate statuses in [qualification](HALO_QUALIFICATION.md). Full SDK linking passed for all five targets in local WSL. Numerical and performance acceptance uses the documented historical evidence; no new GPU numeric/state/restore/decode/cache/memory/performance result is asserted. The historical table is not a performance claim for this fork.

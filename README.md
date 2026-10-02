@@ -1,6 +1,6 @@
 <p align="center">
 
-> Local Halo prefill candidate based on upstream8db1d1d. The normal ROCm build includes the compatible frozen prefill sources, enabled explicitly with `DS4_ROCM_HALO_PREFILL=1`; native selectors remain the default. The new integrated binary requires GPU requalification. See [Halo scope](docs/HALO.md), [historical evidence](docs/HALO_EVIDENCE.md) and [release gates](docs/HALO_QUALIFICATION.md). The companion is a separate local repository; no public URL is assigned.
+> Local Halo prefill candidate based on upstream8db1d1d. The normal ROCm build includes the compatible frozen prefill sources, enabled explicitly with `DS4_ROCM_HALO_PREFILL=1`; native selectors remain the default. Private release preparation is complete: the normal ROCm build/link passed in WSL and the owner accepted the recorded historical numerical/performance evidence. See [release status](docs/HALO_RELEASE.md) for the exact scope. See [Halo scope](docs/HALO.md), [historical evidence](docs/HALO_EVIDENCE.md) and [release gates](docs/HALO_QUALIFICATION.md). The pinned companion is [msala9/ds4-on-halo](https://github.com/msala9/ds4-on-halo). Both repositories are initially private; the planned official destination is the madrock organization.
 
   <img src="logo.svg" alt="DwarfStar logo" width="220">
 </p>

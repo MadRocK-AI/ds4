@@ -1,6 +1,6 @@
 # Halo prefill candidate
 
-This local fork ports the final compatible Halo prefill chain into the normal ROCm backend. It preserves upstream history from `8db1d1d155cb0400a86a86b9c62d0defb3a6148b`. It has no publication URL. The cleaned integrated binary requires GPU requalification; historical experimental tests qualify their original binaries only.
+This local fork ports the final compatible Halo prefill chain into the normal ROCm backend. It preserves upstream history from `8db1d1d155cb0400a86a86b9c62d0defb3a6148b`. The initial private repository is [msala9/ds4](https://github.com/msala9/ds4), with a future official home planned under madrock. The owner accepted the historical numerical/performance evidence for this preparation. The normal WSL build/link passed; no new GPU run is claimed. See [current release status](HALO_RELEASE.md).
 
 Use the normal build with an existing complete ROCm installation:
 

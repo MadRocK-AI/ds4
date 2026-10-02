@@ -1,6 +1,6 @@
 # Qualifying the cleaned Halo candidate
 
-The offline preparation is separate from GPU release qualification. Historical experimental results do not qualify this executable. Keep `DS4_ROCM_HALO_PREFILL` opt-in until the gates below pass on an exclusive Halo executor. Publication is a separate action.
+The owner accepted the existing historical numerical/performance evidence for the initial private publication on 2026-10-02. Normal gfx1151 ROCm build/link and ELF relocation checks passed locally in WSL. [Current release status](HALO_RELEASE.md) records this decision. The sequence below is retained as a reproduction protocol for future GPU qualification; it does not schedule a new run for this publication. Keep `DS4_ROCM_HALO_PREFILL` opt-in. Untested cases remain explicitly untested.
 
 ## Executed and pending checks
 
@@ -18,14 +18,14 @@ The offline preparation is separate from GPU release qualification. Historical e
 | Ported kernel families | PASS | Production specializations compiled for both architectures; gfx1100 definitions are unreachable registrations |
 | Normal Makefile object recipes | PASS | All10 Halo objects, full runtime and native quantizer for gfx1151/gfx1100; real gfx1100 template entries verified |
 | S4+D2 source reconstruction | PASS | Newly assembled/linked module has original SHA256; no undefined symbols |
-| Complete SDK executable link | PENDING | Offline cache lacks the complete link libraries |
+| Complete SDK executable link | PASS | Five normal ROCm targets in WSL; five relocation checks pass with real SDK libraries. See [build record](halo/release-build.json) |
 | New GPU logits/state/decode/snapshot equality | PENDING | No GPU access in this preparation |
 | Cache demotion, aliases, resource failures and peak memory | PENDING | New host composition needs hardware checks; fault/alias injection is not automated by the benchmark |
 | Ordinary complete prefill/decode timing | PENDING | Run after numerical admission, without payloads or profiler |
 | Metal/CUDA model and SSD inference regressions | SKIP here | Required platform/model executors unavailable; shared changes are guarded by `DS4_ROCM_BUILD` |
 | Full upstream/model suites | PENDING | No claim that `make test` or `make test-rocm` completed |
 
-[Offline records](halo/offline-checks.json) bind actual logs and source identities. [Dependencies](halo/dependencies.json) record the cached compiler, rocWMMA2.2.1 headers and official reference-header commits. The full-runtime checks use configured official headers, not a complete SDK install. A different installed toolchain still needs requalification. Companion parser/clone/build checks are reported in its own verification record.
+[Offline records](halo/offline-checks.json) bind actual logs and source identities. [Dependencies](halo/dependencies.json) record the cached compiler, rocWMMA2.2.1 headers and official reference-header commits. The earlier full-runtime syntax/object checks used configured reference headers. The later full build used real AMD SDK packages and is recorded separately in [release-build.json](halo/release-build.json). A different installed toolchain still needs requalification. Companion parser/clone/build checks are reported in its own verification record.
 
 The original command assertion54 and subsequent TCP tiny-buffer failure were reproduced on a freshly built historical core. WSL rounded requested 50ms to 52ms; Linux stores socket timeouts in timer ticks ([kernel source](https://github.com/torvalds/linux/blob/v6.18/net/core/sock.c#L401)). The corrected command test requires exact restoration of both effective receive/send timeouts, with no tolerance increase. The TCP fixture keeps its 1KB buffers, payloads and deadlines, negotiating 536-byte MSS before connection ([TCP option documentation](https://man7.org/linux/man-pages/man7/tcp.7.html)). Deliberate missing-restoration and serial-send controls still fail. These unit results do not qualify distributed model inference or GPU behavior. Original failures remain in the offline evidence record.
 

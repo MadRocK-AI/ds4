@@ -1,0 +1,258 @@
+{
+  "scope": "Successful local WSL compilation/link and ELF relocation checks; no new model or GPU execution.",
+  "compiled_engine_commit": "34ec09459cc64c1f565dbb2e49744ce7d852d9de",
+  "compiled_companion_commit": "bb95bd220c119a08c40246bb3a966fa914517b1a",
+  "publication_changes": "Documentation and companion pin metadata only; compiled engine source unchanged.",
+  "date": "2026-10-02",
+  "platform": "Linux-6.18.40.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "target": "gfx1151",
+  "status": "PASS_NORMAL_ROCM_BUILD_LINK",
+  "elapsed_seconds": 312.1039481930002,
+  "compiler": {
+    "version": "AMD clang 23.0.0git / HIP 7.15.26333",
+    "source_commit": "8f497e0992fb7513f7f78a6f6b6f1056c375e961",
+    "hipcc_sha256": "7b95d430bb8c4d4237f9b4935dbd6440e2067fde0979cc69bffb26ebd021464c",
+    "clang_sha256": "241bf4da7ec39bc00b68ed74f6be751516d9892ed990e8c7fa372bad18500247"
+  },
+  "executables": {
+    "ds4": {
+      "bytes": 36991616,
+      "sha256": "c7693885f1e869c700febd577b47e587f6e2f4c0e2c676445d020c5f4a53ae98"
+    },
+    "ds4-server": {
+      "bytes": 38257872,
+      "sha256": "8fb4ba153f323d2223d7bea7c886252c3f398956e6fbdb79ebe8390f7f98ee44"
+    },
+    "ds4-bench": {
+      "bytes": 36724280,
+      "sha256": "79cba4f6a937afa2e939b5d117660ab85bbd1d34a993d3b7ba7b82d4a595e4f8"
+    },
+    "ds4-eval": {
+      "bytes": 37081752,
+      "sha256": "5ba610b245277160bb0dfaf642f75fcd7d458d1ce14ea58c7e20b5f959867d4b"
+    },
+    "ds4-agent": {
+      "bytes": 38314632,
+      "sha256": "8cc3dcbb0e5e636c485006a2bb505e474b992cf79078874aca24809a5067f23c"
+    }
+  },
+  "link_validation": {
+    "status": "PASS_LINKED_ELF_AND_RELOCATIONS",
+    "executables": 5,
+    "resolved_library_files": 29,
+    "unresolved_symbols": false
+  },
+  "libraries": [
+    {
+      "name": "libamd_comgr.so.3.3.0",
+      "bytes": 13181720,
+      "sha256": "ff98e63e6b8677eb51376816f3e1169e377ac446e7bf4c5d247683a72f2f59eb"
+    },
+    {
+      "name": "libamdhip64.so.7.15.26333-0000000",
+      "bytes": 28216272,
+      "sha256": "817aeadfd9f62b68831ad89993163c7f1f470f30595e7e0da5fdc942193142a8"
+    },
+    {
+      "name": "libhipblas.so.3.6",
+      "bytes": 937328,
+      "sha256": "24f0ad48d80c8fbdff8a67c89fccc213fb34210247e85da7161d05e076d7c1ef"
+    },
+    {
+      "name": "libhipblaslt.so.1.4",
+      "bytes": 9081728,
+      "sha256": "1e8545626323f9b22c65d36492e1686b831cb85c8f7c8be3fc21c0d6cbb0d055"
+    },
+    {
+      "name": "libhsa-runtime64.so.1.21.0",
+      "bytes": 4895880,
+      "sha256": "69cfd3277b627dec1641166600764d2ee4c34bdfc8519e6ffe58a7e0d51bfbc0"
+    },
+    {
+      "name": "liborigami.so.1.0",
+      "bytes": 560432,
+      "sha256": "33bd6b994fa6ae8eeeecf2d628c18f0eece7bc2bdc9346b7b941073ead7aac65"
+    },
+    {
+      "name": "librocblas.so.5.6",
+      "bytes": 27673472,
+      "sha256": "d05939967b5f1bd184a4b8c1c77509c87a0abae3f0b3d079ba9d68ed1ddc50a5"
+    },
+    {
+      "name": "librocm_kpack.so.0.1.0",
+      "bytes": 339976,
+      "sha256": "bb31da3416c89978478bfd45c3ac47d8fef2eebf41ad59ceff351e4c054c1ee7"
+    },
+    {
+      "name": "librocprofiler-register.so.0.6.0",
+      "bytes": 967760,
+      "sha256": "7166282aacab9f6c8fdcc28ad884e57b6b09cd4e08aead98b8e862a61010e85c"
+    },
+    {
+      "name": "librocroller.so.1.0.0",
+      "bytes": 233751464,
+      "sha256": "0e7f6f32d5177aa04ae0c702f9aabc5d8130e2543b838f2f294786e33c01b469"
+    },
+    {
+      "name": "librocsolver.so.0.11",
+      "bytes": 29471616,
+      "sha256": "0d9307c7a5edede2e6ae75e2f7cd5eb8d462da0564a35f4348a89b212c0f323f"
+    },
+    {
+      "name": "libroctx64.so.4.1.0",
+      "bytes": 7608,
+      "sha256": "ffaadd7b4e0e74e01dab93058bd5a2b237b1058e4ac685640c1aec27bd845ddd"
+    },
+    {
+      "name": "libLLVM.so.23.0git",
+      "bytes": 132274504,
+      "sha256": "1f258534e3b14393fb2d65d6cb6a93fac239727cc1df5b698b6d2b51f78a65d9"
+    },
+    {
+      "name": "libclang-cpp.so.23.0git",
+      "bytes": 89897976,
+      "sha256": "0119f76826759e3f0534bb95bcc28e3e788e3a041e47b89310b3d324197b8ad3"
+    },
+    {
+      "name": "librocm_sysdeps_bz2.so",
+      "bytes": 104016,
+      "sha256": "628d4871ea18e82dcc73b28f45a587f00a7abd4b208b371a713eb2e9d5b95dec"
+    },
+    {
+      "name": "librocm_sysdeps_drm.so.2",
+      "bytes": 360336,
+      "sha256": "f1b274ac80ac1bcd241d70e1f13f9586e3fc83545a357b312890c1722ca68dcf"
+    },
+    {
+      "name": "librocm_sysdeps_drm_amdgpu.so.1",
+      "bytes": 251416,
+      "sha256": "78c1af14962d9ee0e43602d422eb8619b6c825a9b7c8f532308ea1f4108a466f"
+    },
+    {
+      "name": "librocm_sysdeps_elf.so.1",
+      "bytes": 1198616,
+      "sha256": "a51543f71efce0c552ae606fe103b6e4fa4f6b283ba48a762f6d57b880401832"
+    },
+    {
+      "name": "librocm_sysdeps_liblzma.so.5.8.1",
+      "bytes": 218464,
+      "sha256": "15402b36e2fdb0762e0b6590c3470fccec5e80cc8010c84ac4835573d592c02d"
+    },
+    {
+      "name": "librocm_sysdeps_numa.so.1",
+      "bytes": 219056,
+      "sha256": "333b980e3f706f7196c73a33967c7979e9fd47b6d5f5f51ed3990142ef4142cb"
+    },
+    {
+      "name": "librocm_sysdeps_z.so.1.3.2",
+      "bytes": 129576,
+      "sha256": "27361c0c552d2afd5ecf9079f356309ed827e9a27d35f2fc68c7b5e6b5c83199"
+    },
+    {
+      "name": "librocm_sysdeps_zstd.so.1.5.7",
+      "bytes": 879168,
+      "sha256": "5fc4ab0e6899318ece9bea43d3d397d20053418a5e40cb6bc86efe19a801c75e"
+    },
+    {
+      "name": "libc.so.6",
+      "bytes": 2190608,
+      "sha256": "85e64f97e348786a8fb4d9f3d52fec289e2fb86bba20f0731dfe61990525e0f7"
+    },
+    {
+      "name": "libdl.so.2",
+      "bytes": 14408,
+      "sha256": "59d725ca30596a9863f4fa2552a7125f834842abc86b40890231c129358965d2"
+    },
+    {
+      "name": "libgcc_s.so.1",
+      "bytes": 187120,
+      "sha256": "9d339ecb409578d6a5d587e6c537a8f9589b8a13fefba30d167433a4b5758bee"
+    },
+    {
+      "name": "libm.so.6",
+      "bytes": 1198376,
+      "sha256": "1c488db6f4fe8cecb72456bc018de000b7a9b539c2994864b0416b5e8371b3d8"
+    },
+    {
+      "name": "libpthread.so.0",
+      "bytes": 14408,
+      "sha256": "1327fc40710691dbd94e88b6cf4efce27fefe8fbb93f7d1164a75b4dccaea696"
+    },
+    {
+      "name": "librt.so.1",
+      "bytes": 14624,
+      "sha256": "9f3cc59207bcaaac74aaf7aca961f4816f0f4d945e4bd1c3cb98ec516becf161"
+    },
+    {
+      "name": "libstdc++.so.6.0.35",
+      "bytes": 2735712,
+      "sha256": "5bb0d21308f123b6ad46c6f35b42cedfcb8d6d439a53aa3dae04d880aaffdde3"
+    }
+  ],
+  "sdk_packages": [
+    {
+      "Package": "amdrocm-blas-dev10.0",
+      "Version": "10.0.0-4",
+      "url": "https://stable.repo.amd.com/rocm/core/packages/ubuntu2604/pool/main/amdrocm-blas-dev10.0_10.0.0-4_amd64.deb",
+      "actual_sha256": "f338ffc36985b0676ea2144bf8b3cb70f3dc66be8944048c4d1131c1db1c6fce"
+    },
+    {
+      "Package": "amdrocm-blas-host10.0",
+      "Version": "10.0.0-4",
+      "url": "https://stable.repo.amd.com/rocm/core/packages/ubuntu2604/pool/main/amdrocm-blas-host10.0_10.0.0-4_amd64.deb",
+      "actual_sha256": "de191b787c316e7b07e79c255d295e8c0ec22714a933d36cf5be2a00d68da003"
+    },
+    {
+      "Package": "amdrocm-hipblas-common-dev10.0",
+      "Version": "10.0.0-4",
+      "url": "https://stable.repo.amd.com/rocm/core/packages/ubuntu2604/pool/main/amdrocm-hipblas-common-dev10.0_10.0.0-4_amd64.deb",
+      "actual_sha256": "58d9a8ea37919abaac868b430c077cf27d0938fd8e0a4c6ea941bd2b938ea662"
+    },
+    {
+      "Package": "amdrocm-profiler-base10.0",
+      "Version": "10.0.0-4",
+      "url": "https://stable.repo.amd.com/rocm/core/packages/ubuntu2604/pool/main/amdrocm-profiler-base10.0_10.0.0-4_amd64.deb",
+      "actual_sha256": "297742c1786824e5c0b8599581786667ed595dd3c69d648019720a27a55773ef"
+    },
+    {
+      "Package": "amdrocm-math-common10.0",
+      "Version": "10.0.0-4",
+      "url": "https://stable.repo.amd.com/rocm/core/packages/ubuntu2604/pool/main/amdrocm-math-common10.0_10.0.0-4_amd64.deb",
+      "actual_sha256": "bca1e2f18596b1946558b12776d1cfcb5c2aead4d2ae500d57cfcd451ea8ee1d"
+    },
+    {
+      "Package": "amdrocm-solver-host10.0",
+      "Version": "10.0.0-4",
+      "url": "https://stable.repo.amd.com/rocm/core/packages/ubuntu2604/pool/main/amdrocm-solver-host10.0_10.0.0-4_amd64.deb",
+      "actual_sha256": "689c304dd33a3f10f19d3c59d5a9238948df8a5f9beab42996e664d362dfdb8a"
+    },
+    {
+      "Package": "amdrocm-blas10.0-gfx1151",
+      "Version": "10.0.0-4",
+      "url": "https://stable.repo.amd.com/rocm/core/packages/ubuntu2604/pool/main/amdrocm-blas10.0-gfx1151_10.0.0-4_amd64.deb",
+      "actual_sha256": "387d430c7ef2f71ed9cc6b3119c6a23744fe60d76adcb04583504cdff96ec47f"
+    },
+    {
+      "Package": "amdrocm-solver10.0-gfx1151",
+      "Version": "10.0.0-4",
+      "url": "https://stable.repo.amd.com/rocm/core/packages/ubuntu2604/pool/main/amdrocm-solver10.0-gfx1151_10.0.0-4_amd64.deb",
+      "actual_sha256": "c45907a91c5cc4c5e8171cf2c0f8116315973856ab40e3df09e86d27f1a9fae2"
+    },
+    {
+      "Package": "amdrocm-ccl-dev10.0",
+      "Version": "10.0.0-4",
+      "url": "https://stable.repo.amd.com/rocm/core/packages/ubuntu2604/pool/main/amdrocm-ccl-dev10.0_10.0.0-4_amd64.deb",
+      "actual_sha256": "7d1f3c7780e87164aa5692b540412f074051f7f7c60bfb9c9756c9dbcfec8fed"
+    }
+  ],
+  "headers": {
+    "rocwmma": "2.2.1",
+    "rocwmma_tree_sha256": "d50bce369b112d205fb8f9daf3c077bcfab9b59b2b7a0a750ba1d6adb0ae5cb6",
+    "hipcub": "4.6.0",
+    "rocprim": "4.6.0",
+    "hipblaslt": "1.4.1"
+  },
+  "hardware_run": false,
+  "model_run": false,
+  "historical_numerical_and_performance_evidence": "Accepted by the owner for this private release preparation on 2026-10-02."
+}
