@@ -11,7 +11,7 @@ The offline preparation is separate from GPU release qualification. Historical e
 | Linux nonmovable allocator | PASS | Existing `make test-linux-memory` |
 | SSD cache sizing | PASS | Existing `make test-ssd-cache`; this does not test SSD model inference |
 | Session serialization unit suite | PASS | Existing `tests/test_session_state`; no GPU model proof |
-| TP command sub-suite | FAIL / partial base control also fails | Timeout assertion54 in `tests/test_tp_command`; same failure with unchanged historical-base source and shared unchanged CPU objects. This control is not a separate full baseline rebuild |
+| Session/TP unit suite | PASS after test portability fixes | `make test-session-state`: serialization, command, RDMA accounting and Unix/TCP exchanges. Timeout checks compare exact effective socket options; the 1KB TCP test negotiates small segments. Production network code and deadlines are unchanged |
 | ROCm C frontend | PASS | Real `ds4.c` with `DS4_ROCM_BUILD` |
 | Complete ROCm host/device syntax | PASS | Actual `ds4_rocm.cu`, gfx1151 and gfx1100 |
 | Complete ROCm HIP object | PASS | Actual host/device object generation, gfx1151 and gfx1100; no final SDK library link |
@@ -26,6 +26,8 @@ The offline preparation is separate from GPU release qualification. Historical e
 | Full upstream/model suites | PENDING | No claim that `make test` or `make test-rocm` completed |
 
 [Offline records](halo/offline-checks.json) bind actual logs and source identities. [Dependencies](halo/dependencies.json) record the cached compiler, rocWMMA2.2.1 headers and official reference-header commits. The full-runtime checks use configured official headers, not a complete SDK install. A different installed toolchain still needs requalification. Companion parser/clone/build checks are reported in its own verification record.
+
+The original command assertion54 and subsequent TCP tiny-buffer failure were reproduced on a freshly built historical core. WSL rounded requested 50ms to 52ms; Linux stores socket timeouts in timer ticks ([kernel source](https://github.com/torvalds/linux/blob/v6.18/net/core/sock.c#L401)). The corrected command test requires exact restoration of both effective receive/send timeouts, with no tolerance increase. The TCP fixture keeps its 1KB buffers, payloads and deadlines, negotiating 536-byte MSS before connection ([TCP option documentation](https://man7.org/linux/man-pages/man7/tcp.7.html)). Deliberate missing-restoration and serial-send controls still fail. These unit results do not qualify distributed model inference or GPU behavior. Original failures remain in the offline evidence record.
 
 ## Build the three controls
 
@@ -82,7 +84,7 @@ The focused upstream regression command on the GPU executor is:
 make -C "$HALO_ENGINE" test-rocm HIPCC="$HALO_HIPCC" ROCM_ARCH=gfx1151 -j2
 ```
 
-Save its real result, including the known TP failure if it recurs. Metal/CUDA/SSD inference checks require their respective executors; keep their status explicit.
+Save its real result, including any TP regression if it recurs. Metal/CUDA/SSD inference checks require their respective executors; keep their status explicit.
 
 ## Ordinary timing and resources
 

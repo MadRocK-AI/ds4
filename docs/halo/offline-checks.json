@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date_utc": "2026-10-02",
-  "code_commit": "93c5db79700631fec3c4a79f60a29f0e7eb597dd",
+  "code_commit": "ed654fb0d7a100dccd018498a4e573f79a9db2ff",
   "code_sha256": {
     ".gitignore": "b9b79c189ac53618776cd8cc3d472cb680cc4fa100bf356f0269661e56a7dbd0",
     "Makefile": "22d0992d04bf8b7bf11abd1b1a0cc49be6672ba5670763408af6544184d96464",
@@ -84,7 +84,9 @@
     "rocm/halo/shared_gu/kernel/mapping.hpp": "807317329d657b14612f164dd6b031b8d1a68a0eeb516eb1fcdb723084ecf25a",
     "rocm/halo/shared_gu/kernel/wmma.hpp": "5b871e635fbd858b72e57e8c44057eef963fb20ea5a4c0a7acd09cfada277ef3",
     "scripts/build_halo_output_b.py": "d1fdd1e2a712cd90c179369933563ba15a208aab15a5ff73430e06a2c8907615",
-    "tests/test_halo_shapes.c": "b2908790bc4d8ccf738fd797ae92ccedc139fcbbfc3d12a3a58158d1b53e04eb"
+    "tests/test_halo_shapes.c": "b2908790bc4d8ccf738fd797ae92ccedc139fcbbfc3d12a3a58158d1b53e04eb",
+    "tests/test_tp_commands.c": "3fb668352bc9ec0458ed7e534a927b6790fcc6652f00f10630b4c3db1e3f1034",
+    "tests/test_tp_tcp.c": "2986b9cfe9048bd4d7320fa338b9da14e47345ad206226046d93d1640130a123"
   },
   "executed": [
     {
@@ -133,7 +135,53 @@
       "command": "historical-base source control with unchanged shared CPU objects: ./tests/test_tp_command",
       "log_sha256": "5a5e1f4acc5341696f42a53987f51aa7123eebbf1d66a38520e5692a6b34de18",
       "log_id": "base-tp.log",
-      "scope": "Same timeout assertion54 as the candidate command sub-suite; not a fresh complete baseline build or root-cause proof"
+      "scope": "Same timeout assertion54 as the candidate command sub-suite; not a fresh complete baseline build or root-cause proof; preserved pre-fix result, superseded by the corrected full session/TP unit suite",
+      "historical": true
+    },
+    {
+      "check": "Fresh historical-core original TP command failure",
+      "status": "FAIL",
+      "historical": true,
+      "source_commit": "8db1d1d155cb0400a86a86b9c62d0defb3a6148b",
+      "command": "make -B tests/test_tp_commands -j2; ./tests/test_tp_commands",
+      "log_id": "tp-fresh-baseline-original.log",
+      "log_sha256": "a8acde27d34de63e056b689aadd8a9ca100f10dc20b7b3a88ffcfeea00292780",
+      "scope": "Fresh CPU core build; original assertion54 reproduces on WSL. Benchmark-only instrumentation does not enter this unit executable."
+    },
+    {
+      "check": "Fresh historical-core original TCP tiny-buffer failure",
+      "status": "FAIL",
+      "historical": true,
+      "source_commit": "8db1d1d155cb0400a86a86b9c62d0defb3a6148b",
+      "command": "make tests/test_tp_tcp -j2; ./tests/test_tp_tcp",
+      "log_id": "tp-tcp-fresh-baseline.log",
+      "log_sha256": "fc634664d9cb9ca84c7f1c7da394d4ba27822cc34616b5fe0e9f04cf69427685",
+      "scope": "Original fixture fails on TCP after Unix cases pass; corrected fixture retains payloads, 1KB buffers and deadlines."
+    },
+    {
+      "check": "Corrected complete session/TP unit suite",
+      "status": "PASS",
+      "source_commit": "ed654fb0d7a100dccd018498a4e573f79a9db2ff",
+      "command": "make test-session-state -j2",
+      "log_id": "session-suite-corrected-final.log",
+      "log_sha256": "1cfd9777079054a9646f73b9dec5ec3821edbca3b8f3809b2d13f091a67c1a3b",
+      "scope": "WSL kernel6.18.40.1/GCC15.2; production code unchanged; serialization, commands, RDMA accounting, Unix/TCP blocking/nonblocking, stalls/close and canaries. No model/GPU inference."
+    },
+    {
+      "check": "Missing timeout restoration negative control",
+      "status": "PASS_REJECTION",
+      "log_id": "tp-no-restore.log",
+      "log_sha256": "b477b29fb8e4d8642c38f1ffba173023f5bf02476ce312e36261e68808081155",
+      "mutated_source_sha256": "bdea4e8f2121f28853f5af7820d5f142106002c62a37b7aed2644c4158c6a35c",
+      "scope": "Isolated deliberate removal of restoration aborts corrected command assertion."
+    },
+    {
+      "check": "Serial-send deadlock negative control",
+      "status": "PASS_REJECTION",
+      "log_id": "tp-tcp-serial-negative.log",
+      "log_sha256": "54cbc855697f7fa7aa8dd669c5398617c2efe3c741c2fb49ccf0e0c4759af10b",
+      "mutated_source_sha256": "f63e33500e4f1d46c8d0cdfde64dd5379662e7a42a96c115a6eb6764197b1fa1",
+      "scope": "Isolated deliberate send-then-receive exchange fails the corrected 1KB-buffer fixture."
     }
   ],
   "pending": [
