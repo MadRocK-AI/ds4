@@ -902,7 +902,7 @@ static int indexer_scores_launch(
                                                          scale, causal ? 1 : 0);
         return cuda_ok(cudaGetLastError(), "indexer score one direct launch");
     }
-    if (g_halo_prefill_model && !g_quality_mode && !g_ssd_streaming_mode && !g_glm_model &&
+    if (g_halo_prefill_model && halo_prefill_scope(n_tokens) && !g_quality_mode && !g_ssd_streaming_mode && !g_glm_model &&
         ds4_rocm_is_gfx1151() &&
         ds4_rocm_halo_indexer_shape(n_comp, n_tokens, pos0, n_head,
                                    head_dim, ratio, causal) &&

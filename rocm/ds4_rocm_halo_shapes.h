@@ -46,4 +46,24 @@ static inline int ds4_rocm_halo_direct_qk_shape(uint32_t rows, uint32_t pos0,
         pos0 > 0u && top_k == 0u && ((n_comp == 0u && ratio <= 1u) ||
           (ratio == 128u && n_comp == end / 128u));
 }
+static inline int ds4_rocm_halo_output_a_shape(uint64_t rows, uint64_t k,
+        uint64_t rank, uint32_t groups) {
+    return (rows == 2048u || rows == 4096u) && k == 4096u && rank == 1024u && groups == 8u;
+}
+static inline int ds4_rocm_halo_shared_down_shape(uint64_t rows, uint64_t k, uint64_t n) {
+    return (rows == 2048u || rows == 4096u) && k == 2048u && n == 4096u;
+}
+static inline int ds4_rocm_halo_uncached_a_shape(uint64_t rows,uint64_t pos,uint64_t capacity,
+        uint64_t k,uint64_t rank,uint64_t groups,uint64_t blocks) {
+    return (rows==2048 || rows==4096) &&
+        (capacity==32897 || capacity==65665 || capacity==131201) &&
+        pos%rows==0 && pos<=capacity-129 && rows<=capacity-129-pos &&
+        k==4096 && rank==1024 && groups==8 && blocks==128;
+}
+static inline int ds4_rocm_halo_scope_shape(uint64_t rows,uint32_t pos,uint32_t capacity,
+        uint32_t layer,uint32_t scoped_rows) {
+    return rows==scoped_rows && (rows==2048 || rows==4096) && layer<43 &&
+        capacity<=262144 && (uint64_t)pos+rows<=131072 &&
+        (uint64_t)pos+rows<capacity && pos%rows==0;
+}
 #endif

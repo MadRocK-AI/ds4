@@ -1,3 +1,5 @@
+#include "ds4_rocm_halo_shapes.h"
+static int ds4_rocm_is_gfx1151(void);
 static const void *g_model_host_base;
 static const char *g_model_device_base;
 static uint64_t g_model_registered_size;
@@ -35,6 +37,27 @@ static int g_rocblas_attention_b_solution_disabled;
 static int g_quality_mode;
 static int g_glm_model;
 static int g_halo_prefill_model;
+static thread_local void *g_halo_dense_scratch;
+static thread_local uint64_t g_halo_dense_scratch_bytes;
+int ds4_rocm_halo_shared_gu(float*,const unsigned char*,const float*,void*);
+static thread_local uint32_t g_halo_rows, g_halo_pos, g_halo_layer, g_halo_capacity;
+// Per-layer plan. State 3 keeps a failed/consumed dead-heads lease from replaying.
+struct halo_attention_plan {
+    const void *model; uint64_t model_size, a_offset, b_offset;
+    uint32_t pos, n_ctx; float base, scale, ext, attn, fast, slow;
+    bool enabled; int state; void *heads, *packed;
+};
+static thread_local halo_attention_plan g_halo_attention;
+static bool halo_overlap(const void *a,uint64_t an,const void *b,uint64_t bn) {
+    if (!an || !bn) return false;
+    uintptr_t x=(uintptr_t)a,y=(uintptr_t)b;
+    return !a || !b || an>UINTPTR_MAX-x || bn>UINTPTR_MAX-y ||
+        (x<y+bn && y<x+an);
+}
+static int halo_prefill_scope(uint64_t rows) {
+    return ds4_rocm_halo_scope_shape(rows,g_halo_pos,g_halo_capacity,g_halo_layer,g_halo_rows);
+}
+
 
 enum {
     DS4_ROCM_N_EXPERT = 256u,
@@ -91,6 +114,7 @@ struct cuda_q8_f16_transpose_range {
     uint64_t in_dim;
     uint64_t out_dim;
     __half *device_ptr;
+    int halo_donor; // One allocation: DonorW or native Wt, demotion is one-way.
 };
 
 struct cuda_stream_selected_cache {
@@ -4734,6 +4758,9 @@ static void cuda_q8_f16_cache_release_all(void) {
     for (const cuda_q8_f16_range &r : g_q8_f16_ranges) {
         (void)cudaFree(r.device_ptr);
     }
+    halo_output_b_release();
+    ds4_rocm_halo_s9_release();
+    ds4_rocm_halo_q2_release();
     g_q8_f16_transpose_ranges.clear();
     g_q8_f16_transpose_by_offset.clear();
     g_q8_f16_ranges.clear();
@@ -5104,27 +5131,43 @@ static const __half *cuda_q8_f16_ptr(
     return dev;
 }
 
+static int halo_output_b_admitted(uint64_t rows, uint64_t k, uint64_t n, bool prepare=true) {
+    return g_halo_prefill_model && !g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
+        ds4_rocm_is_gfx1151() && (rows == 2048u || rows == 4096u) && k == 8192u && n == 4096u &&
+        g_rocblas_f16_solution_set == DS4_ROCBLAS_F16_SOLUTIONS_5_6_8D1AE90E &&
+        (!prepare || halo_output_b_prepare());
+}
+
 static const __half *cuda_q8_f16_transpose_ptr(
         const void *model_map,
         uint64_t offset,
         uint64_t weight_bytes,
         uint64_t in_dim,
         uint64_t out_dim,
-        const char *label) {
-    auto exact = g_q8_f16_transpose_by_offset.find(offset);
-    if (exact != g_q8_f16_transpose_by_offset.end()) {
-        const cuda_q8_f16_transpose_range &r = g_q8_f16_transpose_ranges[exact->second];
-        if (r.host_base == model_map && r.weight_bytes == weight_bytes &&
-            r.in_dim == in_dim && r.out_dim == out_dim) {
-            return r.device_ptr;
+        const char *label, bool donor = false, bool *donor_view = nullptr) {
+    if (donor_view) *donor_view = false;
+    auto matches = [&](const cuda_q8_f16_transpose_range &r) {
+        return r.host_base==model_map && r.offset==offset && r.weight_bytes==weight_bytes &&
+            r.in_dim==in_dim && r.out_dim==out_dim;
+    };
+    cuda_q8_f16_transpose_range *cached=nullptr;
+    auto exact=g_q8_f16_transpose_by_offset.find(offset);
+    if (exact!=g_q8_f16_transpose_by_offset.end() && matches(g_q8_f16_transpose_ranges[exact->second]))
+        cached=&g_q8_f16_transpose_ranges[exact->second];
+    if (!cached) for (auto &r:g_q8_f16_transpose_ranges) if(matches(r)) {cached=&r;break;}
+    if (cached) {
+        auto &r=*cached;
+        if (r.halo_donor && !donor) {
+            const char *q8 = cuda_model_range_ptr(model_map, offset, weight_bytes, "q8_0");
+            if (!q8) return NULL;
+            const uint64_t count = in_dim * out_dim;
+            dequant_q8_0_to_f16_transpose_kernel<<<(count+255u)/256u,256>>>(
+                r.device_ptr, (const unsigned char *)q8, in_dim, out_dim, (in_dim+31u)/32u);
+            if (!cuda_ok(cudaGetLastError(), "Halo output-B cache demotion")) return NULL;
+            r.halo_donor = 0;
         }
-    }
-    for (const cuda_q8_f16_transpose_range &r : g_q8_f16_transpose_ranges) {
-        if (r.host_base == model_map && r.offset == offset &&
-            r.weight_bytes == weight_bytes &&
-            r.in_dim == in_dim && r.out_dim == out_dim) {
-            return r.device_ptr;
-        }
+        if (donor_view) *donor_view = r.halo_donor != 0;
+        return r.device_ptr;
     }
     if (!cuda_q8_f16_cache_allowed(label, in_dim, out_dim)) return NULL;
     uint64_t out_bytes = 0;
@@ -5143,19 +5186,22 @@ static const __half *cuda_q8_f16_transpose_ptr(
     }
     const uint64_t blocks = (in_dim + 31u) / 32u;
     const uint64_t n = in_dim * out_dim;
-    dequant_q8_0_to_f16_transpose_kernel<<<(n + 255u) / 256u, 256>>>(dev,
-                                                                     (const unsigned char *)q8,
-                                                                     in_dim,
-                                                                     out_dim,
-                                                                     blocks);
+    if (donor) {
+        dequant_q8_0_to_f16_kernel<<<(n+255u)/256u,256>>>(dev,
+            (const unsigned char *)q8,in_dim,out_dim,blocks);
+    } else {
+        dequant_q8_0_to_f16_transpose_kernel<<<(n+255u)/256u,256>>>(dev,
+            (const unsigned char *)q8,in_dim,out_dim,blocks);
+    }
     if (!cuda_ok(cudaGetLastError(), "q8 fp16 transpose dequant launch")) {
         (void)cudaFree(dev);
         cuda_q8_f16_cache_disable_after_failure("transpose launch failure", out_bytes);
         return NULL;
     }
-    g_q8_f16_transpose_ranges.push_back({model_map, offset, weight_bytes, in_dim, out_dim, dev});
+    g_q8_f16_transpose_ranges.push_back({model_map, offset, weight_bytes, in_dim, out_dim, dev, donor ? 1 : 0});
     g_q8_f16_transpose_by_offset[offset] = g_q8_f16_transpose_ranges.size() - 1u;
     g_q8_f16_bytes += out_bytes;
+    if (donor_view) *donor_view = donor;
     return dev;
 }
 
@@ -6358,9 +6404,12 @@ extern "C" int ds4_gpu_cache_q8_f16_range(const void *model_map, uint64_t model_
     const int preload_transposed_b = !g_quality_mode &&
                                      strstr(cache_label, "attn_output_b") != NULL;
     if (preload_transposed_b) {
-        const __half *f16_t = cuda_q8_f16_transpose_ptr(model_map, offset, bytes, in_dim, out_dim, cache_label);
+        bool donor_view = false;
+        const bool donor = halo_output_b_admitted(cuda_prefill_warmup_tokens(),in_dim,out_dim,false);
+        const __half *f16_t = cuda_q8_f16_transpose_ptr(model_map, offset, bytes,
+            in_dim, out_dim, cache_label, donor, &donor_view);
         if (f16_t) {
-            if (strstr(cache_label, "attn_output_b") != NULL && in_dim == 8192u && out_dim == 4096u) {
+            if (!donor_view && strstr(cache_label, "attn_output_b") != NULL && in_dim == 8192u && out_dim == 4096u) {
                 cuda_q8_f16_warmup_attention_output_b_gemm(f16_t, in_dim, out_dim);
             }
             return 1;

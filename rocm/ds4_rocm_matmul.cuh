@@ -311,6 +311,19 @@ static int cuda_matmul_q8_0_tensor_f16_gemm(
     if (!xh) return 0;
     f32_to_f16_kernel<<<(xh_count + 255u) / 256u, 256>>>(xh, (const float *)x->ptr, xh_count);
     if (!cuda_ok(cudaGetLastError(), "q8 f16 activation convert launch")) return 0;
+    if (g_halo_prefill_model && halo_prefill_scope(n_tok) && !g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
+        ds4_rocm_is_gfx1151() &&
+        g_rocblas_f16_solution_set == DS4_ROCBLAS_F16_SOLUTIONS_5_6_8D1AE90E &&
+        ds4_rocm_halo_shared_down_shape(n_tok, in_dim, out_dim) &&
+        (((uintptr_t)w_f16 | (uintptr_t)xh) & 15u) == 0u &&
+        ((uintptr_t)out->ptr & 3u) == 0u) {
+        halo_shared_down::shared_down_k32<<<dim3(64u, (unsigned)n_tok / 32u), 256>>>(
+            (float *)out->ptr, (const float *)out->ptr,
+            (const unsigned short *)w_f16, (const unsigned short *)xh,
+            1.0f, 0.0f, 4096u, 0u, 4096u, 0u, 2048u, 0u, 2048u, 0u,
+            4096u, (unsigned)n_tok, 1u, 2048u, 15u, 64u, (unsigned)n_tok / 32u);
+        return cuda_ok(cudaGetLastError(), "Halo shared-down K32 launch");
+    }
     if (in_dim == 16384u && out_dim == 24u && n_tok == 2048u &&
         ds4_rocm_gfx1151_flag("DS4_ROCM_F16_TINYM_WMMA")) {
         matmul_f16_tinym24_wmma_kernel<<<32u, 256u>>>((float *)out->ptr, w_f16, xh);
@@ -547,7 +560,22 @@ static int cuda_matmul_q8_0_tensor_labeled(ds4_gpu_tensor *out, const void *mode
             return cuda_ok(cudaGetLastError(),
                            "matmul_q8_0 f32 tiny exact8 launch");
         }
-        if (g_halo_prefill_model && !g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
+        if (g_halo_prefill_model && halo_prefill_scope(n_tok) && n_tok==2048u &&
+            in_dim==4096u && out_dim==2048u && !g_quality_mode && !g_glm_model &&
+            !g_ssd_streaming_mode && ds4_rocm_is_gfx1151() && g_halo_dense_scratch &&
+            g_halo_dense_scratch_bytes>=(32u<<20) &&
+            (((uintptr_t)g_halo_dense_scratch&31u)==0)) {
+            const uintptr_t a=(uintptr_t)g_halo_dense_scratch;
+            const uintptr_t y=(uintptr_t)out->ptr, xx=(uintptr_t)x->ptr, ww=(uintptr_t)wptr;
+            const uint64_t sb=32u<<20;
+            const bool disjoint = a<=UINTPTR_MAX-sb && y<=UINTPTR_MAX-out_bytes &&
+                xx<=UINTPTR_MAX-x_bytes && ww<=UINTPTR_MAX-weight_bytes &&
+                (a+sb<=y || y+out_bytes<=a) && (a+sb<=xx || xx+x_bytes<=a) &&
+                (a+sb<=ww || ww+weight_bytes<=a);
+            if(disjoint) return ds4_rocm_halo_shared_gu((float*)out->ptr,
+                (const unsigned char*)wptr,(const float*)x->ptr,g_halo_dense_scratch);
+        }
+        if (g_halo_prefill_model && halo_prefill_scope(n_tok) && !g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
             ds4_rocm_is_gfx1151() &&
             ((uintptr_t)x->ptr & 7u) == 0u &&
             ds4_rocm_halo_q8_shape(n_tok, in_dim, out_dim)) {
@@ -568,7 +596,7 @@ static int cuda_matmul_q8_0_tensor_labeled(ds4_gpu_tensor *out, const void *mode
                 return cuda_ok(cudaGetLastError(), "Halo cooperative Q8 launch");
             }
         }
-        if (g_halo_prefill_model && !g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
+        if (g_halo_prefill_model && halo_prefill_scope(n_tok) && !g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
             ds4_rocm_is_gfx1151() &&
             ((uintptr_t)x->ptr & 7u) == 0u &&
             ds4_rocm_halo_qa_shape(n_tok, in_dim, out_dim)) {
@@ -1205,7 +1233,7 @@ extern "C" int ds4_rocm_halo_hc_project(ds4_gpu_tensor *out, ds4_gpu_tensor *nor
      * The normalization scratch is dead after this HC-only call. */
     const uint64_t xb = (uint64_t)rows * 16384u * sizeof(float);
     const uint64_t ob = (uint64_t)rows * 24u * sizeof(float);
-    const bool select = g_halo_prefill_model && ds4_rocm_halo_hc_shape(rows, k, n) &&
+    const bool select = g_halo_prefill_model && halo_prefill_scope(rows) && ds4_rocm_halo_hc_shape(rows, k, n) &&
         ds4_rocm_is_gfx1151() && !g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
         g_cublas_ready && isfinite(eps) && eps > 0.0f && out && norm && x &&
         out->bytes >= ob && norm->bytes >= xb && x->bytes >= xb &&

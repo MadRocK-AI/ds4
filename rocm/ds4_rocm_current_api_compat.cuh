@@ -323,5 +323,27 @@ extern "C" int ds4_gpu_routed_moe_set_selected_override(
 
 extern "C" void ds4_rocm_halo_set_model(bool enabled) {
     const char *policy = getenv("DS4_ROCM_HALO_PREFILL");
-    g_halo_prefill_model = enabled && !(policy && policy[0] == '0');
+    g_halo_prefill_model = enabled && policy && strcmp(policy, "1")==0;
+    g_halo_attention={};g_halo_rows=0;
+    g_halo_dense_scratch=nullptr;g_halo_dense_scratch_bytes=0;
+}
+
+extern "C" void ds4_rocm_halo_set_scope(uint32_t pos,uint32_t rows,uint32_t capacity,
+        uint32_t layer,bool enabled) {
+    g_halo_attention={};
+    g_halo_dense_scratch=nullptr;g_halo_dense_scratch_bytes=0;
+    g_halo_pos=pos;g_halo_rows=enabled && !g_quality_mode && !g_glm_model && !g_ssd_streaming_mode &&
+        !cuda_runtime_config()->graph_dump ? rows : 0;g_halo_capacity=capacity;g_halo_layer=layer;
+}
+
+extern "C" void ds4_rocm_halo_set_dense_scratch(const ds4_gpu_tensor *heads) {
+    g_halo_dense_scratch=heads?heads->ptr:nullptr;
+    g_halo_dense_scratch_bytes=heads?heads->bytes:0;
+}
+
+extern "C" void ds4_rocm_halo_attention_plan(bool enabled,const void *model,uint64_t size,
+        uint64_t a,uint64_t b,uint32_t pos,uint32_t n_ctx,float base,float scale,
+        float ext,float attn,float fast,float slow) {
+    g_halo_attention={model,size,a,b,pos,n_ctx,base,scale,ext,attn,fast,slow,
+        enabled,0,nullptr,nullptr};
 }

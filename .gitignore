@@ -90,3 +90,5 @@ __pycache__/
 # Local Halo admission and existing SSD sizing harness products.
 /tests/test_halo_shapes
 /tests/test_ssd_cache
+
+/rocm/halo/output_b/code.inc
