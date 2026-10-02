@@ -632,7 +632,6 @@ extern "C" int ds4_gpu_attention_indexed_mixed_batch_heads_tensor(
             !halo_overlap(tmp,tmp_bytes,comp_kv->ptr,(uint64_t)n_comp*512*4) &&
             !halo_overlap(tmp,tmp_bytes,sinks,256);
         if (safe) {
-#if !defined(__HIP_DEVICE_COMPILE__) || defined(__gfx1151__)
             plan.state=3;plan.heads=heads->ptr;plan.packed=tmp;
             auto *indices=(int32_t*)heads->ptr;
             auto *kv=(half*)((char*)heads->ptr+list);
@@ -648,7 +647,6 @@ extern "C" int ds4_gpu_attention_indexed_mixed_batch_heads_tensor(
                 n_raw,n_raw,0,n_comp,top_k,window,ratio,n_head,head_dim,rp,nullptr);
             if (!cuda_ok(cudaGetLastError(),"Halo fused attention inverse RoPE pack")) return 0;
             plan.state=1;return 1;
-#endif
         }
     }
     if (n_tokens > 1u && top_k == 512u) {
@@ -1745,10 +1743,8 @@ extern "C" int ds4_gpu_attention_output_q8_batch_tensor(
             !halo_overlap(out_a,34ull<<20,xq,xq_bytes) &&
             !halo_overlap(out_a,34ull<<20,xscale,x_rows*blocks_a*4);
         if (halo_uncached) {
-#if !defined(__HIP_DEVICE_COMPILE__) || defined(__gfx1151__)
             halo_output_a_uncached::halo_output_a_q8_slots<<<dim3(64,n_tokens/16,8),256>>>(
                 (float*)low->ptr,out_a,xq,xscale);
-#endif
         } else {
         grouped_q8_0_a_preq_warp8_kernel<<<grid_a, 256>>>((float *)low->ptr,
                                                           out_a,

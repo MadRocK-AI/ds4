@@ -358,7 +358,6 @@ static int routed_moe_q2_float_down_launch(
 
 #if defined(__HIP_PLATFORM_AMD__) || defined(__HIPCC__)
     if (use_wmma_hot && hot_count != 0u) {
-#if !defined(__HIP_DEVICE_COMPILE__) || defined(__gfx1151__)
         if (halo_compact && tile_count) {
             const dim3 grid(128u,1u,tile_count);
             if(n_tokens==2048u) {
@@ -372,7 +371,6 @@ static int routed_moe_q2_float_down_launch(
             }
             if(!cuda_ok(cudaGetLastError(), "Halo Q2 direct-X compact launch"))return 0;
         } else
-#endif
         {
 
         constexpr uint32_t bm = 16u, bn = 16u, bk = 16u;
