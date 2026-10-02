@@ -551,7 +551,7 @@ static int next_frontier(const bench_config *c, int cur) {
 /* Optional qualification readbacks run outside the prefill/decode timers.
  * Keep binary payloads local: they contain user prompt and model state. */
 static int write_qualification_payload(ds4_engine *engine, ds4_session *session,
-        int frontier, const char *phase, const int *tokens, int token_count) {
+        int frontier, const char *phase, const int *tokens, int token_count, uint64_t snapshot_bytes) {
     const char *dir = getenv("DS4_BENCH_DUMP_PAYLOAD_DIR");
     if (!dir) return 0;
     char path[PATH_MAX], err[256];
@@ -560,6 +560,8 @@ static int write_qualification_payload(ds4_engine *engine, ds4_session *session,
     FILE *fp = fopen(path, "wb");
     if (!fp) return 1;
     int rc = ds4_session_save_payload(session, fp, err, sizeof(err));
+    off_t state_bytes = ftello(fp);
+    if (state_bytes <= 0) rc = 1;
     if (fclose(fp) != 0) rc = 1;
     if (rc != 0) {
         fprintf(stderr, "ds4-bench: qualification state dump failed (%s)\n", phase);
@@ -584,6 +586,20 @@ static int write_qualification_payload(ds4_engine *engine, ds4_session *session,
     fp = fopen(path, "wb");
     if (!fp) return 1;
     rc = token_count != 0 && fwrite(tokens, sizeof(int), (size_t)token_count, fp) != (size_t)token_count;
+    if (fclose(fp) != 0) rc = 1;
+    if (rc) return 1;
+    /* Bind full readback extents to the API results, so a truncated file cannot
+     * pass merely because both arms retain the same byte prefix. */
+    n = snprintf(path, sizeof(path), "%s/frontier_%06d.%s.manifest.json", dir, frontier, phase);
+    if (n <= 0 || (size_t)n >= sizeof(path)) return 1;
+    fp = fopen(path, "wb");
+    if (!fp) return 1;
+    rc = fprintf(fp, "{\"frontier\":%d,\"phase\":\"%s\",\"state_bytes\":%llu,"
+                     "\"logits_count\":%d,\"token_count\":%d,\"session_pos\":%d,\"context_alloc\":%d,\"restore_kind\":\"%s\",\"snapshot_bytes\":%llu}\n",
+                 frontier, phase, (unsigned long long)state_bytes, vocab, token_count,
+                 ds4_session_pos(session), ds4_session_ctx(session),
+                 snapshot_bytes ? "snapshot" : !strcmp(phase, "restored") ? "replay" : "none",
+                 (unsigned long long)snapshot_bytes) < 0;
     if (fclose(fp) != 0) rc = 1;
     return rc;
 }
@@ -897,7 +913,7 @@ int main(int argc, char **argv) {
             break;
         }
 
-        if (write_qualification_payload(engine, session, frontier, "prefill", prefix.v, frontier)) {
+        if (write_qualification_payload(engine, session, frontier, "prefill", prefix.v, frontier, 0)) {
             rc = 1;
             break;
         }
@@ -1046,7 +1062,7 @@ int main(int argc, char **argv) {
         }
         const double gen_t1 = bench_now_sec();
         if (rc == 0 && write_qualification_payload(engine, session, frontier,
-                "decode", gen_token_buf, gen_token_count)) rc = 1;
+                "decode", gen_token_buf, gen_token_count, 0)) rc = 1;
         if (cfg.show_output && gen_token_buf && gen_token_count > 0) {
             fprintf(stderr, "ds4-bench: gen[ctx=%d] decoded text: \"", frontier);
             for (int i = 0; i < gen_token_count; i++) {
@@ -1080,7 +1096,7 @@ int main(int argc, char **argv) {
         }
 
         if (need_restore_after_generation && write_qualification_payload(engine,
-                session, frontier, "restored", prefix.v, frontier)) { rc = 1; break; }
+                session, frontier, "restored", prefix.v, frontier, have_snapshot ? snap.len : 0)) { rc = 1; break; }
 
         const double gen_sec = gen_t1 - gen_t0;
         if (write_qualification_timing(frontier, previous, gen_done, prefill_sec,
