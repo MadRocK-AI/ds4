@@ -17,7 +17,16 @@ static void *exchange_bulk(void *arg) {
     return NULL;
 }
 
+static struct timeval socket_timeout(int fd, int option) {
+    struct timeval timeout;
+    socklen_t len = sizeof(timeout);
+    assert(getsockopt(fd, SOL_SOCKET, option, &timeout, &len) == 0);
+    assert(len == sizeof(timeout));
+    return timeout;
+}
+
 static void check_bulk_exchange(void) {
+    const int timeout_options[] = {SO_RCVTIMEO, SO_SNDTIMEO};
     const uint64_t sizes[] = {20480, 2 * 1024 * 1024 - 4,
         2 * 1024 * 1024, 2 * 1024 * 1024 + 4, 7 * 1024 * 1024 + 4};
     for (unsigned n = 0; n < sizeof(sizes) / sizeof(*sizes); n++) {
@@ -40,6 +49,14 @@ static void check_bulk_exchange(void) {
             peer[0].tp.gate_timeout_ms = peer[1].tp.gate_timeout_ms = 50;
             peer[1].delay = 150000;
         }
+        struct timeval expected_timeout[2][2];
+        for (unsigned rank = 0; rank < 2; rank++) {
+            assert(tp_socket_set_gate_timeout(fd[rank], peer[rank].tp.gate_timeout_ms));
+            /* Kernels may round the requested duration to a timer tick.
+             * The bulk header grace must restore both effective timeouts. */
+            for (unsigned option = 0; option < 2; option++)
+                expected_timeout[rank][option] = socket_timeout(fd[rank], timeout_options[option]);
+        }
         pthread_t thread;
         assert(pthread_create(&thread, NULL, exchange_bulk, &peer[1]) == 0);
         exchange_bulk(&peer[0]);
@@ -48,11 +65,11 @@ static void check_bulk_exchange(void) {
         assert(!memcmp(peer[0].in, peer[1].out, sizes[n]));
         assert(!memcmp(peer[1].in, peer[0].out, sizes[n]));
         for (unsigned rank = 0; rank < 2; rank++) {
-            struct timeval timeout;
-            socklen_t len = sizeof(timeout);
-            assert(getsockopt(fd[rank], SOL_SOCKET, SO_RCVTIMEO, &timeout, &len) == 0);
-            assert((uint64_t)timeout.tv_sec * 1000u + timeout.tv_usec / 1000u ==
-                   peer[rank].tp.gate_timeout_ms);
+            for (unsigned option = 0; option < 2; option++) {
+                struct timeval timeout = socket_timeout(fd[rank], timeout_options[option]);
+                assert(timeout.tv_sec == expected_timeout[rank][option].tv_sec);
+                assert(timeout.tv_usec == expected_timeout[rank][option].tv_usec);
+            }
             free(peer[rank].in); free(peer[rank].out); close(fd[rank]);
         }
     }

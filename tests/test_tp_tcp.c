@@ -60,6 +60,12 @@ static void *exchange(void *arg) {
 static void pair(int fd[2], bool tcp) {
     if (tcp) {
         int listener = socket(AF_INET, SOCK_STREAM, 0);
+        /* Loopback's default MSS can exceed the tiny receive window below.
+         * Negotiate small segments before connecting, keeping this test's
+         * timeout checks independent of zero-window probe delays. */
+        const int mss = 536;
+        assert(listener >= 0);
+        assert(setsockopt(listener, IPPROTO_TCP, TCP_MAXSEG, &mss, sizeof(mss)) == 0);
         struct sockaddr_in addr = {.sin_family = AF_INET,
             .sin_addr.s_addr = htonl(INADDR_LOOPBACK)};
         socklen_t len = sizeof(addr);
@@ -67,7 +73,9 @@ static void pair(int fd[2], bool tcp) {
         assert(getsockname(listener, (struct sockaddr *)&addr, &len) == 0);
         assert(listen(listener, 1) == 0);
         fd[0] = socket(AF_INET, SOCK_STREAM, 0);
-        assert(fd[0] >= 0 && connect(fd[0], (struct sockaddr *)&addr, len) == 0);
+        assert(fd[0] >= 0);
+        assert(setsockopt(fd[0], IPPROTO_TCP, TCP_MAXSEG, &mss, sizeof(mss)) == 0);
+        assert(connect(fd[0], (struct sockaddr *)&addr, len) == 0);
         fd[1] = accept(listener, NULL, NULL);
         assert(fd[1] >= 0);
         close(listener);
