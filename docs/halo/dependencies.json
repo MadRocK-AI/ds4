@@ -1,0 +1,47 @@
+{
+  "scope": "Offline source compilation only; complete installed SDK linking and runtime dependency identities remain pending",
+  "compiler": {
+    "version": "AMD clang 23.0.0git",
+    "source_commit": "8f497e0992fb7513f7f78a6f6b6f1056c375e961",
+    "distribution": "cached core-10.0",
+    "driver_sha256": "8e59b623e977b2e674e00931fd940b7893c96164e60872b9d90d0be82c4ac69e",
+    "clang_sha256": "241bf4da7ec39bc00b68ed74f6be751516d9892ed990e8c7fa372bad18500247"
+  },
+  "rocwmma": {
+    "version": "2.2.1",
+    "files": 114,
+    "tree_sha256": "d50bce369b112d205fb8f9daf3c077bcfab9b59b2b7a0a750ba1d6adb0ae5cb6",
+    "algorithm": "SHA256 of sorted relative-name NUL file-SHA256 LF records"
+  },
+  "syntax_reference_headers": [
+    {
+      "name": "hipBLASLt",
+      "git_commit": "39a463bd8ae3c9745d955a2bb543e719396acb22",
+      "tag": "rocm-7.1.0",
+      "source": "https://github.com/ROCm/hipBLASLt",
+      "configured_version": "1.1.0.0"
+    },
+    {
+      "name": "hipCUB",
+      "git_commit": "c1c7893438ce6e668fc4808b2edf0e02324109fc",
+      "tag": "rocm-7.1.0",
+      "source": "https://github.com/ROCm/hipCUB",
+      "configured_version": "4.1.0"
+    },
+    {
+      "name": "rocPRIM",
+      "git_commit": "ca2b5ff89c83c8eece9d991f9c5d61ce5b168ea6",
+      "tag": "rocm-7.1.0",
+      "source": "https://github.com/ROCm/rocPRIM",
+      "configured_version": "4.1.0"
+    }
+  ],
+  "configuration_note": "Official headers exported at these commits. Version templates configured without CMake; hipBLASLt visibility export follows the archived HIP export pattern. No numerical/library-function stubs were used. This is not an SDK installation or link test.",
+  "runtime_target": {
+    "architecture": "gfx1151",
+    "historical_hip": "7.15",
+    "recognized_rocblas_family": "5.6 / 8d1ae90e",
+    "new_sdk_link_status": "PENDING",
+    "new_runtime_status": "PENDING"
+  }
+}

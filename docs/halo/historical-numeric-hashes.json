@@ -1,0 +1,470 @@
+{
+  "indexer32/timing-A0": {
+    "prompt-0.bin": {
+      "bytes": 131072,
+      "sha256": "874c479e2cde7b231dfa4a963d5f1fbe9dd9e60c2842f869e2a117d4860902a0"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "61b5810b6f2a7e8cf8fae34bda5e2b2475dd67b48403b386e00a6710ff051870"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 475229644,
+      "sha256": "3f7962c63f1cdc3abe6839a790281e26984a8d0c60866ee73d924400cb830473"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "09425ff348bdad43f5178864b8669fcc61909d5072fe37632b2223cb0478dd29"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5b9b9b7e2e7c5e29a35b8e615fd58b3bc0c0e199ff5f750e51fe64e674dafd8f"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 475014540,
+      "sha256": "f3ecb853191c9a3663901f8a904c728768b47fca101738c76373e582799a021e"
+    }
+  },
+  "indexer32/timing-B0": {
+    "prompt-0.bin": {
+      "bytes": 131072,
+      "sha256": "874c479e2cde7b231dfa4a963d5f1fbe9dd9e60c2842f869e2a117d4860902a0"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "61b5810b6f2a7e8cf8fae34bda5e2b2475dd67b48403b386e00a6710ff051870"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 475229644,
+      "sha256": "3f7962c63f1cdc3abe6839a790281e26984a8d0c60866ee73d924400cb830473"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "09425ff348bdad43f5178864b8669fcc61909d5072fe37632b2223cb0478dd29"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5b9b9b7e2e7c5e29a35b8e615fd58b3bc0c0e199ff5f750e51fe64e674dafd8f"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 475014540,
+      "sha256": "f3ecb853191c9a3663901f8a904c728768b47fca101738c76373e582799a021e"
+    }
+  },
+  "indexer32/timing-B1": {
+    "prompt-0.bin": {
+      "bytes": 131072,
+      "sha256": "874c479e2cde7b231dfa4a963d5f1fbe9dd9e60c2842f869e2a117d4860902a0"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "61b5810b6f2a7e8cf8fae34bda5e2b2475dd67b48403b386e00a6710ff051870"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 475229644,
+      "sha256": "3f7962c63f1cdc3abe6839a790281e26984a8d0c60866ee73d924400cb830473"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "09425ff348bdad43f5178864b8669fcc61909d5072fe37632b2223cb0478dd29"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5b9b9b7e2e7c5e29a35b8e615fd58b3bc0c0e199ff5f750e51fe64e674dafd8f"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 475014540,
+      "sha256": "f3ecb853191c9a3663901f8a904c728768b47fca101738c76373e582799a021e"
+    }
+  },
+  "indexer32/timing-A1": {
+    "prompt-0.bin": {
+      "bytes": 131072,
+      "sha256": "874c479e2cde7b231dfa4a963d5f1fbe9dd9e60c2842f869e2a117d4860902a0"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "61b5810b6f2a7e8cf8fae34bda5e2b2475dd67b48403b386e00a6710ff051870"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 475229644,
+      "sha256": "3f7962c63f1cdc3abe6839a790281e26984a8d0c60866ee73d924400cb830473"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "09425ff348bdad43f5178864b8669fcc61909d5072fe37632b2223cb0478dd29"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5b9b9b7e2e7c5e29a35b8e615fd58b3bc0c0e199ff5f750e51fe64e674dafd8f"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 475014540,
+      "sha256": "f3ecb853191c9a3663901f8a904c728768b47fca101738c76373e582799a021e"
+    }
+  },
+  "indexer32/qual-A": {
+    "prompt-0.bin": {
+      "bytes": 131072,
+      "sha256": "874c479e2cde7b231dfa4a963d5f1fbe9dd9e60c2842f869e2a117d4860902a0"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "61b5810b6f2a7e8cf8fae34bda5e2b2475dd67b48403b386e00a6710ff051870"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 475229644,
+      "sha256": "3f7962c63f1cdc3abe6839a790281e26984a8d0c60866ee73d924400cb830473"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "09425ff348bdad43f5178864b8669fcc61909d5072fe37632b2223cb0478dd29"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5b9b9b7e2e7c5e29a35b8e615fd58b3bc0c0e199ff5f750e51fe64e674dafd8f"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 475014540,
+      "sha256": "f3ecb853191c9a3663901f8a904c728768b47fca101738c76373e582799a021e"
+    }
+  },
+  "indexer32/qual-B": {
+    "prompt-0.bin": {
+      "bytes": 131072,
+      "sha256": "874c479e2cde7b231dfa4a963d5f1fbe9dd9e60c2842f869e2a117d4860902a0"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "61b5810b6f2a7e8cf8fae34bda5e2b2475dd67b48403b386e00a6710ff051870"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 475229644,
+      "sha256": "3f7962c63f1cdc3abe6839a790281e26984a8d0c60866ee73d924400cb830473"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "09425ff348bdad43f5178864b8669fcc61909d5072fe37632b2223cb0478dd29"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5b9b9b7e2e7c5e29a35b8e615fd58b3bc0c0e199ff5f750e51fe64e674dafd8f"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 475014540,
+      "sha256": "f3ecb853191c9a3663901f8a904c728768b47fca101738c76373e582799a021e"
+    }
+  },
+  "indexer64/timing-A0": {
+    "prompt-0.bin": {
+      "bytes": 262144,
+      "sha256": "9eee362a1767ce7fe07058c3ebc38e4ef47939b1437f40d31cc868ca2a8bdf00"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "87e46103ae0680c4d604db6689fbf9d7143eca93517a6c368fd581934e64d04f"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 926248396,
+      "sha256": "4d7737c7b093e855e7a1572b65470a63fcfcbcdafc72e0e1668caab2dc313e53"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "38c4375729b456df79606b7b628930e25c9bcf2794e9b7e34b2de152856fca79"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5397c293a64b6274cb9410d5b413c828b0a32de81e7c978b57c86846b8d36108"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 926033292,
+      "sha256": "1451f66768b12018d43c930c3038b11110c81f9c718a8ddeed52f6e4533fd5fe"
+    }
+  },
+  "indexer64/timing-B0": {
+    "prompt-0.bin": {
+      "bytes": 262144,
+      "sha256": "9eee362a1767ce7fe07058c3ebc38e4ef47939b1437f40d31cc868ca2a8bdf00"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "87e46103ae0680c4d604db6689fbf9d7143eca93517a6c368fd581934e64d04f"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 926248396,
+      "sha256": "4d7737c7b093e855e7a1572b65470a63fcfcbcdafc72e0e1668caab2dc313e53"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "38c4375729b456df79606b7b628930e25c9bcf2794e9b7e34b2de152856fca79"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5397c293a64b6274cb9410d5b413c828b0a32de81e7c978b57c86846b8d36108"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 926033292,
+      "sha256": "1451f66768b12018d43c930c3038b11110c81f9c718a8ddeed52f6e4533fd5fe"
+    }
+  },
+  "indexer64/timing-B1": {
+    "prompt-0.bin": {
+      "bytes": 262144,
+      "sha256": "9eee362a1767ce7fe07058c3ebc38e4ef47939b1437f40d31cc868ca2a8bdf00"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "87e46103ae0680c4d604db6689fbf9d7143eca93517a6c368fd581934e64d04f"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 926248396,
+      "sha256": "4d7737c7b093e855e7a1572b65470a63fcfcbcdafc72e0e1668caab2dc313e53"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "38c4375729b456df79606b7b628930e25c9bcf2794e9b7e34b2de152856fca79"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5397c293a64b6274cb9410d5b413c828b0a32de81e7c978b57c86846b8d36108"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 926033292,
+      "sha256": "1451f66768b12018d43c930c3038b11110c81f9c718a8ddeed52f6e4533fd5fe"
+    }
+  },
+  "indexer64/timing-A1": {
+    "prompt-0.bin": {
+      "bytes": 262144,
+      "sha256": "9eee362a1767ce7fe07058c3ebc38e4ef47939b1437f40d31cc868ca2a8bdf00"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "87e46103ae0680c4d604db6689fbf9d7143eca93517a6c368fd581934e64d04f"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 926248396,
+      "sha256": "4d7737c7b093e855e7a1572b65470a63fcfcbcdafc72e0e1668caab2dc313e53"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "38c4375729b456df79606b7b628930e25c9bcf2794e9b7e34b2de152856fca79"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5397c293a64b6274cb9410d5b413c828b0a32de81e7c978b57c86846b8d36108"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 926033292,
+      "sha256": "1451f66768b12018d43c930c3038b11110c81f9c718a8ddeed52f6e4533fd5fe"
+    }
+  },
+  "indexer64/qual-A": {
+    "prompt-0.bin": {
+      "bytes": 262144,
+      "sha256": "9eee362a1767ce7fe07058c3ebc38e4ef47939b1437f40d31cc868ca2a8bdf00"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "87e46103ae0680c4d604db6689fbf9d7143eca93517a6c368fd581934e64d04f"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 926248396,
+      "sha256": "4d7737c7b093e855e7a1572b65470a63fcfcbcdafc72e0e1668caab2dc313e53"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "38c4375729b456df79606b7b628930e25c9bcf2794e9b7e34b2de152856fca79"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5397c293a64b6274cb9410d5b413c828b0a32de81e7c978b57c86846b8d36108"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 926033292,
+      "sha256": "1451f66768b12018d43c930c3038b11110c81f9c718a8ddeed52f6e4533fd5fe"
+    }
+  },
+  "indexer64/qual-B": {
+    "prompt-0.bin": {
+      "bytes": 262144,
+      "sha256": "9eee362a1767ce7fe07058c3ebc38e4ef47939b1437f40d31cc868ca2a8bdf00"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "87e46103ae0680c4d604db6689fbf9d7143eca93517a6c368fd581934e64d04f"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 926248396,
+      "sha256": "4d7737c7b093e855e7a1572b65470a63fcfcbcdafc72e0e1668caab2dc313e53"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "38c4375729b456df79606b7b628930e25c9bcf2794e9b7e34b2de152856fca79"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "5397c293a64b6274cb9410d5b413c828b0a32de81e7c978b57c86846b8d36108"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 926033292,
+      "sha256": "1451f66768b12018d43c930c3038b11110c81f9c718a8ddeed52f6e4533fd5fe"
+    }
+  },
+  "indexer128/model128-A0": {
+    "prompt-0.bin": {
+      "bytes": 524288,
+      "sha256": "c27bf8435430e9ecf86c8c74ba6057a92b945a50370be3e3f64bf9c9755feb65"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "f10779c681a3c4d250805682a76c25c7d7b75b4ca38fa35fae281d161bf7354c"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 1828285900,
+      "sha256": "dbae1a13387e492d13f749d6b3712b5b189ad11ea5f0e194ac760c62d52955c5"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "97c7800dff562bbc3e3becf6e8e93fc5fa150fae1cbc6b3a000a158a7a5a6106"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "fbf7a08ace639b4000ca94142ff917ff5159b624f2c3468432365c10a50065ec"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 1828070796,
+      "sha256": "791d99bb63d1cb6b067f6852296ac76d7d79ec5c233392817297b799e08c0fd0"
+    }
+  },
+  "indexer128/model128-B0": {
+    "prompt-0.bin": {
+      "bytes": 524288,
+      "sha256": "c27bf8435430e9ecf86c8c74ba6057a92b945a50370be3e3f64bf9c9755feb65"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "f10779c681a3c4d250805682a76c25c7d7b75b4ca38fa35fae281d161bf7354c"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 1828285900,
+      "sha256": "dbae1a13387e492d13f749d6b3712b5b189ad11ea5f0e194ac760c62d52955c5"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "97c7800dff562bbc3e3becf6e8e93fc5fa150fae1cbc6b3a000a158a7a5a6106"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "fbf7a08ace639b4000ca94142ff917ff5159b624f2c3468432365c10a50065ec"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 1828070796,
+      "sha256": "791d99bb63d1cb6b067f6852296ac76d7d79ec5c233392817297b799e08c0fd0"
+    }
+  },
+  "indexer128/model128-B1": {
+    "prompt-0.bin": {
+      "bytes": 524288,
+      "sha256": "c27bf8435430e9ecf86c8c74ba6057a92b945a50370be3e3f64bf9c9755feb65"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "f10779c681a3c4d250805682a76c25c7d7b75b4ca38fa35fae281d161bf7354c"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 1828285900,
+      "sha256": "dbae1a13387e492d13f749d6b3712b5b189ad11ea5f0e194ac760c62d52955c5"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "97c7800dff562bbc3e3becf6e8e93fc5fa150fae1cbc6b3a000a158a7a5a6106"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "fbf7a08ace639b4000ca94142ff917ff5159b624f2c3468432365c10a50065ec"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 1828070796,
+      "sha256": "791d99bb63d1cb6b067f6852296ac76d7d79ec5c233392817297b799e08c0fd0"
+    }
+  },
+  "indexer128/model128-A1": {
+    "prompt-0.bin": {
+      "bytes": 524288,
+      "sha256": "c27bf8435430e9ecf86c8c74ba6057a92b945a50370be3e3f64bf9c9755feb65"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "f10779c681a3c4d250805682a76c25c7d7b75b4ca38fa35fae281d161bf7354c"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 1828285900,
+      "sha256": "dbae1a13387e492d13f749d6b3712b5b189ad11ea5f0e194ac760c62d52955c5"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "97c7800dff562bbc3e3becf6e8e93fc5fa150fae1cbc6b3a000a158a7a5a6106"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "fbf7a08ace639b4000ca94142ff917ff5159b624f2c3468432365c10a50065ec"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 1828070796,
+      "sha256": "791d99bb63d1cb6b067f6852296ac76d7d79ec5c233392817297b799e08c0fd0"
+    }
+  },
+  "indexer128/short4096-A": {
+    "prompt-0.bin": {
+      "bytes": 16384,
+      "sha256": "2baaebf14803af10c47794411ae074322d974e366530a23739742b405e9592bd"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "d007a0629975f7f2b633699e8dcb8c816c3799fee9229b226d17de5326b5e40a"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 80588236,
+      "sha256": "4507a6b2a7837f45ef0792f690fd5cdeb12412d136c00a0391423780794fd9a4"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "058eeb632028373e8a54a50f5a1cc62c90bfbf703b284eeb29fe53152b70e627"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "ffa2c5f3d4f10c49ec3f12e53d5da960d20eaa2b1060939567861d8964aaf1dd"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 80373132,
+      "sha256": "ed52a87faf3107c8294442fb201ccc681d5fb8f7fb2e6c597b35ea01cd23c684"
+    }
+  },
+  "indexer128/short4096-B": {
+    "prompt-0.bin": {
+      "bytes": 16384,
+      "sha256": "2baaebf14803af10c47794411ae074322d974e366530a23739742b405e9592bd"
+    },
+    "generated-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "d007a0629975f7f2b633699e8dcb8c816c3799fee9229b226d17de5326b5e40a"
+    },
+    "generated-payload-0.bin": {
+      "bytes": 80588236,
+      "sha256": "4507a6b2a7837f45ef0792f690fd5cdeb12412d136c00a0391423780794fd9a4"
+    },
+    "generated-tokens-0.bin": {
+      "bytes": 64,
+      "sha256": "058eeb632028373e8a54a50f5a1cc62c90bfbf703b284eeb29fe53152b70e627"
+    },
+    "frontier-logits-0.bin": {
+      "bytes": 517120,
+      "sha256": "ffa2c5f3d4f10c49ec3f12e53d5da960d20eaa2b1060939567861d8964aaf1dd"
+    },
+    "frontier-payload-0.bin": {
+      "bytes": 80373132,
+      "sha256": "ed52a87faf3107c8294442fb201ccc681d5fb8f7fb2e6c597b35ea01cd23c684"
+    }
+  }
+}
