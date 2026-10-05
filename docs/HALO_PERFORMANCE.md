@@ -14,9 +14,13 @@
 
 ## Prefill across context lengths
 
-![Archived Halo prefill measurements from 2K to 128K](halo/figures/prefill-context-indexer-update.png)
+![Incremental prefill from 2K to 64K](halo/figures/prefill-context-incremental.png)
 
-The upper panel shows complete empty-context prompts; the lower panel measures each **2K increment**, from 2K to 64K. Short-prompt diamonds use a fixed 64K context allocation and are not joined to the long-prompt curves. Fresh 8K/16K points are unavailable in this dataset. **Local upstream** means the rebuilt upstream8db control on Halo.
+Each measurement adds **2K tokens**. The curves cover all 32 measured frontiers from 2K to 64K. **Local upstream** is the rebuilt upstream8db control on the same Halo machine.
+
+![Full-prompt prefill, with 2K and 4K chunks compared separately](halo/figures/prefill-context-indexer-update.png)
+
+Complete empty-context prompts at **32K, 64K and 128K**, grouped by chunk size. The updated 2K curve includes the resident-key indexer; the 4K curve retains its preceding campaign.
 
 | Full prompt | Local upstream, best chunk (2K) | Halo, previous 4K | Halo, 2K + indexer | Indexer gain over its contemporary 2K control |
 |---|---:|---:|---:|---:|
@@ -26,7 +30,7 @@ The upper panel shows complete empty-context prompts; the lower panel measures e
 
 Rates are token/s. The indexer gain uses its own matched A/B measurements; the preceding curves are from the earlier campaign. All necessary first-use preparation is included, model loading is excluded. The new indexer was measured with 2K chunks; the 4K curve retains its preceding results.
 
-[CSV measurements](halo/figures/prefill-context-data.csv) · [Sources and plotting method](halo/figures/README.md) · [SVG](halo/figures/prefill-context-indexer-update.svg) · [PDF](halo/figures/prefill-context-indexer-update.pdf) · [Previous four-variant chart](halo/figures/prefill-context-four-variants.png).
+[CSV measurements](halo/figures/prefill-context-data.csv) · [Sources and plotting method](halo/figures/README.md) · Incremental: [SVG](halo/figures/prefill-context-incremental.svg), [PDF](halo/figures/prefill-context-incremental.pdf) · Full prompt: [SVG](halo/figures/prefill-context-indexer-update.svg), [PDF](halo/figures/prefill-context-indexer-update.pdf).
 
 ## Quality
 

@@ -1645,8 +1645,8 @@
   "peak_record": "../peak-performance.json",
   "rules": [
     "Rates are token count divided by mean complete-prefill time, never mean of per-run rates.",
-    "Fresh full-prompt and incremental added-token timing are separate panels.",
-    "Short empty-context controls allocate65665; long fresh controls allocate prompt length+129. No joining of short and long controls.",
+    "Fresh full-prompt and incremental added-token timing use separate figures; fresh panels group matching chunk sizes.",
+    "Short empty-context controls allocate65665; long fresh controls allocate prompt length+129. Short controls remain supplementary data and are not plotted.",
     "No invented 8K/16K fresh points; no smoothing, interpolation or benchmark rerun.",
     "P is the local upstream8db control, not the official published DS4 speed number.",
     "Indexer A is the contemporary preceding optimized chain; indexer B includes resident-key scoring.",

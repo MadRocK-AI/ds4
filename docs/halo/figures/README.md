@@ -1,29 +1,35 @@
 # Archived prefill charts
 
-The publication figures reconstruct existing September 25–26 measurements. No engine, GPU, remote host or benchmark is invoked by the renderer.
+Reconstructed from recorded September 25–26 measurements. The renderer uses local data only.
 
-- [Updated indexer chart](prefill-context-indexer-update.png): preceding 2K/4K curves plus the measured 2K resident-key indexer upgrade.
-- [Previous four-variant chart](prefill-context-four-variants.png): original long-context comparison, extended with recorded short-prompt controls and the incremental series.
-- [CSV](prefill-context-data.csv) and [JSON](prefill-context-data.json): all 86 reconstructed records, including the contemporary indexer controls. JSON contains individual observations, protocol, allocation, source IDs and SHA256 bindings. CSV preserves measurement precision.
+- [Incremental chart](prefill-context-incremental.png): two continuous curves from 2K to 64K. Each frontier adds 2K tokens; rates measure that increment. Every one of the 32 frontiers per engine uses two ordinary observations.
+- [Full-prompt chart with indexer update](prefill-context-indexer-update.png): complete empty-context prefill at 32K, 64K and 128K. Separate panels for 2K and 4K chunks, with equal linear axes. Updated indexer observations appear only in the 2K panel.
+- [Preceding four-variant comparison](prefill-context-four-variants.png): the same layout using only the preceding matched campaign.
 
-Both charts have separate full-prompt and incremental panels, with context axes beginning at 2K. K = 1,024 tokens. The logarithmic axis gives each context doubling equal space. Markers are actual measurements, straight lines connect available points, and missing full-prompt 8K/16K measurements are not inferred. Only the first incremental request starts empty: that same 2K observation is also shown as a short-prompt diamond. It is not a second independent measurement. Short 2K/4K requests allocate 65,665 context slots; long prompts allocate length+129. These groups are not connected.
+Series names and final rates are placed at the ends of the curves. Incremental curves have no point symbols; full-prompt curves mark each of their three actual measurements. Axes are linear. Connecting segments do not add observations or estimate missing results. No smoothing or extrapolation is applied. PNG, SVG and PDF are available for every chart.
 
-P is the local rebuilt upstream8db reference, C the qualified preceding Halo chain. Neither P nor the indexer A control is the official remote published DS4 speed figure. The indexer A/B pair measures only the resident-key upgrade relative to its contemporary optimized control. Updated 2K and preceding 4K curves are different campaigns; the latter has no measured indexer update. The resident peak 449.03 token/s is a separate recorded mean after native preparation/warmup, not a point spliced into a first-use curve.
+[CSV](prefill-context-data.csv) and [JSON](prefill-context-data.json) retain all 86 records with full precision, including the short-prompt controls and contemporary indexer A observations. Those supplementary records remain available without being mixed into the plotted curves. JSON retains individual observations, protocols, allocations, source IDs and SHA256 bindings.
 
-Every rate is tokens divided by the arithmetic mean complete-prefill seconds. Incremental rows count only the added 2K tokens, not the entire frontier; decode, snapshots and restore are outside that timer. Model loading is outside prefill, required first-use preparation is inside. Numerical identity is scoped to the documented same-chunk full-logit/state/token checks, not universal model quality or equality between chunk sizes. See [quality evidence](../../HALO_EVIDENCE.md).
+## Reading the measurements
 
-## Reproduce the images
+P is the local rebuilt upstream8db reference, C the qualified preceding Halo chain. Local upstream is not the remote official DS4 published speed figure. Indexer A/B measures the resident-key upgrade relative to its contemporary optimized control. Updated 2K and preceding 4K belong to different campaigns; the latter has no measured indexer update.
 
-With Python 3.11+ and matplotlib already installed, run:
+Each rate is tokens divided by the arithmetic mean complete-prefill seconds. Incremental rates count only the added 2K tokens; decode, snapshot and restore remain outside the timer. Model loading is excluded, required first-use preparation is included. Long prompts allocate length+129 context slots. The archived short 2K/4K controls allocate 65,665 slots and are retained only in the data files; the short 2K control is the first incremental frontier, not an independent measurement.
+
+The separate resident peak of 449.03 token/s remains in the [performance page](../../HALO_PERFORMANCE.md) and [peak record](../peak-performance.json). Numerical identity is scoped to the documented same-chunk full-logit/state/token checks. See [quality evidence](../../HALO_EVIDENCE.md).
+
+## Reproduce the figures
+
+With Python 3.11+ and matplotlib already installed:
 
 ```sh
 python3 docs/halo/figures/render_prefill_context.py
 ```
 
-Optional `--output-dir /path/to/exports` writes PNG, SVG and PDF for both charts. The renderer uses only this directory's normalized data and [the peak record](../peak-performance.json). It checks rate arithmetic before rendering. No model or ROCm installation is needed.
+Optional `--output-dir /path/to/exports` writes all three figures in PNG, SVG and PDF. The renderer checks rate arithmetic before rendering. No model, ROCm installation or remote host is needed.
 
 ## Provenance
 
-Portable archived inputs are in [inputs](inputs/). The JSON manifest binds each original source ID and SHA256, its portable filename and portable SHA256. For the short 4K control, only the two selected ordinary rows are copied; its original full CSV hash and selection rule are retained. Portable text uses UTF-8 and LF line endings; original source hashes preserve the archived byte identity. Full diagnostics, profiler observations and rejected intermediate candidates are excluded from all plotted series. No external Spark or R9700 series is included.
+Portable archived inputs are in [inputs](inputs/). The JSON manifest binds each original source ID and SHA256 to its portable filename and SHA256. Portable text uses UTF-8 and LF line endings. For the short 4K control, only the two selected ordinary rows are copied; the original CSV hash and selection rule are retained.
 
-The retained [long-context cases](../longcontext-cases.json) and [indexer observations](../indexer-observations.csv) preserve the corresponding verification and per-observation identities.
+Timing diagnostics, profiler observations, rejected intermediate candidates and other hardware are excluded from the curves. The retained [long-context cases](../longcontext-cases.json) and [indexer observations](../indexer-observations.csv) preserve verification and per-observation identities.
