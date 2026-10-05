@@ -1,0 +1,257 @@
+{
+  "schema": 1,
+  "title": "Recorded prefill across context sizes",
+  "scope": "Cross-campaign result overview from2K to128K. Protocols vary: initial2K request; resident4K after native preparation/warmup; long complete first-use prompts. Connected segments are visual guides, not a controlled scaling experiment. No incremental added-token rate at frontier>2K is substituted for a full-prompt rate.",
+  "points": [
+    {
+      "series": "halo",
+      "context_tokens": 2048,
+      "prefill_tps": 354.23343592770874,
+      "protocol": "initial2K_no_warmup",
+      "context_allocation": 65665,
+      "source_record": "prefill-context-data.json",
+      "source_point": {
+        "protocol": "short_fresh",
+        "series": "C",
+        "context_tokens": 2048,
+        "added_tokens": 2048,
+        "chunk_tokens": 2048,
+        "context_allocation": 65665,
+        "individual_seconds": [
+          5.779827405,
+          5.783169151981999
+        ],
+        "mean_seconds": 5.781498278491,
+        "prefill_tps": 354.23343592770874,
+        "source": "inputs/02-public-individual-rows.csv",
+        "sample_ids": [
+          "public-full-0-C:row0",
+          "public-full-1-C:row0"
+        ],
+        "note": "First request starts empty; allocated prefill capacity4096, actual chunk2048."
+      }
+    },
+    {
+      "series": "halo",
+      "context_tokens": 4096,
+      "prefill_tps": 449.03371257444996,
+      "protocol": "resident4K_after_preparation_and_warmup",
+      "context_allocation": 4352,
+      "source_record": "../peak-performance.json",
+      "individual_seconds": [
+        9.080935692,
+        9.101184074,
+        9.149177336,
+        9.15594103
+      ],
+      "controlled_tps": 447.5068677410654,
+      "controlled_individual_seconds": [
+        9.145823750005,
+        9.153302905004,
+        9.155847165995999,
+        9.156754804979
+      ]
+    },
+    {
+      "series": "halo",
+      "context_tokens": 32768,
+      "prefill_tps": 400.57513339558426,
+      "protocol": "complete_first_use_prefill",
+      "context_allocation": 32897,
+      "source_record": "best-recorded-selection.json",
+      "source_point": {
+        "protocol": "fresh",
+        "series": "C",
+        "context_tokens": 32768,
+        "added_tokens": 32768,
+        "chunk_tokens": 4096,
+        "context_allocation": 32897,
+        "individual_seconds": [
+          81.802381795977
+        ],
+        "mean_seconds": 81.802381795977,
+        "prefill_tps": 400.57513339558426,
+        "source": "inputs/01-final-fresh-series.json",
+        "sample_ids": [
+          "final32-4096-C"
+        ]
+      },
+      "halo_configuration": "4K chunks"
+    },
+    {
+      "series": "halo",
+      "context_tokens": 65536,
+      "prefill_tps": 361.8701957606089,
+      "protocol": "complete_first_use_prefill",
+      "context_allocation": 65665,
+      "source_record": "best-recorded-selection.json",
+      "source_point": {
+        "protocol": "indexer_fresh",
+        "series": "indexer_B",
+        "context_tokens": 65536,
+        "added_tokens": 65536,
+        "chunk_tokens": 2048,
+        "context_allocation": 65665,
+        "individual_seconds": [
+          180.922379182011,
+          181.284847430012
+        ],
+        "mean_seconds": 181.1036133060115,
+        "prefill_tps": 361.8701957606089,
+        "source": "inputs/04-summary.json"
+      },
+      "halo_configuration": "2K + indexer"
+    },
+    {
+      "series": "halo",
+      "context_tokens": 131072,
+      "prefill_tps": 319.2927269216232,
+      "protocol": "complete_first_use_prefill",
+      "context_allocation": 131201,
+      "source_record": "best-recorded-selection.json",
+      "source_point": {
+        "protocol": "indexer_fresh",
+        "series": "indexer_B",
+        "context_tokens": 131072,
+        "added_tokens": 131072,
+        "chunk_tokens": 2048,
+        "context_allocation": 131201,
+        "individual_seconds": [
+          410.627998034994,
+          410.386631791975
+        ],
+        "mean_seconds": 410.5073149134845,
+        "prefill_tps": 319.2927269216232,
+        "source": "inputs/05-performance-summary.json"
+      },
+      "halo_configuration": "2K + indexer"
+    },
+    {
+      "series": "upstream",
+      "context_tokens": 2048,
+      "prefill_tps": 202.65843363182267,
+      "protocol": "initial2K_no_warmup",
+      "context_allocation": 65665,
+      "source_record": "prefill-context-data.json",
+      "source_point": {
+        "protocol": "short_fresh",
+        "series": "P",
+        "context_tokens": 2048,
+        "added_tokens": 2048,
+        "chunk_tokens": 2048,
+        "context_allocation": 65665,
+        "individual_seconds": [
+          10.096306713007,
+          10.115040659002
+        ],
+        "mean_seconds": 10.1056736860045,
+        "prefill_tps": 202.65843363182267,
+        "source": "inputs/02-public-individual-rows.csv",
+        "sample_ids": [
+          "public-full-0-P:row0",
+          "public-full-1-P:row0"
+        ],
+        "note": "First request starts empty; allocated prefill capacity4096, actual chunk2048."
+      }
+    },
+    {
+      "series": "upstream",
+      "context_tokens": 4096,
+      "prefill_tps": 311.2416145183508,
+      "protocol": "resident4K_after_preparation_and_warmup",
+      "context_allocation": 4352,
+      "source_record": "../baseline-attribution.json",
+      "individual_seconds": [
+        13.147111633996001,
+        13.159157017013,
+        13.157070516987,
+        13.177436472994001
+      ]
+    },
+    {
+      "series": "upstream",
+      "context_tokens": 32768,
+      "prefill_tps": 272.2146527470826,
+      "protocol": "complete_first_use_prefill",
+      "context_allocation": 32897,
+      "source_record": "best-recorded-selection.json",
+      "source_point": {
+        "protocol": "fresh",
+        "series": "P",
+        "context_tokens": 32768,
+        "added_tokens": 32768,
+        "chunk_tokens": 2048,
+        "context_allocation": 32897,
+        "individual_seconds": [
+          120.375592089986
+        ],
+        "mean_seconds": 120.375592089986,
+        "prefill_tps": 272.2146527470826,
+        "source": "inputs/01-final-fresh-series.json",
+        "sample_ids": [
+          "final32-2048-P"
+        ]
+      },
+      "halo_configuration": "2K chunks"
+    },
+    {
+      "series": "upstream",
+      "context_tokens": 65536,
+      "prefill_tps": 251.71181227687416,
+      "protocol": "complete_first_use_prefill",
+      "context_allocation": 65665,
+      "source_record": "best-recorded-selection.json",
+      "source_point": {
+        "protocol": "fresh",
+        "series": "P",
+        "context_tokens": 65536,
+        "added_tokens": 65536,
+        "chunk_tokens": 2048,
+        "context_allocation": 65665,
+        "individual_seconds": [
+          260.361241720006
+        ],
+        "mean_seconds": 260.361241720006,
+        "prefill_tps": 251.71181227687416,
+        "source": "inputs/01-final-fresh-series.json",
+        "sample_ids": [
+          "final64-2048-P"
+        ]
+      },
+      "halo_configuration": "2K chunks"
+    },
+    {
+      "series": "upstream",
+      "context_tokens": 131072,
+      "prefill_tps": 218.05317570418327,
+      "protocol": "complete_first_use_prefill",
+      "context_allocation": 131201,
+      "source_record": "best-recorded-selection.json",
+      "source_point": {
+        "protocol": "fresh",
+        "series": "P",
+        "context_tokens": 131072,
+        "added_tokens": 131072,
+        "chunk_tokens": 2048,
+        "context_allocation": 131201,
+        "individual_seconds": [
+          601.101082691021
+        ],
+        "mean_seconds": 601.101082691021,
+        "prefill_tps": 218.05317570418327,
+        "source": "inputs/01-final-fresh-series.json",
+        "sample_ids": [
+          "final128-2048-P"
+        ]
+      },
+      "halo_configuration": "2K chunks"
+    }
+  ],
+  "rounding": "Human-readable rates: maximum two decimals",
+  "source_bindings": {
+    "prefill-context-data.json": "72737a3c82cd618ed3b858c002c6180aa1b0f6e0ea0d39a4a0d44d748c9f90da",
+    "best-recorded-selection.json": "4c12a516cca6c8aa62e6c013fd92b6f1aa2d779638a8805f9344a9b259182660",
+    "../peak-performance.json": "7a4bbf1ebabc1e4072a31a12026fc8bf8048c1f1756773daa2e839ade7dd3556",
+    "../baseline-attribution.json": "47d1bb2addd7bdb0a7d6927627061e4630e061d471bccb3d878cc361fb91fb30"
+  }
+}

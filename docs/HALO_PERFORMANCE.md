@@ -14,19 +14,21 @@
 
 ## Prefill across context lengths
 
-![Best recorded full-prompt Halo prefill, using the best chunk at each context](halo/figures/prefill-context-best-recorded.png)
+![Recorded Halo prefill from 2K to 128K, including the resident 4K peak and controlled result](halo/figures/prefill-context-overview.png)
 
-**Best recorded complete-prefill rates at each prompt length.** At 32K the best result uses 4K chunks; at 64K and 128K it uses **2K + indexer**. Local upstream is the rebuilt upstream8db control on the same Halo machine, whose best recorded chunk is 2K.
+**Recorded prefill from 2K to 128K, including both 4K results above: 449.03 best mean and 447.51 controlled.** The 2K point is an initial request; 4K follows native preparation/warmup; long prompts include first-use preparation. Each point identifies its setting. The connecting lines summarize recorded means across those protocols; they are not a controlled context-scaling experiment. Local upstream is the rebuilt upstream8db control on Halo.
 
-| Full prompt | Local upstream, best chunk | Halo, 2K + indexer | Halo, best recorded | Best Halo setting |
+| Context | Local upstream | Halo, 2K + indexer | Halo shown in chart | Measurement / setting |
 |---|---:|---:|---:|---|
+| 2K | 202.66 | — | **354.23** | Initial 2K request |
+| 4K | 311.24 | — | **449.03** | Prepared 4K; controlled result **447.51** |
 | 32K | 272.21 | 391.33 | **400.58** | 4K chunks |
 | 64K | 251.71 | 361.87 | **361.87** | 2K + indexer |
 | 128K | 218.05 | 319.29 | **319.29** | 2K + indexer |
 
-Rates are token/s, from the archived complete empty-context campaigns. Required first-use preparation is included; model loading is excluded. **400.58 at 32K belongs to 4K chunks; the fixed 2K + indexer result is 391.33.** The best-result curve selects a recorded configuration at each context; it is not a fixed-chunk A/B series.
+Rates are token/s; model loading is excluded. The 4K measurement follows native preparation/warmup and has no prefix reuse; initial 2K and long complete prompts include first-use preparation. **400.58 at 32K belongs to 4K chunks; the fixed 2K + indexer result is 391.33.** The long-context points select the best recorded chunk at each prompt length.
 
-[Fixed 2K + indexer chart](halo/figures/prefill-context-indexer-update.png) · [Best-result selection and source times](halo/figures/best-recorded-selection.json) · [CSV measurements](halo/figures/prefill-context-data.csv) · [Sources and plotting method](halo/figures/README.md) · [SVG](halo/figures/prefill-context-best-recorded.svg) · [PDF](halo/figures/prefill-context-best-recorded.pdf).
+[Fixed 2K + indexer chart](halo/figures/prefill-context-indexer-update.png) · [Overview source times and protocol bindings](halo/figures/prefill-context-overview.json) · [CSV measurements](halo/figures/prefill-context-data.csv) · [Sources and plotting method](halo/figures/README.md) · [SVG](halo/figures/prefill-context-overview.svg) · [PDF](halo/figures/prefill-context-overview.pdf).
 
 The [archived incremental chart from 2K to 64K](halo/figures/prefill-context-incremental.png) measures each added 2K interval in the **preceding campaign, before the indexer upgrade**; it is not the updated full-prompt curve.
 

@@ -10,7 +10,7 @@ import statistics
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FixedLocator, FuncFormatter
+from matplotlib.ticker import FixedLocator, FuncFormatter, NullLocator
 
 HERE = Path(__file__).resolve().parent
 BLUE = "#0868B2"
@@ -163,6 +163,54 @@ def render_best(selection, output):
     fig.text(.07, .035, "Upstream best setting: 2K chunks. First-use preparation included, model loading excluded. K = 1,024 tokens.", fontsize=9.5, color=MUTED)
     save(fig, output)
 
+def render_overview(overview, output):
+    fig = plt.figure(figsize=(12.4, 6.7))
+    ax = fig.add_axes([.07, .26, .75, .49])
+    header(fig, "Recorded prefill from 2K to 128K",
+           "DeepSeek V4 Flash 0731  ·  AMD Strix Halo, 128 GB  ·  Archived measured results")
+    ax.set_xscale("log", base=2)
+    ax.set_xlim(2048 / 1.12, 131072)
+    ax.set_ylim(0, 510)
+    ax.set_xticks([2048, 4096, 8192, 16384, 32768, 65536, 131072])
+    ax.xaxis.set_major_formatter(FuncFormatter(lambda x, _: f"{x / 1024:g}K"))
+    ax.xaxis.set_minor_locator(NullLocator())
+    ax.set_yticks([0, 100, 200, 300, 400, 500])
+    ax.set_ylabel("Prefill (token/s)", labelpad=14, color=MUTED, fontsize=10)
+    ax.set_xlabel("Prompt / context length (tokens)", labelpad=15, color=MUTED, fontsize=10)
+    ax.grid(axis="y", color="#DEE6ED", lw=.8)
+    ax.set_axisbelow(True)
+    for name in ["top", "right", "left"]:
+        ax.spines[name].set_visible(False)
+    ax.spines["bottom"].set_color("#B9C8D4")
+    ax.tick_params(axis="both", length=0, pad=9, colors=MUTED, labelsize=10)
+    # A visible band identifies the prepared resident workload at4K.
+    ax.axvspan(4096 / 1.10, 4096 * 1.10, color="#EEF4FA", zorder=0)
+    for series, color, label in [("halo", BLUE, "Halo"), ("upstream", ORANGE, "Local upstream")]:
+        pp = sorted([p for p in overview["points"] if p["series"] == series], key=lambda p: p["context_tokens"])
+        ax.plot([p["context_tokens"] for p in pp], [p["prefill_tps"] for p in pp],
+                color=color, lw=2.6, marker="o", markersize=5,
+                markerfacecolor="white", markeredgewidth=1.5, clip_on=False)
+        end_label(ax, pp[-1], label, color, fontsize=10.5)
+        for p in pp[:-1]:
+            if p["context_tokens"] == 4096 and series == "halo":
+                text = f"{p['prefill_tps']:.2f} peak mean\n{p['controlled_tps']:.2f} controlled"
+                ax.annotate(text, (4096, p["prefill_tps"]), xytext=(0, 12), textcoords="offset points",
+                            ha="center", color=color, fontsize=10, linespacing=1.4)
+            else:
+                ax.annotate(f"{p['prefill_tps']:.2f}", (p["context_tokens"], p["prefill_tps"]),
+                            xytext=(0, 12 if series == "halo" else -20), textcoords="offset points",
+                            ha="center", color=color, fontsize=10)
+        if series == "halo":
+            for p in pp:
+                label = {2048: "Initial 2K", 4096: "Prepared 4K"}.get(p["context_tokens"], p.get("halo_configuration", ""))
+                ax.annotate(label, (p["context_tokens"], p["prefill_tps"]), xytext=(0, -22),
+                            textcoords="offset points", ha="center", fontsize=8.5, color=BLUE)
+    fig.text(.07, .11, "Protocols: 2K initial request; 4K after native preparation / warmup; 32K–128K complete first-use prompts.", fontsize=9.5, color=MUTED)
+    fig.text(.07, .075, "Cross-campaign overview. Lines link recorded means; they do not imply identical preparation or a controlled scaling test.", fontsize=9.5, color=MUTED)
+    fig.text(.07, .04, "Local upstream = rebuilt upstream8db. Best measured chunk shown at each long-context point. K = 1,024 tokens.", fontsize=9.5, color=MUTED)
+    save(fig, output)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, default=HERE)
@@ -182,6 +230,8 @@ def main():
     render_previous(data, args.output_dir / "prefill-context-four-variants")
     render_current(data, args.output_dir / "prefill-context-indexer-update")
     render_best(selection, args.output_dir / "prefill-context-best-recorded")
+    overview = json.loads((HERE / "prefill-context-overview.json").read_text(encoding="utf-8"))
+    render_overview(overview, args.output_dir / "prefill-context-overview")
 
 
 if __name__ == "__main__":

@@ -28,9 +28,9 @@ The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8d
 
 **Measured improvement: +43.78%** in the controlled resident 4K comparison against upstream DS4 rebuilt on the same machine. The official published value uses 2K increments; it is context, not the denominator of that controlled gain. [Official DS4 source](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md) - [Measurement records](docs/halo/peak-performance.json).
 
-![Best recorded full-prompt Halo prefill, with the chosen chunk shown at each context](docs/halo/figures/prefill-context-best-recorded.png)
+![Recorded Halo prefill from 2K to 128K, including 449.03 and 447.51 at 4K](docs/halo/figures/prefill-context-overview.png)
 
-**400.58 at 32K (4K chunks), 361.87 at 64K and 319.29 at 128K (2K + indexer).** [Context measurements, the fixed 2K + indexer curve and downloadable figures](docs/HALO_PERFORMANCE.md#prefill-across-context-lengths).
+The chart starts at **2K**, includes **449.03 / 447.51 at prepared 4K**, and shows **400.58 / 361.87 / 319.29** at 32K / 64K / 128K. Preparation and chunk settings are identified at the points. [Measurements, protocols and downloadable figures](docs/HALO_PERFORMANCE.md#prefill-across-context-lengths).
 
 ## Quality
 
