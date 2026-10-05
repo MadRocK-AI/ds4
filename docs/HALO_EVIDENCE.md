@@ -1,4 +1,6 @@
-# Evidence boundaries
+# Halo evidence and numerical coverage
+
+[Performance overview and reference definitions](HALO_PERFORMANCE.md) distinguish the original upstream report from local rebuilt upstream8db controls. The local resident control at 311.241615 token/s is not the original Clean DS4 performance baseline. Its source, harness and environment attribution is recorded in [baseline-attribution.json](halo/baseline-attribution.json).
 
 The source/evidence matrix was assembled before selecting public claims. [sources.json](halo/sources.json) binds each component to its original source SHA256, port path/SHA256, historical checkpoint and upstream base. New integrated GPU executions remain **NOT RUN**; historical results were accepted by the owner for this private preparation. [Release status](HALO_RELEASE.md) records that decision and the successful local build/link. The accompanying source records include transformations such as namespace changes, architecture guards, extracted helpers and new native lifetime bindings; whole-file hash differences are expected.
 

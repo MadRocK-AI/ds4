@@ -12,6 +12,8 @@ The compiled engine commit is `34ec09459cc64c1f565dbb2e49744ce7d852d9de`. Public
 
 Historical fresh resident 4096-token prefill reached **447.506868 tokens/s** in the frozen controlled comparison (9.152932156 seconds). A later ordinary profiling bracket reported **449.0337 tokens/s**; the observations are kept separate. The frozen structural9 checkpoint SHA256 is `9405793e0ad534c747a2036fc2e807554691031ebc68b8a240bf0805779fac71`. Long-context and indexer evidence, numerical hashes, tested geometry and measurement boundaries are retained in [HALO_EVIDENCE.md](HALO_EVIDENCE.md). These are historical performance observations, not a new binary benchmark.
 
+The [performance overview](HALO_PERFORMANCE.md) explains the added paths, same-protocol gains, distinct upstream/local references and bitwise test coverage.
+
 ## Build dependencies
 
 The successful build used AMD clang23/HIP7.15, rocBLAS5.6.0 at rocm-libraries commit `8d1ae90eff7d022f26019ec55b2ec6a7674b3112`, hipBLASLt1.4.1, hipCUB4.6, rocPRIM4.6 and the frozen rocWMMA2.2.1 headers. The driver and clang hashes are in the build record. A full existing SDK can provide these dependencies; the recorded build used a core SDK plus an isolated math/header overlay. No SDK or model is bundled here.

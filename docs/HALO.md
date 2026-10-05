@@ -1,4 +1,4 @@
-# Halo prefill candidate
+# Halo prefill implementation
 
 This local fork ports the final compatible Halo prefill chain into the normal ROCm backend. It preserves upstream history from `8db1d1d155cb0400a86a86b9c62d0defb3a6148b`. The initial private repository is [msala9/ds4](https://github.com/msala9/ds4), with a future official home planned under madrock. The owner accepted the historical numerical/performance evidence for this preparation. The normal WSL build/link passed; no new GPU run is claimed. See [current release status](HALO_RELEASE.md).
 
@@ -10,6 +10,8 @@ DS4_ROCM_HALO_PREFILL=1 ./ds4-bench --rocm ...
 ```
 
 `DS4_ROCM_HALO_PREFILL=1` explicitly admits the candidate. The default and `0` use native selectors. Other backends retain their build and arithmetic. The normal build needs HIP, hipBLAS, hipBLASLt, rocBLAS, hipCUB, rocPRIM and rocWMMA2.2.1; no script installs them. Cached dense donor paths require the recognized rocBLAS 5.6 solution family. Unknown libraries and architectures keep native dispatch. Rebuilding against a different compiler/header/library combination needs qualification even when compilation succeeds.
+
+For the fork delta, baseline definitions, measured improvements and bitwise coverage, start with [HALO_PERFORMANCE.md](HALO_PERFORMANCE.md).
 
 ## Admission and fallbacks
 

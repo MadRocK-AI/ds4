@@ -1,0 +1,197 @@
+{
+  "schema": 1,
+  "audit_date": "2026-10-05",
+  "audit_scope": "Offline attribution audit of preserved evidence; no benchmark rerun",
+  "upstream_commit": "8db1d1d155cb0400a86a86b9c62d0defb3a6148b",
+  "source_identity_audit": {
+    "matching_git_archive_files": 3092,
+    "source_changes": false,
+    "harness_change": "Host-only resident loop inserted in benchmark frontend; inference objects linked from upstream tree"
+  },
+  "reference": {
+    "name": "Local upstream8db resident fresh4096 control P",
+    "executable_sha256": "263bd3fbeedbfdbd0d882b32a26875c9ef9c789170f1d511ad6d27b643dca7da",
+    "published_original_ds4_baseline": false,
+    "sdk": "core10 / HIP7.15 / clang23 / gfx1151",
+    "context_alloc": 4352,
+    "tokens_per_request": 4096,
+    "prefix_reuse": false,
+    "model_and_weights_resident": true,
+    "measurements_after": "native cache fill, first prepared request and warmup",
+    "observations": [
+      {
+        "pair": 0,
+        "research_preload": false,
+        "command_sha256": "23209f8c2be633d8a345ea2b58280026ae17883431b346a2483b9317b72f07dd",
+        "environment_sha256": "7d1de58733a9f1886ac377895590d02089538f6b06242ab82ef1154b4e22e2cc",
+        "loaded_maps_sha256": "6f4b75bebba08de2677efe0a551cc049cc3ed0045a9611ac64bb39922eaecac4",
+        "requests": [
+          {
+            "phase": "first-native-cache-fill-O",
+            "prefill_ms": 15148.658994993,
+            "processed_tokens": 4096,
+            "prefix_start": 0
+          },
+          {
+            "phase": "first-own-preparation-P",
+            "prefill_ms": 13034.595130011,
+            "processed_tokens": 4096,
+            "prefix_start": 0
+          },
+          {
+            "phase": "own-warmup-P",
+            "prefill_ms": 13115.512389981,
+            "processed_tokens": 4096,
+            "prefix_start": 0
+          },
+          {
+            "phase": "measure-0-P",
+            "prefill_ms": 13147.111633996,
+            "processed_tokens": 4096,
+            "prefix_start": 0
+          },
+          {
+            "phase": "measure-1-P",
+            "prefill_ms": 13159.157017013,
+            "processed_tokens": 4096,
+            "prefix_start": 0
+          }
+        ]
+      },
+      {
+        "pair": 1,
+        "research_preload": false,
+        "command_sha256": "23209f8c2be633d8a345ea2b58280026ae17883431b346a2483b9317b72f07dd",
+        "environment_sha256": "9a493b4a6281aa24f5a51230615fb20e2b1a633a61dac6f966e0ad1ebcbec76f",
+        "loaded_maps_sha256": "e8e6d325222094bad07aa228bda27dcd041a96a956ba7168fd45d681591fd36f",
+        "requests": [
+          {
+            "phase": "first-native-cache-fill-O",
+            "prefill_ms": 15169.375244994,
+            "processed_tokens": 4096,
+            "prefix_start": 0
+          },
+          {
+            "phase": "first-own-preparation-P",
+            "prefill_ms": 13091.158511001,
+            "processed_tokens": 4096,
+            "prefix_start": 0
+          },
+          {
+            "phase": "own-warmup-P",
+            "prefill_ms": 13149.85387199,
+            "processed_tokens": 4096,
+            "prefix_start": 0
+          },
+          {
+            "phase": "measure-0-P",
+            "prefill_ms": 13157.070516987,
+            "processed_tokens": 4096,
+            "prefix_start": 0
+          },
+          {
+            "phase": "measure-1-P",
+            "prefill_ms": 13177.436472994,
+            "processed_tokens": 4096,
+            "prefix_start": 0
+          }
+        ]
+      }
+    ]
+  },
+  "structural9_summary": {
+    "P": {
+      "timer": "prefill_ms",
+      "ms": [
+        13147.111633996,
+        13159.157017013,
+        13157.070516987,
+        13177.436472994
+      ],
+      "session_mean_ms": [
+        13153.1343255045,
+        13167.2534949905
+      ],
+      "mean_ms": 13160.1939102475,
+      "sd_ms": 12.639655256731285,
+      "tps": 311.2416145183508
+    },
+    "R": {
+      "timer": "obs_prepare_prefill_ms",
+      "ms": [
+        9307.469991007,
+        9310.903159028,
+        9294.806418999,
+        9306.97477801
+      ],
+      "session_mean_ms": [
+        9309.186575017498,
+        9300.8905985045
+      ],
+      "mean_ms": 9305.038586761,
+      "sd_ms": 7.041567726596552,
+      "tps": 440.19161896090327
+    },
+    "C": {
+      "timer": "obs_prepare_prefill_ms",
+      "ms": [
+        9145.823750005,
+        9153.302905004,
+        9155.847165996,
+        9156.754804979
+      ],
+      "session_mean_ms": [
+        9149.5633275045,
+        9156.3009854875
+      ],
+      "mean_ms": 9152.932156496001,
+      "sd_ms": 4.959059692695382,
+      "tps": 447.5068677410654
+    }
+  },
+  "historical_throughput_gain_percent": 43.781180557614796,
+  "checkpoint_sha256": "9405793e0ad534c747a2036fc2e807554691031ebc68b8a240bf0805779fac71",
+  "evidence_bindings": [
+    {
+      "source_id": "halo-deepseek-residual6-20260924/public-source-identities.json",
+      "sha256": "445ab05d769dc78fba28e6876da2bee580bc8bbdb0c32e386739f2bf3ec04325"
+    },
+    {
+      "source_id": "halo-deepseek-residual6-20260924/build-command-2.json",
+      "sha256": "47c4de1a178cdfd23c554a55b15c8e0ba68da852048b47d4aabb29b0c1f5bafe"
+    },
+    {
+      "source_id": "halo-deepseek-residual6-20260924/build-host.py",
+      "sha256": "6d5a9eaaae19001e116987e91ef26141ed699240c1af0894a83a39b37c785142"
+    },
+    {
+      "source_id": "halo-deepseek-residual6-20260924/native-host/host.patch",
+      "sha256": "155563d556af4ba6804e655c1858a6a400c430e39869e5559f323a421e7a18a8"
+    },
+    {
+      "source_id": "halo-deepseek-residual6-20260924/native-host/identities.json",
+      "sha256": "3f59c8f4c77a43b54e98fb4ff2509e6446a7840c72650131d1ae43ffdf9ab406"
+    },
+    {
+      "source_id": "halo-deepseek-structural9-20260925/b-model-fresh.json",
+      "sha256": "f843c46294affb27d9df38542e69f6606348130c2f6a9c3bf99706bc2aac9b90"
+    },
+    {
+      "source_id": "halo-deepseek-structural9-20260925/run-b-model-fresh.py",
+      "sha256": "d85d4aa70fae8cfbc8d300d9489d9e70e61f583fffa74c89243c04c3b2a71cc3"
+    },
+    {
+      "source_id": "halo-deepseek-structural9-20260925/checkpoint-iq2-fused-epilogue.json",
+      "sha256": "9405793e0ad534c747a2036fc2e807554691031ebc68b8a240bf0805779fac71"
+    },
+    {
+      "source_id": "halo-deepseek-structural9-20260925.md",
+      "sha256": "e3edc2b735cce98794bf7d00db9b9bc33aba06b70d2eea2a9eeb664f51ef619a"
+    },
+    {
+      "source_id": "halo-deepseek-longcontext-20260925.md",
+      "sha256": "7728aba38c84b1b1d1ca39ab431b5ad2a66316f57f45e3e1e9fd4ac618c923bc"
+    }
+  ],
+  "publication_scope": "Historical checkpoint observations, not a timing result for the rebuilt integrated release"
+}
