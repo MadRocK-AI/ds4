@@ -1,18 +1,18 @@
-# Initial private Halo release
+# Halo build and qualification record
 
-Prepared on 2026-10-02 for the private repositories [msala9/ds4](https://github.com/msala9/ds4) and [msala9/ds4-on-halo](https://github.com/msala9/ds4-on-halo). The planned official home is the madrock organization. No transfer or public publication is included in this initial upload.
+Build validation recorded on 2026-10-02 for DS4 Halo. The [setup and verification companion](https://github.com/msala9/ds4-on-halo) provides pinned-source bootstrap and benchmark tooling.
 
-## Acceptance and validation
+## Validation scope
 
-The owner accepted the existing internal numerical and performance evidence for this preparation. Those observations retain their original executables, model, inputs and measurement boundaries. No new GPU inference or benchmark of the integrated release executable is claimed. The source remains opt-in with `DS4_ROCM_HALO_PREFILL=1`; native dispatch is the default.
+Numerical and performance results are the documented historical checkpoint observations, with their original executables, model, inputs and measurement boundaries. No new GPU inference or benchmark of the integrated release executable is claimed. The source remains opt-in with `DS4_ROCM_HALO_PREFILL=1`; native dispatch is the default.
 
 The normal `make rocm` path built **ds4, ds4-server, ds4-bench, ds4-eval and ds4-agent** in local WSL for gfx1151. All five ELF relocation checks passed, with 29 real shared-library files resolved and no missing symbols. The actual runtime object contains a gfx1151 AMD HSA code image. The successful build and source checks took 312.10 seconds. [The portable build record](halo/release-build.json) contains executable, compiler and library hashes and exact SDK package identities.
 
-The compiled engine commit is `34ec09459cc64c1f565dbb2e49744ce7d852d9de`. Publication commits change documentation only. The companion publication updates its engine pin and presentation; its build and benchmark implementations are unchanged. The archived compiler logs and original receipts remain local; this repository contains the path-independent evidence summary.
+The compiled engine commit is `34ec09459cc64c1f565dbb2e49744ce7d852d9de`. Subsequent documentation revisions preserve the compiled engine source; the companion pins the corresponding engine revision. The archived compiler logs and original receipts remain local; this repository contains the path-independent evidence summary.
 
 Historical fresh resident 4096-token prefill reached **447.51 tokens/s** in the frozen controlled comparison (9.15 seconds). A later ordinary profiling bracket reported **449.03 tokens/s**; the observations are kept separate. The frozen structural9 checkpoint SHA256 is `9405793e0ad534c747a2036fc2e807554691031ebc68b8a240bf0805779fac71`. Long-context and indexer evidence, numerical hashes, tested geometry and measurement boundaries are retained in [HALO_EVIDENCE.md](HALO_EVIDENCE.md). These are historical performance observations, not a new binary benchmark.
 
-The [performance overview](HALO_PERFORMANCE.md) explains the added paths, same-protocol gains, distinct upstream/local references and bitwise test coverage.
+The [performance overview](HALO_PERFORMANCE.md) explains the added paths, same-protocol gains, the measured original-engine reference and bitwise test coverage.
 
 ## Build dependencies
 

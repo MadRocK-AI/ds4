@@ -2,7 +2,7 @@
 
 An opt-in **single-device ROCm prefill fork** of [antirez/ds4](https://github.com/antirez/ds4), targeting Ryzen AI Max+ 395 / Radeon 8060S (`gfx1151`) with 128 GB unified memory. The Halo work accelerates routed MoE, attention, projections and indexer scoring while preserving **bitwise logits and complete state on the documented historical test cases**.
 
-The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8db1d1d155cb0400a86a86b9c62d0defb3a6148b), which already contains gfx1151 tuning. This repository adds the compatible Halo prefill chain to the normal ROCm source build. The pinned setup/verification companion is [ds4-on-halo](https://github.com/msala9/ds4-on-halo). Both repositories are currently private under msala9; their planned official home is madrock.
+The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8db1d1d155cb0400a86a86b9c62d0defb3a6148b), which already contains gfx1151 tuning. This repository adds the compatible Halo prefill chain to the normal ROCm source build. The pinned setup/verification companion is [ds4-on-halo](https://github.com/msala9/ds4-on-halo).
 
 ## What this fork adds
 
@@ -37,7 +37,7 @@ The first panel starts at **2K context**. Each panel keeps its own benchmark pro
 
 ## Start Here
 
-Clone the private repository using your existing GitHub access and build with a complete compatible Linux ROCm SDK:
+Clone the repository and build with a complete compatible Linux ROCm SDK:
 
 ```sh
 git clone https://github.com/msala9/ds4.git

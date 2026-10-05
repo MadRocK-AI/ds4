@@ -1,6 +1,6 @@
 # Halo source credits
 
-The fork retains the upstream DS4 license, history, `AGENT.md` and `CONTRIBUTING.md`. The private mixed-hardware project overlay is not copied.
+The fork retains the upstream DS4 license, history, `AGENT.md` and `CONTRIBUTING.md`.
 
 The frozen GEMM template headers under `rocm/halo/output_a`, `rocm/halo/shared_gu/kernel` and `rocm/halo/q2/prepared` preserve the MIT notices of Adel Johar (2024). Their qualified WMMA orders differ: Q2 prepared retains the native K8 correction; shared-GU retains its qualified unpatched order. Separate namespaces prevent accidental substitution at link time. Output-B assembly carries the corresponding MIT license in `rocm/halo/output_b/LICENSE`.
 

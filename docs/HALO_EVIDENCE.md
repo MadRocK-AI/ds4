@@ -2,7 +2,7 @@
 
 [Performance and quality summary](HALO_PERFORMANCE.md). The detailed historical controls, source/harness attribution and exact values remain in [baseline-attribution.json](halo/baseline-attribution.json); the peak and controlled headline figures are bound in [peak-performance.json](halo/peak-performance.json). The secondary incremental comparison remains in [published-performance.json](halo/published-performance.json).
 
-The source/evidence matrix was assembled before selecting public claims. [sources.json](halo/sources.json) binds each component to its original source SHA256, port path/SHA256, historical checkpoint and upstream base. New integrated GPU executions remain **NOT RUN**; historical results were accepted by the owner for this private preparation. [Release status](HALO_RELEASE.md) records that decision and the successful local build/link. The accompanying source records include transformations such as namespace changes, architecture guards, extracted helpers and new native lifetime bindings; whole-file hash differences are expected.
+The source/evidence matrix binds the documented measurements to their implementation. [sources.json](halo/sources.json) binds each component to its original source SHA256, port path/SHA256, historical checkpoint and upstream base. New integrated GPU executions remain **NOT RUN**. [Build and qualification status](HALO_RELEASE.md) distinguishes the historical numerical results from the successful local build/link. The accompanying source records include transformations such as namespace changes, architecture guards, extracted helpers and new native lifetime bindings; whole-file hash differences are expected.
 
 ## Historical chain
 

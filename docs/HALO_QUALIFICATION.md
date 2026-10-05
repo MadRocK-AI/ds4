@@ -1,6 +1,6 @@
-# Qualifying the cleaned Halo candidate
+# Halo verification and reproduction
 
-The owner accepted the existing historical numerical/performance evidence for the initial private publication on 2026-10-02. Normal gfx1151 ROCm build/link and ELF relocation checks passed locally in WSL. [Current release status](HALO_RELEASE.md) records this decision. The sequence below is retained as a reproduction protocol for future GPU qualification; it does not schedule a new run for this publication. Keep `DS4_ROCM_HALO_PREFILL` opt-in. Untested cases remain explicitly untested.
+Numerical and performance evidence describes the retained historical checkpoints. Normal gfx1151 ROCm build/link and ELF relocation checks passed locally in WSL on 2026-10-02. [Build and qualification status](HALO_RELEASE.md) records the scope. The sequence below explains how to reproduce the GPU checks; it does not report a new run of the integrated executable. Keep `DS4_ROCM_HALO_PREFILL` opt-in. Untested cases remain explicitly untested.
 
 ## Executed and pending checks
 
@@ -31,7 +31,7 @@ The original command assertion54 and subsequent TCP tiny-buffer failure were rep
 
 ## Build the three controls
 
-Use explicit existing paths. The companion is local and has no publication URL. Do not run more than one model process at a time. Set these shell variables to real paths; all destinations must be new.
+Use explicit existing paths and a local clone of [ds4-on-halo](https://github.com/msala9/ds4-on-halo). Do not run more than one model process at a time. Set these shell variables to real paths; all destinations must be new.
 
 ```sh
 HALO_RELEASE=/path/to/local/release/ds4
