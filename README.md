@@ -2,7 +2,9 @@
 
 An opt-in **single-device ROCm prefill fork** of [antirez/ds4](https://github.com/antirez/ds4), targeting Ryzen AI Max+ 395 / Radeon 8060S (`gfx1151`) with 128 GB unified memory. The Halo work accelerates routed MoE, attention, projections and indexer scoring while preserving **bitwise logits and complete state on the documented historical test cases**.
 
-The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8db1d1d155cb0400a86a86b9c62d0defb3a6148b), which already contains gfx1151 tuning. This repository adds the compatible Halo prefill chain to the normal ROCm source build. The pinned setup/verification companion is [ds4-on-halo](https://github.com/msala9/ds4-on-halo).
+**Release candidate 0.1.0-rc.1.** The integrated ROCm engine builds and links in WSL. Performance and bitwise results below describe the verified historical checkpoints; the integrated executable has not had a new GPU model run. [Validation scope](docs/HALO_RELEASE.md).
+
+The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8db1d1d155cb0400a86a86b9c62d0defb3a6148b), which already contains gfx1151 tuning. This repository adds the compatible Halo prefill chain to the normal ROCm source build. The pinned setup/verification companion is [ds4-on-halo](https://github.com/MadRocK-AI/ds4-on-halo).
 
 ## What this fork adds
 
@@ -18,7 +20,7 @@ The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8d
 
 ## Performance
 
-**Up to 449.03 token/s prefill.** DeepSeek V4 Flash 0731 on AMD Strix Halo (`gfx1151`), 128 GB unified memory. Bitwise logits and state are preserved in the verified cases.
+**Best recorded prefill: 449.03 token/s.** DeepSeek V4 Flash 0731 on AMD Strix Halo (`gfx1151`), 128 GB unified memory. Bitwise logits and state are preserved in the verified cases.
 
 | Prepared complete 4K request, same-machine test | Prefill |
 |---|---:|
@@ -40,13 +42,13 @@ The first panel starts at **2K context**. Each panel keeps its own benchmark pro
 Clone the repository and build with a complete compatible Linux ROCm SDK:
 
 ```sh
-git clone https://github.com/msala9/ds4.git
+git clone https://github.com/MadRocK-AI/ds4.git
 cd ds4
 make rocm HIPCC=/path/to/existing/hipcc ROCM_ARCH=gfx1151 -j2
 DS4_ROCM_HALO_PREFILL=1 ./ds4 --rocm -m /path/to/compatible-0731.gguf
 ```
 
-Required SDK components include HIP, hipBLAS, hipBLASLt, rocBLAS, hipCUB, rocPRIM and rocWMMA2.2.1. See [the verified build recipe and dependency identities](docs/HALO_RELEASE.md#build-dependencies), including the split core/math/header layout. Halo selects only admitted operator shapes; short prompts and unsupported configurations use native paths. The [companion](https://github.com/msala9/ds4-on-halo) supplies exact source-pin bootstrap, build records, timing configuration and full payload comparisons.
+Required SDK components include HIP, hipBLAS, hipBLASLt, rocBLAS, hipCUB, rocPRIM and rocWMMA2.2.1. See [the verified build recipe and dependency identities](docs/HALO_RELEASE.md#build-dependencies), including the split core/math/header layout. Halo selects only admitted operator shapes; short prompts and unsupported configurations use native paths. The [companion](https://github.com/MadRocK-AI/ds4-on-halo) supplies exact source-pin bootstrap, build records, timing configuration and full payload comparisons.
 
 ## Release state and documentation
 

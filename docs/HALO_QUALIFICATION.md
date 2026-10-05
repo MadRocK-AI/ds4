@@ -31,7 +31,7 @@ The original command assertion54 and subsequent TCP tiny-buffer failure were rep
 
 ## Build the three controls
 
-Use explicit existing paths and a local clone of [ds4-on-halo](https://github.com/msala9/ds4-on-halo). Do not run more than one model process at a time. Set these shell variables to real paths; all destinations must be new.
+Use explicit existing paths and a local clone of [ds4-on-halo](https://github.com/MadRocK-AI/ds4-on-halo). Do not run more than one model process at a time. Set these shell variables to real paths; all destinations must be new.
 
 ```sh
 HALO_RELEASE=/path/to/local/release/ds4

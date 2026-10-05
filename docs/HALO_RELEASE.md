@@ -1,6 +1,6 @@
 # Halo build and qualification record
 
-Build validation recorded on 2026-10-02 for DS4 Halo. The [setup and verification companion](https://github.com/msala9/ds4-on-halo) provides pinned-source bootstrap and benchmark tooling.
+Build validation recorded on 2026-10-02 for DS4 Halo. The [setup and verification companion](https://github.com/MadRocK-AI/ds4-on-halo) provides pinned-source bootstrap and benchmark tooling.
 
 ## Validation scope
 
