@@ -1,25 +1,22 @@
 # Archived prefill charts
 
-Reconstructed from recorded September 25–26 measurements. The renderer uses local data only.
+Reconstructed from recorded September 25–26 measurements. The renderer uses local data only. **Original DS4** means the upstream `8db1d1d` engine measured by us on the same Halo, not an upstream-published number or today's main. [Provenance audit](PROVENANCE_AUDIT.md).
 
-- [Main overview: DS4 Halo versus official DS4](prefill-context-overview.png): starts at 2K; includes Halo prepared 4K **449.03 / 447.51** and long-context **400.58 / 361.87 / 319.29**. The official curve uses only [antirez/ds4 main](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md): **231.91 / 295.27 / 268.51** at 2K / 4K / 16K. It stops at 16K; no local rebuilt control is relabelled official. [Official reference](official-ds4-published-context.json) and [overview records](prefill-context-overview.json) bind every plotted value to its source. Official rates count 2K increments, while Halo preparation and complete-prompt conditions vary. These cross-campaign curves do not establish a controlled A/B or scaling result.
+- [Main overview](prefill-context-overview.png): three independent panels. Incremental prefill starts at **2K context**; the prepared complete-4K panel shows **311.24 → 447.51 (+43.78%)**, with **449.03** identified separately as an unpaired best mean; the full-prompt panel keeps **fixed 2K chunks**. No line joins different protocols.
+- [Fixed 2K + indexer](prefill-context-indexer-update.png): **391.33 / 361.87 / 319.29** at 32K / 64K / 128K, against the original engine's recorded same-chunk full-prompt rates. Different archived days; not contemporary alternating A/B.
+- [Earlier incremental](prefill-context-incremental.png): 32 frontiers from 2K to 64K, two ordinary observations per engine/frontier. Each measurement adds 2K tokens. This preceding checkpoint has no indexer upgrade.
+- [Preceding four-variant comparison](prefill-context-four-variants.png): the same full-prompt campaign, with separate 2K- and 4K-chunk panels. The 4K campaign reached **400.58 / 354.53 / 288.48**.
+- [Best recorded selection](prefill-context-best-recorded.png): supplementary changing-configuration summary, choosing 4K chunks at 32K and 2K + indexer at 64K/128K. It is not a fixed-configuration scaling result or a same-chunk A/B. [Selection records](best-recorded-selection.json).
 
-- [Best recorded full-prompt chart](prefill-context-best-recorded.png): 400.58 / 361.87 / 319.29 token/s at 32K / 64K / 128K. It selects 4K chunks at 32K and 2K + indexer at 64K/128K. [Selection and source records](best-recorded-selection.json) bind every chosen point to the full-precision data. This is a best-result curve across archived configurations, not a fixed-chunk A/B.
-- [Fixed 2K + indexer chart](prefill-context-indexer-update.png): 391.33 / 361.87 / 319.29 token/s at 32K / 64K / 128K. Only the measured indexer-upgraded Halo series and its recorded 2K upstream control are shown.
-- [Earlier incremental chart](prefill-context-incremental.png): two continuous curves from 2K to 64K, before the indexer upgrade. Each frontier adds 2K tokens. Every one of the 32 frontiers per engine uses two ordinary observations. These are interval rates, not updated complete-prompt rates.
-- [Preceding four-variant comparison](prefill-context-four-variants.png): retained supplementary pre-indexer 2K/4K comparison; it is not the headline result.
-
-Series names and final rates are placed at the ends of the curves. The current full-prompt charts label the earlier context values above the measured points; the best-result chart also identifies each chosen chunk. Incremental curves have no point symbols; full-prompt curves mark each of their three actual measurements. The main overview uses a base-2 logarithmic context axis to keep 2K and 4K readable alongside 128K; the supplementary charts use linear axes. Connecting segments do not add observations or estimate missing results. No smoothing or extrapolation is applied. PNG, SVG and PDF are available for every chart.
-
-[CSV](prefill-context-data.csv) and [JSON](prefill-context-data.json) retain all 86 records with full precision, including the short-prompt controls and contemporary indexer A observations. Those supplementary records remain available without being mixed into the plotted curves. JSON retains individual observations, protocols, allocations, source IDs and SHA256 bindings.
+The old overview joined official published interval rates with our prepared and first-use complete-prompt rates. That presentation is withdrawn. [The official recorded values](official-ds4-published-context.json) remain separate reference material; none populates the new comparative panels.
 
 ## Reading the measurements
 
-In supplementary internal-control figures, P is the local rebuilt upstream8db reference and C the qualified preceding Halo chain. Those figures are labelled DS4 control and are separate from the official published comparison. Local upstream is not the remote official DS4 published speed figure. Indexer A/B measures the resident-key upgrade relative to its contemporary optimized control. Updated 2K and preceding 4K belong to different campaigns; the latter has no measured indexer update.
+P is original DS4 code; C is the preceding optimized checkpoint. Indexer B adds the resident-key update; indexer A is its contemporary optimized control. Full-prompt reference observations are from September 25 and the indexer upgrade from September 26. They match model, chunk, prompt length and allocation rule, but the whole-fork comparison is not contemporary alternating A/B.
 
-Each rate is tokens divided by the arithmetic mean complete-prefill seconds. Incremental rates count only the added 2K tokens; decode, snapshot and restore remain outside the timer. Model loading is excluded, required first-use preparation is included. Long prompts allocate length+129 context slots. The archived short 2K/4K controls allocate 65,665 slots and are retained only in the data files; the short 2K control is the first incremental frontier, not an independent measurement.
+Each rate is token count divided by arithmetic mean seconds. Incremental rates count only added tokens; full-prompt rates count the complete empty-context request. Model loading is excluded. Required first-use preparation is included in the full-prompt curves; the resident 4K panel explicitly measures after preparation and warmup. Decode, snapshot and restore are outside prefill timers. Long prompts allocate length+129 context slots. Bitwise identity is verified at matching chunks, not between different chunk sizes.
 
-The prepared resident 4K peak and controlled result are shown together at 4K in the main overview, bound to the [peak record](../peak-performance.json) and [controlled attribution](../baseline-attribution.json). Numerical identity is scoped to the documented same-chunk full-logit/state/token checks. See [quality evidence](../../HALO_EVIDENCE.md).
+[CSV](prefill-context-data.csv) and [JSON](prefill-context-data.json) retain all 86 original records, individual observations, source IDs, protocols, allocations and SHA256 bindings. The short controls retain their original allocations and are not spliced into full-prompt curves. Connecting segments add no measurements; no smoothing, extrapolation or missing points are inferred. [Overview panel records](prefill-context-overview.json) bind to the canonical data and prepared benchmark attribution.
 
 ## Reproduce the figures
 
@@ -29,10 +26,10 @@ With Python 3.11+ and matplotlib already installed:
 python3 docs/halo/figures/render_prefill_context.py
 ```
 
-Optional `--output-dir /path/to/exports` writes all five figures in PNG, SVG and PDF. The renderer checks rate arithmetic before rendering. No model, ROCm installation or remote host is needed.
+Optional `--output-dir /path/to/exports` writes all five figures in PNG, SVG and PDF. The renderer checks rate arithmetic, source bindings and label layout. No model, ROCm installation or remote host is needed.
 
 ## Provenance
 
-Portable archived inputs are in [inputs](inputs/). The JSON manifest binds each original source ID and SHA256 to its portable filename and SHA256. Portable text uses UTF-8 and LF line endings. For the short 4K control, only the two selected ordinary rows are copied; the original CSV hash and selection rule are retained.
+Portable archived inputs are in [inputs](inputs/). The JSON manifest binds original source IDs and SHA256 to portable filenames and SHA256; portable text uses UTF-8 and LF. For the short 4K control, only two selected ordinary rows are copied, with the original CSV hash and selection rule retained.
 
-Timing diagnostics, profiler observations, rejected intermediate candidates and other hardware are excluded from the curves. The retained [long-context cases](../longcontext-cases.json) and [indexer observations](../indexer-observations.csv) preserve verification and per-observation identities.
+[Long-context cases](../longcontext-cases.json) and [indexer observations](../indexer-observations.csv) preserve numerical checks and observation identities. [Quality evidence](../../HALO_EVIDENCE.md) scopes the bitwise claim. Diagnostics, rejected candidates and other hardware are not plotted as Halo performance.

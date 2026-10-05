@@ -18,19 +18,18 @@ The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8d
 
 ## Performance
 
-**Up to 449.03 token/s prefill, with bitwise-preserved logits and state in verified cases.** DeepSeek V4 Flash 0731 on AMD Strix Halo (`gfx1151`), 128 GB unified memory.
+**Up to 449.03 token/s prefill.** DeepSeek V4 Flash 0731 on AMD Strix Halo (`gfx1151`), 128 GB unified memory. Bitwise logits and state are preserved in the verified cases.
 
-| Result | Prefill |
+| Prepared complete 4K request, same-machine test | Prefill |
 |---|---:|
-| DS4 Halo best recorded mean, resident 4K | **449.03 token/s** |
-| DS4 Halo controlled resident 4K test | **447.51 token/s** |
-| DS4 official published 4K interval | 295.27 token/s |
+| Original DS4 code, upstream `8db1d1d` | 311.24 token/s |
+| DS4 Halo, controlled comparison | **447.51 token/s (+43.78%)** |
 
-The official value comes from [DS4 main](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md). It measures a 2K increment at the 4K frontier; the Halo peak measures a prepared complete 4K request. These published figures use different protocols. [The archived matched A/B record](docs/halo/peak-performance.json) separately documents the **+43.78%** internal gain against original DS4 code on the same machine.
+**Best separate recorded mean: 449.03 token/s.** It has no contemporary upstream timing and is not used to calculate the gain. These are our historical measurements of the original engine and optimized checkpoints; 311.24 is not a number published by upstream. [Measurement evidence](docs/halo/peak-performance.json).
 
-![DS4 Halo versus official DS4 from 2K, including 449.03 and 447.51 at 4K](docs/halo/figures/prefill-context-overview.png)
+![Original DS4 and DS4 Halo: separate incremental, prepared 4K and full-prompt benchmarks](docs/halo/figures/prefill-context-overview.png)
 
-The chart starts at **2K** and compares **DS4 Halo** with **DS4 official** published results. Halo includes **449.03 / 447.51 at prepared 4K** and **400.58 / 361.87 / 319.29** at 32K / 64K / 128K. The official curve ends at 16K, where the published data ends. Protocols and chunk choices are indicated. [Measurements, protocols and downloadable figures](docs/HALO_PERFORMANCE.md#prefill-across-context-lengths).
+The first panel starts at **2K context**. Each panel keeps its own benchmark protocol: incremental 2K additions, prepared complete 4K requests, or complete first-use long prompts with fixed 2K chunks. The original engine is explicitly pinned to `8db1d1d`; these are our measurements, not published timings for today's upstream main. [Results, official published figures and provenance](docs/HALO_PERFORMANCE.md).
 
 ## Quality
 

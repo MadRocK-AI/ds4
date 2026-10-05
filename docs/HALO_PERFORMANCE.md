@@ -2,38 +2,38 @@
 
 ## Performance
 
-**Up to 449.03 token/s prefill, with bitwise-preserved logits and state in verified cases.** DeepSeek V4 Flash 0731 on AMD Strix Halo (`gfx1151`), 128 GB unified memory.
+**Up to 449.03 token/s prefill.** DeepSeek V4 Flash 0731 on AMD Strix Halo (`gfx1151`), 128 GB unified memory. Bitwise logits and state are preserved in the verified cases.
 
-| Result | Prefill |
+| Prepared complete 4K request, same-machine test | Prefill |
 |---|---:|
-| DS4 Halo best recorded mean, resident 4K | **449.03 token/s** |
-| DS4 Halo controlled resident 4K test | **447.51 token/s** |
-| DS4 official published 4K interval | 295.27 token/s |
+| Original DS4 code, upstream `8db1d1d` | 311.24 token/s |
+| DS4 Halo, controlled comparison | **447.51 token/s (+43.78%)** |
 
-The official value comes from [DS4 main](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md). It measures a 2K increment at the 4K frontier; the Halo peak measures a prepared complete 4K request. These published figures use different protocols. [The archived matched A/B record](halo/peak-performance.json) separately documents the **+43.78%** internal gain against original DS4 code on the same machine.
+**Best separate recorded mean: 449.03 token/s.** It has no contemporary upstream timing and is not used to calculate the gain. These are our historical measurements of the original engine and optimized checkpoints; 311.24 is not a number published by upstream. [Measurement evidence](halo/peak-performance.json).
 
 ## Prefill across context lengths
 
-![DS4 Halo versus official DS4, starting at 2K](halo/figures/prefill-context-overview.png)
+![Original DS4 and DS4 Halo, with each benchmark protocol in a separate panel](halo/figures/prefill-context-overview.png)
 
-**DS4 Halo** is this repository; **DS4 official** uses only the gfx1151 results published in [antirez/ds4 main](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md), including integrated upstream tuning. It uses no unmerged PR or local rebuilt timing. The official report supplies 2K, 4K and 16K values; its curve stops at 16K.
+The first panel starts at **2K context** and measures each added 2K interval. The middle panel shows the prepared 4K comparison. The final panel measures complete empty-context prompts with **fixed 2K chunks**. No line connects different protocols. All original-engine reference measurements use upstream `8db1d1d` on our Halo.
 
-| Context | DS4 official, published | DS4 Halo, recorded | Halo setting |
-|---|---:|---:|---|
-| 2K | 231.91 | **354.23** | Initial 2K request |
-| 4K | 295.27 | **449.03** | Prepared 4K; controlled result **447.51** |
-| 16K | 268.51 | — | No matching full-prompt point in this dataset |
-| 32K | — | **400.58** | 4K chunks |
-| 64K | — | **361.87** | 2K + indexer |
-| 128K | — | **319.29** | 2K + indexer |
+| Complete first-use prompt, 2K chunks | Original DS4 code, measured by us | DS4 Halo + indexer |
+|---|---:|---:|
+| 32K | 272.21 | **391.33** |
+| 64K | 251.71 | **361.87** |
+| 128K | 218.05 | **319.29** |
 
-Rates are token/s. Official values measure **2K increments**; Halo points use an initial 2K request, prepared resident 4K and complete first-use long prompts. Both series summarize archived campaigns, with the protocols shown. Connecting lines do not establish a controlled speedup. Missing values remain unfilled.
+Rates are token/s. The original-engine measurements are from September 25; the indexer results are from September 26. They use the same model, prompt length, chunk size and allocation rule, but are not a contemporary alternating A/B campaign. The incremental panel predates the indexer upgrade.
 
-**Fixed 2K + indexer:** 391.33 / 361.87 / 319.29 at 32K / 64K / 128K. The best 32K result, 400.58, belongs to 4K chunks.
+The separate **4K-chunk** campaign reached **400.58 / 354.53 / 288.48** at 32K / 64K / 128K; its original-engine references were **262.88 / 223.18 / 171.70**. The 400.58 result is not a 2K + indexer measurement. [Separate 2K/4K campaign charts](halo/figures/prefill-context-four-variants.png).
 
-[Official data and source binding](halo/figures/official-ds4-published-context.json) · [Overview source records](halo/figures/prefill-context-overview.json) · [Sources and plotting method](halo/figures/README.md) · [SVG](halo/figures/prefill-context-overview.svg) · [PDF](halo/figures/prefill-context-overview.pdf).
+[Full-precision data](halo/figures/prefill-context-data.json) · [Plotting method](halo/figures/README.md) · [SVG](halo/figures/prefill-context-overview.svg) · [PDF](halo/figures/prefill-context-overview.pdf).
 
-[Supplementary internal controls and indexer measurements](halo/figures/README.md) retain the matched local-original-code comparisons and the earlier incremental series separately from the official published reference.
+## What official DS4 publishes
+
+The [official gfx1151 report](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md) records **231.91** at the initial 2K request, **295.27** for the added 2K interval ending at 4K, and **268.51** for a 2K interval ending at 16K. These include integrated upstream tuning; no unmerged PR figures are used. The report contains no 32K/64K/128K full-prompt timings on Strix Halo. The official repository does contain 32K/64K interval measurements for other hardware in [its performance documentation](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/docs/PERFORMANCE.md).
+
+These published figures are kept separate from our measurements. They do not support a percentage comparison with our prepared 447.51/449.03 results or our complete long-prompt rates. The percentage above comes only from the matched historical 4K comparison. [Provenance audit](halo/figures/PROVENANCE_AUDIT.md).
 
 ## Quality
 
