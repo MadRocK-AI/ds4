@@ -1,6 +1,6 @@
 # Halo evidence and numerical coverage
 
-[Performance overview and reference definitions](HALO_PERFORMANCE.md) distinguish the original upstream report from local rebuilt upstream8db controls. The local resident control at 311.241615 token/s is not the original Clean DS4 performance baseline. Its source, harness and environment attribution is recorded in [baseline-attribution.json](halo/baseline-attribution.json).
+[Performance and quality summary](HALO_PERFORMANCE.md). The detailed historical controls, source/harness attribution and exact values remain in [baseline-attribution.json](halo/baseline-attribution.json); the official-repository comparison is bound in [published-performance.json](halo/published-performance.json).
 
 The source/evidence matrix was assembled before selecting public claims. [sources.json](halo/sources.json) binds each component to its original source SHA256, port path/SHA256, historical checkpoint and upstream base. New integrated GPU executions remain **NOT RUN**; historical results were accepted by the owner for this private preparation. [Release status](HALO_RELEASE.md) records that decision and the successful local build/link. The accompanying source records include transformations such as namespace changes, architecture guards, extracted helpers and new native lifetime bindings; whole-file hash differences are expected.
 
@@ -20,9 +20,9 @@ Here A is the preceding optimized longcontext chain and B adds the resident-key 
 
 | Fresh tokens; chunk2048 | A prefill mean; min..max (s) | B prefill mean; min..max (s) | Throughput gain from mean times |
 |---|---|---|---|
-|32768|87.557065;87.388420..87.725711|83.734270;83.686994..83.781547|4.5654%|
-|65536|195.294173;195.042467..195.545880|181.103613;180.922379..181.284847|7.8356%|
-|131072|469.851545;469.465110..470.237979|410.507315;410.386632..410.627998|14.4563%|
+|32768|87.56;87.388420..87.725711|83.73;83.686994..83.781547|4.57%|
+|65536|195.29;195.042467..195.545880|181.10;180.922379..181.284847|7.84%|
+|131072|469.85;469.465110..470.237979|410.51;410.386632..410.627998|14.46%|
 
 Use [all18 observations](halo/indexer-observations.csv), including initialization/decode, qualification-only and short4K fallback control rows. [Original official CSVs](halo/historical-csv/) retain their rounded upstream fields; [provenance](halo/historical-provenance.json) binds the original records/CSV/config/environment hashes. [Numerical hashes](halo/historical-numeric-hashes.json) contain hashes/extents only. The decisive pool excludes separate32K/64K qualification runs and the short fallback control. Ranges are not confidence intervals. The16-token decode checks are regressions after readbacks, not an optimized decode claim.
 

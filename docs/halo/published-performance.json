@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "comparison": "Published results at the 4096-token frontier with 2048-token increments; not a controlled cross-repository A/B",
+  "official_ds4": {
+    "repository": "antirez/ds4",
+    "branch": "main",
+    "commit": "0aaea5a238fb41a35106a551e73c8409dfb751ac",
+    "path": "speed-bench/gfx1151-prefill-results.md",
+    "file_sha256": "43e8ed3584a2c8ab5d7d98a6bd63664bfff1e6801c3a9b278a713cb9658fd225",
+    "prefill_tps": 295.27,
+    "selection": "Latest pure-prefill 4K value explicitly published in main; no unmerged PR result"
+  },
+  "halo": {
+    "checkpoint_sha256": "cfcf4c62e7f7c00d255dd9ab694b57e2d083cbeec12096762285f6f07d6a05d7",
+    "frontier_tokens": 4096,
+    "added_tokens": 2048,
+    "prefill_complete_ms": [
+      4956.111859006,
+      4957.193550013
+    ],
+    "mean_prefill_complete_ms": 4956.6527045095,
+    "prefill_tps": 413.18206501269606,
+    "source_id": "halo-deepseek-longcontext-20260925/public-individual-rows.csv",
+    "source_sha256": "6e273cf7f298a3bf2e743e5b7d3eb182a22b085d26dbe1f62bd3ec92cc5766ec"
+  },
+  "published_throughput_difference_percent": 39.93364209459007,
+  "rounding": "Human-readable documentation: maximum two decimal places; evidence retains measured precision",
+  "quality_scope": "Bitwise logits, state and token-ID equality on documented internal cases against their matching controls; not equality proven against a remote published run",
+  "benchmark_rerun": false
+}

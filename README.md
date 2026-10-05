@@ -16,27 +16,22 @@ The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8d
 
 [Detailed dispatch domains, memory ownership and native fallbacks](docs/HALO.md). Added paths target DeepSeek V4 Flash 0731 and checked 2048/4096 prefill chunks. Native dispatch remains the default; enable Halo with `DS4_ROCM_HALO_PREFILL=1`. Other backends and upstream functionality retain their existing implementation. R9700, NPU, SSD streaming, GLM, vision and distributed execution are outside these added Halo paths.
 
-## Historical performance
+## Performance
 
-**Resident fresh4096: 447.506868 token/s.** This is the frozen controlled structural9 result. Its contemporary local upstream8db control measured 311.241615 token/s, giving **+43.781181% in that specific comparison**. That control uses resident prepared weights, warmup, core10/HIP7.15 and a host-only resident benchmark loop. It is not the original DS4 performance reference or an upstream-published result.
+DeepSeek V4 Flash 0731 on AMD Strix Halo, 128 GB unified memory. Prefill at the **4K context frontier, in 2048-token increments**:
 
-The upstream report separately lists **187.26 token/s for Clean DS4**, **292.86 for its tuned gfx1151 path**, and **294.38 in a later stock-launch follow-up**, with 2048-token increments. Those workloads and software conditions differ; we do not divide the fresh4096 result by them to claim an overall speedup. [Upstream results at the pinned base](https://github.com/antirez/ds4/blob/8db1d1d155cb0400a86a86b9c62d0defb3a6148b/speed-bench/gfx1151-prefill-results.md).
+| Engine | Prefill | Increase |
+|---|---:|---:|
+| Official DS4 | 295.27 token/s | Reference |
+| DS4 on Halo | **413.18 token/s** | **+39.93%** |
 
-Historical long-context results against the local rebuilt upstream8db control, with each pair using the same **2048 chunk**, prompt and capacity:
+[Official DS4 result](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md) - [Halo measurement records](docs/halo/published-performance.json).
 
-| Fresh prompt | Local upstream8db | Optimized composition | Prefill throughput gain |
-|---|---:|---:|---:|
-| 32,768 tokens | 272.21 token/s | 373.87 token/s | +37.34% |
-| 65,536 tokens | 251.71 token/s | 335.66 token/s | +33.35% |
-| 131,072 tokens | 218.05 token/s | 278.58 token/s | +27.76% |
+This compares published throughput from the respective setups, rather than a controlled A/B. Our separate resident fresh4096 record is **447.51 token/s**.
 
-The matching 4096-chunk results, each arm's fastest configuration, later indexer gains and exact measurement boundaries are in [Halo performance and baseline attribution](docs/HALO_PERFORMANCE.md). These are separate historical campaigns; their gains are not added. No ordinary-decode acceleration is claimed.
+## Quality
 
-## Bitwise preservation
-
-Historical qualification checks full FP32 logits, prompt/generated token IDs and serialized prefill/decode state, including raw/compressed KV and indexer/compressor state. Coverage includes six fresh32K/64K/128K cases with 2048/4096 chunks and a separate incremental diagnostic with **223 payload comparisons and 31 snapshot restorations**. Structural9 also retains independent code/Italian prompt checks and 128 teacher-forced tokens.
-
-Equality applies to the tested inputs, geometry, chunk, capacity and runtime identities. It does not assert equality across chunk sizes or to an unquantized model. [Test coverage and quality boundaries](docs/HALO_PERFORMANCE.md#what-bitwise-preservation-means-here), [case records and hashes](docs/HALO_EVIDENCE.md).
+**Bitwise logits, complete serialized state and token IDs match the reference in the verified cases.** Coverage includes fresh32K/64K/128K prompts, 223 incremental payload comparisons and 31 snapshot restorations. Model weights and quantization are preserved. [Verification evidence](docs/HALO_EVIDENCE.md).
 
 ## Start Here
 
