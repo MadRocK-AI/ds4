@@ -1,0 +1,305 @@
+{
+  "qualification_excluded": true,
+  "runs": [
+    {
+      "name": "qual-A",
+      "candidate": false,
+      "prefill_s": 194.412280834018,
+      "tokens": 65536,
+      "tps": 337.0980460640355,
+      "decode_s": 1.244561892003,
+      "decode_tokens": 16,
+      "decode_tps": 12.85592954662108,
+      "engine_s": 31.363415801985,
+      "initialization_s": 31.679725987982,
+      "owner": null,
+      "memory": {
+        "peak_vram_used": 189353984,
+        "peak_gtt_used": 97496342528,
+        "min_available": 30540341248,
+        "swap_free_change": 0
+      }
+    },
+    {
+      "name": "qual-B",
+      "candidate": true,
+      "prefill_s": 180.651969536004,
+      "tokens": 65536,
+      "tps": 362.77489898574646,
+      "decode_s": 1.2430019380119999,
+      "decode_tokens": 16,
+      "decode_tps": 12.872063599184457,
+      "engine_s": 31.67576135401,
+      "initialization_s": 31.996847884991,
+      "owner": {
+        "module_load_ms": 0.307225,
+        "free_before_load": 9896538112,
+        "free_after_load": 9896517632,
+        "new_tensor_bytes": 0,
+        "fallback_score_calls": 0,
+        "active_by_ncomp": {
+          "1024": 21,
+          "1536": 21,
+          "2048": 21,
+          "2560": 21,
+          "3072": 21,
+          "3584": 21,
+          "4096": 21,
+          "4608": 21,
+          "5120": 21,
+          "5632": 21,
+          "6144": 21,
+          "6656": 21,
+          "7168": 21,
+          "7680": 21,
+          "8192": 21,
+          "8704": 21,
+          "9216": 21,
+          "9728": 21,
+          "10240": 21,
+          "10752": 21,
+          "11264": 21,
+          "11776": 21,
+          "12288": 21,
+          "12800": 21,
+          "13312": 21,
+          "13824": 21,
+          "14336": 21,
+          "14848": 21,
+          "15360": 21,
+          "15872": 21,
+          "16384": 21
+        }
+      },
+      "memory": {
+        "peak_vram_used": 189366272,
+        "peak_gtt_used": 97496363008,
+        "min_available": 30508265472,
+        "swap_free_change": 0
+      }
+    },
+    {
+      "name": "timing-A0",
+      "candidate": false,
+      "prefill_s": 195.042466732993,
+      "tokens": 65536,
+      "tps": 336.0088759014555,
+      "decode_s": 1.243523694022,
+      "decode_tokens": 16,
+      "decode_tps": 12.866662755938556,
+      "engine_s": 31.491217087983,
+      "initialization_s": 31.813383050001,
+      "owner": null,
+      "memory": {
+        "peak_vram_used": 189370368,
+        "peak_gtt_used": 97496342528,
+        "min_available": 30526291968,
+        "swap_free_change": 0
+      }
+    },
+    {
+      "name": "timing-B0",
+      "candidate": true,
+      "prefill_s": 180.922379182011,
+      "tokens": 65536,
+      "tps": 362.2326894898373,
+      "decode_s": 1.2424021610059999,
+      "decode_tokens": 16,
+      "decode_tps": 12.878277664169913,
+      "engine_s": 31.37238939802,
+      "initialization_s": 31.693907630018998,
+      "owner": {
+        "module_load_ms": 0.287413,
+        "free_before_load": 9896538112,
+        "free_after_load": 9896517632,
+        "new_tensor_bytes": 0,
+        "fallback_score_calls": 0,
+        "active_by_ncomp": {
+          "1024": 21,
+          "1536": 21,
+          "2048": 21,
+          "2560": 21,
+          "3072": 21,
+          "3584": 21,
+          "4096": 21,
+          "4608": 21,
+          "5120": 21,
+          "5632": 21,
+          "6144": 21,
+          "6656": 21,
+          "7168": 21,
+          "7680": 21,
+          "8192": 21,
+          "8704": 21,
+          "9216": 21,
+          "9728": 21,
+          "10240": 21,
+          "10752": 21,
+          "11264": 21,
+          "11776": 21,
+          "12288": 21,
+          "12800": 21,
+          "13312": 21,
+          "13824": 21,
+          "14336": 21,
+          "14848": 21,
+          "15360": 21,
+          "15872": 21,
+          "16384": 21
+        }
+      },
+      "memory": {
+        "peak_vram_used": 189374464,
+        "peak_gtt_used": 97496363008,
+        "min_available": 30527905792,
+        "swap_free_change": 0
+      }
+    },
+    {
+      "name": "timing-B1",
+      "candidate": true,
+      "prefill_s": 181.284847430012,
+      "tokens": 65536,
+      "tps": 361.5084268159877,
+      "decode_s": 1.24205407899,
+      "decode_tokens": 16,
+      "decode_tps": 12.881886763747602,
+      "engine_s": 31.415586089977,
+      "initialization_s": 31.736564587016,
+      "owner": {
+        "module_load_ms": 0.285341,
+        "free_before_load": 9896538112,
+        "free_after_load": 9896517632,
+        "new_tensor_bytes": 0,
+        "fallback_score_calls": 0,
+        "active_by_ncomp": {
+          "1024": 21,
+          "1536": 21,
+          "2048": 21,
+          "2560": 21,
+          "3072": 21,
+          "3584": 21,
+          "4096": 21,
+          "4608": 21,
+          "5120": 21,
+          "5632": 21,
+          "6144": 21,
+          "6656": 21,
+          "7168": 21,
+          "7680": 21,
+          "8192": 21,
+          "8704": 21,
+          "9216": 21,
+          "9728": 21,
+          "10240": 21,
+          "10752": 21,
+          "11264": 21,
+          "11776": 21,
+          "12288": 21,
+          "12800": 21,
+          "13312": 21,
+          "13824": 21,
+          "14336": 21,
+          "14848": 21,
+          "15360": 21,
+          "15872": 21,
+          "16384": 21
+        }
+      },
+      "memory": {
+        "peak_vram_used": 189370368,
+        "peak_gtt_used": 97496363008,
+        "min_available": 30550990848,
+        "swap_free_change": 0
+      }
+    },
+    {
+      "name": "timing-A1",
+      "candidate": false,
+      "prefill_s": 195.545880182006,
+      "tokens": 65536,
+      "tps": 335.14385441923815,
+      "decode_s": 1.243172593007,
+      "decode_tokens": 16,
+      "decode_tps": 12.870296602420279,
+      "engine_s": 31.599273768021,
+      "initialization_s": 31.92043025099,
+      "owner": null,
+      "memory": {
+        "peak_vram_used": 189362176,
+        "peak_gtt_used": 97496342528,
+        "min_available": 30554468352,
+        "swap_free_change": 0
+      }
+    }
+  ],
+  "means": {
+    "A": {
+      "mean_s": 195.29417345749948,
+      "individual_s": [
+        195.042466732993,
+        195.545880182006
+      ],
+      "range_s": [
+        195.042466732993,
+        195.545880182006
+      ],
+      "range_width_s": 0.5034134490129816,
+      "sample_sd_s": 0.35596706353758756,
+      "tps_from_mean_time": 335.5758077148274,
+      "decode_mean_s": 1.2433481435145,
+      "decode_range_s": [
+        1.243172593007,
+        1.243523694022
+      ],
+      "initialization_range_s": [
+        31.813383050001,
+        31.92043025099
+      ]
+    },
+    "B": {
+      "mean_s": 181.1036133060115,
+      "individual_s": [
+        180.922379182011,
+        181.284847430012
+      ],
+      "range_s": [
+        180.922379182011,
+        181.284847430012
+      ],
+      "range_width_s": 0.36246824800099375,
+      "sample_sd_s": 0.25630375612630996,
+      "tps_from_mean_time": 361.8701957606089,
+      "decode_mean_s": 1.2422281199979999,
+      "decode_range_s": [
+        1.24205407899,
+        1.2424021610059999
+      ],
+      "initialization_range_s": [
+        31.693907630018998,
+        31.736564587016
+      ]
+    }
+  },
+  "pairs": [
+    {
+      "pair": "0",
+      "order": "AB",
+      "saved_s": 14.120087550981992,
+      "throughput_gain_percent": 7.804500258520775
+    },
+    {
+      "pair": "1",
+      "order": "BA",
+      "saved_s": 14.26103275199398,
+      "throughput_gain_percent": 7.866643546973595
+    }
+  ],
+  "saved_s": 14.190560151487972,
+  "throughput_gain_percent": 7.83560299678292,
+  "time_reduction_percent": 7.266248603456759,
+  "observations_per_arm": 2,
+  "historical195s_not_used": true,
+  "not_a_new_profile": true,
+  "next_test": "fresh32768/chunk2048 only; not executed here"
+}

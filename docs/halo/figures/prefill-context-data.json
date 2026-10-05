@@ -1,0 +1,1656 @@
+{
+  "schema": 1,
+  "model": "DeepSeek V4 Flash 0731",
+  "device": "AMD Strix Halo gfx1151 / 128 GB",
+  "upstream_base": "8db1d1d155cb0400a86a86b9c62d0defb3a6148b",
+  "model_sha256": "ca22ae2f838e14077c22bc1c1417b71b45b5e5a3687bd96c2ac6e17fdb6261c0",
+  "longcontext_checkpoint_sha256": "cfcf4c62e7f7c00d255dd9ab694b57e2d083cbeec12096762285f6f07d6a05d7",
+  "points": [
+    {
+      "protocol": "fresh",
+      "series": "P",
+      "context_tokens": 32768,
+      "added_tokens": 32768,
+      "chunk_tokens": 2048,
+      "context_allocation": 32897,
+      "individual_seconds": [
+        120.375592089986
+      ],
+      "mean_seconds": 120.375592089986,
+      "prefill_tps": 272.2146527470826,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final32-2048-P"
+      ]
+    },
+    {
+      "protocol": "fresh",
+      "series": "C",
+      "context_tokens": 32768,
+      "added_tokens": 32768,
+      "chunk_tokens": 2048,
+      "context_allocation": 32897,
+      "individual_seconds": [
+        87.645208772999
+      ],
+      "mean_seconds": 87.645208772999,
+      "prefill_tps": 373.87097890164296,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final32-2048-C"
+      ]
+    },
+    {
+      "protocol": "fresh",
+      "series": "P",
+      "context_tokens": 32768,
+      "added_tokens": 32768,
+      "chunk_tokens": 4096,
+      "context_allocation": 32897,
+      "individual_seconds": [
+        124.648054448015
+      ],
+      "mean_seconds": 124.648054448015,
+      "prefill_tps": 262.88416730696775,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final32-4096-P"
+      ]
+    },
+    {
+      "protocol": "fresh",
+      "series": "C",
+      "context_tokens": 32768,
+      "added_tokens": 32768,
+      "chunk_tokens": 4096,
+      "context_allocation": 32897,
+      "individual_seconds": [
+        81.802381795977
+      ],
+      "mean_seconds": 81.802381795977,
+      "prefill_tps": 400.57513339558426,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final32-4096-C"
+      ]
+    },
+    {
+      "protocol": "fresh",
+      "series": "P",
+      "context_tokens": 65536,
+      "added_tokens": 65536,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        260.361241720006
+      ],
+      "mean_seconds": 260.361241720006,
+      "prefill_tps": 251.71181227687416,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final64-2048-P"
+      ]
+    },
+    {
+      "protocol": "fresh",
+      "series": "C",
+      "context_tokens": 65536,
+      "added_tokens": 65536,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        195.244018786005
+      ],
+      "mean_seconds": 195.244018786005,
+      "prefill_tps": 335.6620110951004,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final64-2048-C"
+      ]
+    },
+    {
+      "protocol": "fresh",
+      "series": "P",
+      "context_tokens": 65536,
+      "added_tokens": 65536,
+      "chunk_tokens": 4096,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        293.64280015401897
+      ],
+      "mean_seconds": 293.64280015401897,
+      "prefill_tps": 223.1827239272532,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final64-4096-P"
+      ]
+    },
+    {
+      "protocol": "fresh",
+      "series": "C",
+      "context_tokens": 65536,
+      "added_tokens": 65536,
+      "chunk_tokens": 4096,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        184.90770167001799,
+        184.800024168013
+      ],
+      "mean_seconds": 184.8538629190155,
+      "prefill_tps": 354.52870156525387,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final64-4096-C",
+        "decisive64-4096-C"
+      ]
+    },
+    {
+      "protocol": "fresh",
+      "series": "P",
+      "context_tokens": 131072,
+      "added_tokens": 131072,
+      "chunk_tokens": 2048,
+      "context_allocation": 131201,
+      "individual_seconds": [
+        601.101082691021
+      ],
+      "mean_seconds": 601.101082691021,
+      "prefill_tps": 218.05317570418327,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final128-2048-P"
+      ]
+    },
+    {
+      "protocol": "fresh",
+      "series": "C",
+      "context_tokens": 131072,
+      "added_tokens": 131072,
+      "chunk_tokens": 2048,
+      "context_allocation": 131201,
+      "individual_seconds": [
+        470.545359749987,
+        470.466802837007
+      ],
+      "mean_seconds": 470.506081293497,
+      "prefill_tps": 278.57663314289573,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final128-2048-C",
+        "decisive128-2048-C"
+      ]
+    },
+    {
+      "protocol": "fresh",
+      "series": "P",
+      "context_tokens": 131072,
+      "added_tokens": 131072,
+      "chunk_tokens": 4096,
+      "context_allocation": 131201,
+      "individual_seconds": [
+        763.363577092998
+      ],
+      "mean_seconds": 763.363577092998,
+      "prefill_tps": 171.7032406748324,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final128-4096-P"
+      ]
+    },
+    {
+      "protocol": "fresh",
+      "series": "C",
+      "context_tokens": 131072,
+      "added_tokens": 131072,
+      "chunk_tokens": 4096,
+      "context_allocation": 131201,
+      "individual_seconds": [
+        454.580425967986,
+        454.11757610397797
+      ],
+      "mean_seconds": 454.349001035982,
+      "prefill_tps": 288.48308173042466,
+      "source": "inputs/01-final-fresh-series.json",
+      "sample_ids": [
+        "final128-4096-C",
+        "decisive128-4096-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 2048,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        10.096306713007,
+        10.115040659002
+      ],
+      "mean_seconds": 10.1056736860045,
+      "prefill_tps": 202.65843363182267,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "short_fresh",
+      "series": "P",
+      "context_tokens": 2048,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        10.096306713007,
+        10.115040659002
+      ],
+      "mean_seconds": 10.1056736860045,
+      "prefill_tps": 202.65843363182267,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P:row0",
+        "public-full-1-P:row0"
+      ],
+      "note": "First request starts empty; allocated prefill capacity4096, actual chunk2048."
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 2048,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.779827405,
+        5.783169151981999
+      ],
+      "mean_seconds": 5.781498278491,
+      "prefill_tps": 354.23343592770874,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "short_fresh",
+      "series": "C",
+      "context_tokens": 2048,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.779827405,
+        5.783169151981999
+      ],
+      "mean_seconds": 5.781498278491,
+      "prefill_tps": 354.23343592770874,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C:row0",
+        "public-full-1-C:row0"
+      ],
+      "note": "First request starts empty; allocated prefill capacity4096, actual chunk2048."
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 4096,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        7.913509181992,
+        7.965092928993
+      ],
+      "mean_seconds": 7.9393010554925,
+      "prefill_tps": 257.9572163450295,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 4096,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        4.956111859006,
+        4.957193550013001
+      ],
+      "mean_seconds": 4.9566527045095,
+      "prefill_tps": 413.1820650126961,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 6144,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.039199163992,
+        8.084235898015
+      ],
+      "mean_seconds": 8.0617175310035,
+      "prefill_tps": 254.04015857959124,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 6144,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.078317923006,
+        5.0795599599950005
+      ],
+      "mean_seconds": 5.0789389415005,
+      "prefill_tps": 403.23382966186,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 8192,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.130960687005,
+        8.159971399
+      ],
+      "mean_seconds": 8.1454660430025,
+      "prefill_tps": 251.4282165302707,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 8192,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.158953489008001,
+        5.153683832003
+      ],
+      "mean_seconds": 5.1563186605055,
+      "prefill_tps": 397.1825899137165,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 10240,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.22053999902,
+        8.241449127992
+      ],
+      "mean_seconds": 8.230994563506,
+      "prefill_tps": 248.81561811257623,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 10240,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.234941877978,
+        5.2332679649989995
+      ],
+      "mean_seconds": 5.2341049214885,
+      "prefill_tps": 391.2798903957737,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 12288,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.292203615012001,
+        8.306052664004001
+      ],
+      "mean_seconds": 8.299128139508001,
+      "prefill_tps": 246.77290982537016,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 12288,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.312954811001,
+        5.310359603987
+      ],
+      "mean_seconds": 5.311657207494,
+      "prefill_tps": 385.56704998028874,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 14336,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.342843858001,
+        8.363782506989
+      ],
+      "mean_seconds": 8.353313182495,
+      "prefill_tps": 245.17217961990684,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 14336,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.358406454994,
+        5.361020143988
+      ],
+      "mean_seconds": 5.359713299491,
+      "prefill_tps": 382.1099908822537,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 16384,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.449780763009999,
+        8.471527257002998
+      ],
+      "mean_seconds": 8.460654010006499,
+      "prefill_tps": 242.06166539582048,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 16384,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.490319171018,
+        5.469949491991001
+      ],
+      "mean_seconds": 5.4801343315045,
+      "prefill_tps": 373.7134668809748,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 18432,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.504828409001,
+        8.533633607993
+      ],
+      "mean_seconds": 8.519231008497,
+      "prefill_tps": 240.39728444472797,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 18432,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.5173717300059995,
+        5.520094875974
+      ],
+      "mean_seconds": 5.51873330299,
+      "prefill_tps": 371.0996505104554,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 20480,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.649160286004001,
+        8.669942393986
+      ],
+      "mean_seconds": 8.659551339995001,
+      "prefill_tps": 236.5018601530899,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 20480,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.648212473985,
+        5.648095137993
+      ],
+      "mean_seconds": 5.648153805989,
+      "prefill_tps": 362.59635809287107,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 22528,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.777636746992,
+        8.798095743026
+      ],
+      "mean_seconds": 8.787866245008999,
+      "prefill_tps": 233.04860849050198,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 22528,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.784339310019,
+        5.781786232983
+      ],
+      "mean_seconds": 5.783062771501,
+      "prefill_tps": 354.1376050926799,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 24576,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.771388960013,
+        8.788906792994
+      ],
+      "mean_seconds": 8.7801478765035,
+      "prefill_tps": 233.25347463459474,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 24576,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.761240988009,
+        5.769812565995
+      ],
+      "mean_seconds": 5.765526777002,
+      "prefill_tps": 355.21472351307574,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 26624,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.829493963974999,
+        8.857277887
+      ],
+      "mean_seconds": 8.8433859254875,
+      "prefill_tps": 231.58550551293533,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 26624,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.827337117981999,
+        5.828244484001
+      ],
+      "mean_seconds": 5.827790800991499,
+      "prefill_tps": 351.41961507121493,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 28672,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.922497429012001,
+        8.954527392983
+      ],
+      "mean_seconds": 8.9385124109975,
+      "prefill_tps": 229.12089907491125,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 28672,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.909345891996001,
+        5.905901019985
+      ],
+      "mean_seconds": 5.9076234559905005,
+      "prefill_tps": 346.6707069698677,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 30720,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        8.990639829019,
+        9.014112409001
+      ],
+      "mean_seconds": 9.00237611901,
+      "prefill_tps": 227.49549373696024,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 30720,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        5.967570570007,
+        5.9717272379779995
+      ],
+      "mean_seconds": 5.9696489039925,
+      "prefill_tps": 343.0687521053873,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 32768,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        9.062690697989,
+        9.089098742988
+      ],
+      "mean_seconds": 9.075894720488499,
+      "prefill_tps": 225.65268362762242,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 32768,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        6.057008945005,
+        6.062698349006999
+      ],
+      "mean_seconds": 6.059853647005999,
+      "prefill_tps": 337.9619573835514,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 34816,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        9.277605112990999,
+        9.307946320012
+      ],
+      "mean_seconds": 9.292775716501499,
+      "prefill_tps": 220.38625083389203,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 34816,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        6.243362270994,
+        6.248665926018
+      ],
+      "mean_seconds": 6.246014098506,
+      "prefill_tps": 327.88910939055773,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 36864,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        9.334984643996,
+        9.354794729006
+      ],
+      "mean_seconds": 9.344889686501,
+      "prefill_tps": 219.1572151952102,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 36864,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        6.319734854012,
+        6.314302652987
+      ],
+      "mean_seconds": 6.3170187534995,
+      "prefill_tps": 324.20356499107265,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 38912,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        9.397650644998,
+        9.437920268014
+      ],
+      "mean_seconds": 9.417785456506,
+      "prefill_tps": 217.4608892353987,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 38912,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        6.3852416950099995,
+        6.380066626007
+      ],
+      "mean_seconds": 6.382654160508499,
+      "prefill_tps": 320.86964897324754,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 40960,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        9.559044014022,
+        9.576869398006
+      ],
+      "mean_seconds": 9.567956706014,
+      "prefill_tps": 214.04779128157182,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 40960,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        6.518236205010999,
+        6.526025214000001
+      ],
+      "mean_seconds": 6.5221307095055,
+      "prefill_tps": 314.00781297056784,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 43008,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        9.634874045994,
+        9.657652071997
+      ],
+      "mean_seconds": 9.6462630589955,
+      "prefill_tps": 212.31019592505967,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 43008,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        6.608792336978,
+        6.606288122013
+      ],
+      "mean_seconds": 6.6075402294955,
+      "prefill_tps": 309.9489263580873,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 45056,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        9.655075944,
+        9.687659788993
+      ],
+      "mean_seconds": 9.6713678664965,
+      "prefill_tps": 211.75908395488403,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 45056,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        6.614648328978,
+        6.6150445599920005
+      ],
+      "mean_seconds": 6.614846444485,
+      "prefill_tps": 309.6065822824172,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 47104,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        9.723460027017,
+        9.743363980989999
+      ],
+      "mean_seconds": 9.7334120040035,
+      "prefill_tps": 210.40925824958674,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 47104,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        6.681541660015,
+        6.676409203995999
+      ],
+      "mean_seconds": 6.678975432005499,
+      "prefill_tps": 306.63385737070246,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 49152,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        9.796281634975,
+        9.824028348987
+      ],
+      "mean_seconds": 9.810154991981,
+      "prefill_tps": 208.7632663983467,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 49152,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        6.74367686201,
+        6.746676620998
+      ],
+      "mean_seconds": 6.745176741504,
+      "prefill_tps": 303.6243642658575,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 51200,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        9.925273043016,
+        9.945975778013
+      ],
+      "mean_seconds": 9.9356244105145,
+      "prefill_tps": 206.1269544199636,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 51200,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        6.870550737018,
+        6.869685364014
+      ],
+      "mean_seconds": 6.870118050516,
+      "prefill_tps": 298.1025922613046,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 53248,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        10.005253556999,
+        10.023783711978
+      ],
+      "mean_seconds": 10.0145186344885,
+      "prefill_tps": 204.50308943926623,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 53248,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        6.93272505101,
+        6.9311809040079995
+      ],
+      "mean_seconds": 6.931952977509,
+      "prefill_tps": 295.4434351538186,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 55296,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        10.068445203011,
+        10.073295534996
+      ],
+      "mean_seconds": 10.0708703690035,
+      "prefill_tps": 203.35878876004705,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 55296,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        7.001454883983,
+        6.996886195004
+      ],
+      "mean_seconds": 6.9991705394935,
+      "prefill_tps": 292.60610074350393,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 57344,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        10.141165397014,
+        10.184348740004
+      ],
+      "mean_seconds": 10.162757068508999,
+      "prefill_tps": 201.52011764072077,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 57344,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        7.098170231999,
+        7.081028916989
+      ],
+      "mean_seconds": 7.089599574494001,
+      "prefill_tps": 288.87386071394167,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 59392,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        10.254408673994,
+        10.271162854013001
+      ],
+      "mean_seconds": 10.2627857640035,
+      "prefill_tps": 199.5559536264818,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 59392,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        7.166020909994001,
+        7.1783869670180005
+      ],
+      "mean_seconds": 7.172203938506001,
+      "prefill_tps": 285.5468162310241,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 61440,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        10.383535200002,
+        10.395716414001
+      ],
+      "mean_seconds": 10.3896258070015,
+      "prefill_tps": 197.119707489356,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 61440,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        7.315412319003,
+        7.313337797008
+      ],
+      "mean_seconds": 7.3143750580055,
+      "prefill_tps": 279.99657985250394,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 63488,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        10.439549902017,
+        10.466418063995999
+      ],
+      "mean_seconds": 10.452983983006499,
+      "prefill_tps": 195.92491515623198,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 63488,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        7.362928512011,
+        7.365814315999001
+      ],
+      "mean_seconds": 7.364371414005,
+      "prefill_tps": 278.09569681741874,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "P",
+      "context_tokens": 65536,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        10.416593873,
+        10.45031125602
+      ],
+      "mean_seconds": 10.43345256451,
+      "prefill_tps": 196.29168650906527,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-P",
+        "public-full-1-P"
+      ]
+    },
+    {
+      "protocol": "incremental",
+      "series": "C",
+      "context_tokens": 65536,
+      "added_tokens": 2048,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        7.357010737003,
+        7.352930543013
+      ],
+      "mean_seconds": 7.354970640008,
+      "prefill_tps": 278.45114552323656,
+      "source": "inputs/02-public-individual-rows.csv",
+      "sample_ids": [
+        "public-full-0-C",
+        "public-full-1-C"
+      ]
+    },
+    {
+      "protocol": "short_fresh",
+      "series": "C",
+      "context_tokens": 4096,
+      "added_tokens": 4096,
+      "chunk_tokens": 4096,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        9.522863384976999
+      ],
+      "mean_seconds": 9.522863384976999,
+      "prefill_tps": 430.12273036088436,
+      "source": "inputs/06-short-fresh4096.json",
+      "sample_ids": [
+        "final-fresh4096-C"
+      ]
+    },
+    {
+      "protocol": "short_fresh",
+      "series": "P",
+      "context_tokens": 4096,
+      "added_tokens": 4096,
+      "chunk_tokens": 4096,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        17.695564088994
+      ],
+      "mean_seconds": 17.695564088994,
+      "prefill_tps": 231.47043967632337,
+      "source": "inputs/06-short-fresh4096.json",
+      "sample_ids": [
+        "final-fresh4096-P"
+      ]
+    },
+    {
+      "protocol": "indexer_fresh",
+      "series": "indexer_A",
+      "context_tokens": 32768,
+      "added_tokens": 32768,
+      "chunk_tokens": 2048,
+      "context_allocation": 32897,
+      "individual_seconds": [
+        87.388420056028,
+        87.725710847008
+      ],
+      "mean_seconds": 87.557065451518,
+      "prefill_tps": 374.2473532092537,
+      "source": "inputs/03-summary.json"
+    },
+    {
+      "protocol": "indexer_fresh",
+      "series": "indexer_B",
+      "context_tokens": 32768,
+      "added_tokens": 32768,
+      "chunk_tokens": 2048,
+      "context_allocation": 32897,
+      "individual_seconds": [
+        83.68699365801899,
+        83.781546955986
+      ],
+      "mean_seconds": 83.7342703070025,
+      "prefill_tps": 391.3332006102128,
+      "source": "inputs/03-summary.json"
+    },
+    {
+      "protocol": "indexer_fresh",
+      "series": "indexer_A",
+      "context_tokens": 65536,
+      "added_tokens": 65536,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        195.042466732993,
+        195.545880182006
+      ],
+      "mean_seconds": 195.29417345749948,
+      "prefill_tps": 335.5758077148274,
+      "source": "inputs/04-summary.json"
+    },
+    {
+      "protocol": "indexer_fresh",
+      "series": "indexer_B",
+      "context_tokens": 65536,
+      "added_tokens": 65536,
+      "chunk_tokens": 2048,
+      "context_allocation": 65665,
+      "individual_seconds": [
+        180.922379182011,
+        181.284847430012
+      ],
+      "mean_seconds": 181.1036133060115,
+      "prefill_tps": 361.8701957606089,
+      "source": "inputs/04-summary.json"
+    },
+    {
+      "protocol": "indexer_fresh",
+      "series": "indexer_A",
+      "context_tokens": 131072,
+      "added_tokens": 131072,
+      "chunk_tokens": 2048,
+      "context_allocation": 131201,
+      "individual_seconds": [
+        469.465110452991,
+        470.237978588004
+      ],
+      "mean_seconds": 469.8515445204975,
+      "prefill_tps": 278.9647102975138,
+      "source": "inputs/05-performance-summary.json"
+    },
+    {
+      "protocol": "indexer_fresh",
+      "series": "indexer_B",
+      "context_tokens": 131072,
+      "added_tokens": 131072,
+      "chunk_tokens": 2048,
+      "context_allocation": 131201,
+      "individual_seconds": [
+        410.627998034994,
+        410.386631791975
+      ],
+      "mean_seconds": 410.5073149134845,
+      "prefill_tps": 319.2927269216232,
+      "source": "inputs/05-performance-summary.json"
+    }
+  ],
+  "archived_sources": [
+    {
+      "source_id": "logs/halo-deepseek-longcontext-20260925/final-fresh-series.json",
+      "sha256": "a4190c9e9a9d305b7c12e3ed763e28e52415dc8b64bf19e41db6c1a7304e9595",
+      "file": "inputs/01-final-fresh-series.json",
+      "portable_sha256": "f10602ea2ff91cb01a115b90b706ae30208975a8b29e84d43c1c0fd8501902a3",
+      "portable_normalization": "UTF-8 LF line endings; contents unchanged."
+    },
+    {
+      "source_id": "logs/halo-deepseek-longcontext-20260925/public-individual-rows.csv",
+      "sha256": "6e273cf7f298a3bf2e743e5b7d3eb182a22b085d26dbe1f62bd3ec92cc5766ec",
+      "file": "inputs/02-public-individual-rows.csv",
+      "portable_sha256": "20c5daafd41b2884dec137e15c5e68c285a83cd18b102fd7a9f75536a53b1e03",
+      "portable_normalization": "UTF-8 LF line endings; contents unchanged."
+    },
+    {
+      "source_id": "logs/halo-deepseek-indexer32-20260926/summary.json",
+      "sha256": "de57ca5425e7084dfecfa2052b3314e74e453176c5ac6e58c643511d5870a45f",
+      "file": "inputs/03-summary.json",
+      "portable_sha256": "de57ca5425e7084dfecfa2052b3314e74e453176c5ac6e58c643511d5870a45f",
+      "portable_normalization": "UTF-8 LF line endings; contents unchanged."
+    },
+    {
+      "source_id": "logs/halo-deepseek-indexer64-20260926/summary.json",
+      "sha256": "728a3bb45b234f2b7e9880587024ae7a7252b885c551aca1e32f6e730177ae2f",
+      "file": "inputs/04-summary.json",
+      "portable_sha256": "728a3bb45b234f2b7e9880587024ae7a7252b885c551aca1e32f6e730177ae2f",
+      "portable_normalization": "UTF-8 LF line endings; contents unchanged."
+    },
+    {
+      "source_id": "logs/halo-deepseek-indexer-20260926/performance-summary.json",
+      "sha256": "2adcd7f47a1437ce0fe2a865d6f2d76cae7eb6912d999690d435efaf80763c88",
+      "file": "inputs/05-performance-summary.json",
+      "portable_sha256": "eb8ca5ab9a0b40eb6f884be6e840ff631f4fbb54910d5bc98722dbf5f587c5b2",
+      "portable_normalization": "UTF-8 LF line endings; contents unchanged."
+    },
+    {
+      "source_id": "logs/halo-deepseek-longcontext-20260925/measured-rows.csv",
+      "sha256": "89915cd37e74cdd0c53cb87a793415b2f665895704b2716373e9530ebbc6467e",
+      "file": "inputs/06-short-fresh4096.json",
+      "selection": "Only ordinary final-fresh4096-P/C rows; all other configurations excluded.",
+      "portable_sha256": "d2acb61483ba853aff996563abe73dfa5979e705723c1b3d596d6be334c5f152",
+      "portable_normalization": "UTF-8 LF line endings; numeric contents unchanged. Short4K input is a selected subset."
+    }
+  ],
+  "peak_record": "../peak-performance.json",
+  "rules": [
+    "Rates are token count divided by mean complete-prefill time, never mean of per-run rates.",
+    "Fresh full-prompt and incremental added-token timing are separate panels.",
+    "Short empty-context controls allocate65665; long fresh controls allocate prompt length+129. No joining of short and long controls.",
+    "No invented 8K/16K fresh points; no smoothing, interpolation or benchmark rerun.",
+    "P is the local upstream8db control, not the official published DS4 speed number.",
+    "Indexer A is the contemporary preceding optimized chain; indexer B includes resident-key scoring.",
+    "Updated indexer has no measured 4K-chunk series; previous 4K results remain labelled.",
+    "Same-chunk numerical references; cross-chunk bitwise identity is not claimed."
+  ]
+}

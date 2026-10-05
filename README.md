@@ -28,6 +28,10 @@ The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8d
 
 **Measured improvement: +43.78%** in the controlled resident 4K comparison against upstream DS4 rebuilt on the same machine. The official published value uses 2K increments; it is context, not the denominator of that controlled gain. [Official DS4 source](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md) - [Measurement records](docs/halo/peak-performance.json).
 
+![Halo prefill across context lengths, starting at 2K](docs/halo/figures/prefill-context-indexer-update.png)
+
+[Context measurements from 2K to 128K, chart sources and downloadable figures](docs/HALO_PERFORMANCE.md#prefill-across-context-lengths).
+
 ## Quality
 
 **Full FP32 logits, complete serialized state and token IDs are bitwise identical to the reference in the verified cases.** Model weights and quantization are preserved. Coverage includes fresh32K/64K/128K prompts, 223 incremental payload comparisons and 31 snapshot restorations. [Verification evidence](docs/HALO_EVIDENCE.md).
