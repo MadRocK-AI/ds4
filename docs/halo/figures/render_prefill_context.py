@@ -91,7 +91,7 @@ def render_incremental(data, output):
     save(fig, output)
 
 
-def render_fresh(data, updated, output):
+def render_previous(data, output):
     fig = plt.figure(figsize=(13, 6.3))
     axes = [fig.add_axes([.07, .23, .295, .51]), fig.add_axes([.57, .23, .275, .51])]
     header(fig, "Full-prompt prefill",
@@ -101,10 +101,8 @@ def render_fresh(data, updated, output):
         ax.set_title(f"{chunk // 1024}K chunks", loc="left", fontsize=12, weight="bold", color=INK, pad=16)
         ax.set_ylabel("Prefill (token/s)", labelpad=12, color=MUTED, fontsize=10)
         specs = [("fresh", "P", ORANGE, "Local upstream", "-"),
-                 ("fresh", "C", GRAY if updated and chunk == 2048 else BLUE,
-                  "Halo previous" if updated else "Halo", "--" if updated and chunk == 2048 else "-")]
-        if updated and chunk == 2048:
-            specs.append(("indexer_fresh", "indexer_B", BLUE, "Halo + indexer", "-"))
+                 ("fresh", "C", BLUE,
+                  "Halo preceding", "-")]
         for protocol, series, color, label, line in specs:
             pp = selected(data, protocol, series, chunk)
             assert [p["context_tokens"] for p in pp] == [32768, 65536, 131072]
@@ -114,10 +112,56 @@ def render_fresh(data, updated, output):
             end_label(ax, pp[-1], label, color, fontsize=9.8, compact=True)
     fig.text(.07, .075, "Empty-context requests. Required first-use preparation included; model loading excluded.",
              fontsize=9.5, color=MUTED)
-    note = "Indexer upgrade measured only with 2K chunks; 4K retains the preceding campaign." if updated else "Matching-chunk local upstream and Halo measurements from the same campaign."
+    note = "Pre-indexer campaign: matching-chunk local upstream and Halo measurements."
     fig.text(.07, .035, note + " K = 1,024 tokens.", fontsize=9.5, color=MUTED)
     save(fig, output)
 
+
+def render_current(data, output):
+    fig = plt.figure(figsize=(11.8, 6.1))
+    ax = fig.add_axes([.07, .23, .73, .54])
+    header(fig, "Full-prompt prefill with the indexer upgrade",
+           "DeepSeek V4 Flash 0731  ·  AMD Strix Halo, 128 GB  ·  2K chunks")
+    style(ax, [32768, 65536, 131072], 131072)
+    ax.set_ylabel("Prefill (token/s)", labelpad=14, color=MUTED, fontsize=10)
+    for protocol, series, color, label in [("indexer_fresh", "indexer_B", BLUE, "Halo + indexer"),
+                                         ("fresh", "P", ORANGE, "Local upstream")]:
+        pp = selected(data, protocol, series, 2048)
+        ax.plot([p["context_tokens"] for p in pp], [p["prefill_tps"] for p in pp],
+                color=color, lw=2.6, marker="o", markersize=5,
+                markerfacecolor="white", markeredgewidth=1.5, clip_on=False)
+        end_label(ax, pp[-1], label, color)
+        for p in pp[:-1]:
+            ax.annotate(f"{p['prefill_tps']:.2f}", (p["context_tokens"], p["prefill_tps"]),
+                        xytext=(0, 12), textcoords="offset points", ha="center", color=color, fontsize=10)
+    fig.text(.07, .075, "Complete empty-context prompts. First-use preparation included; model loading excluded.", fontsize=9.5, color=MUTED)
+    fig.text(.07, .035, "Recorded campaigns: upstream September 25, indexer upgrade September 26. K = 1,024 tokens.", fontsize=9.5, color=MUTED)
+    save(fig, output)
+
+
+def render_best(selection, output):
+    fig = plt.figure(figsize=(11.8, 6.1))
+    ax = fig.add_axes([.07, .23, .73, .54])
+    header(fig, "Best recorded full-prompt prefill",
+           "DeepSeek V4 Flash 0731  ·  AMD Strix Halo, 128 GB  ·  Best chunk at each context")
+    style(ax, [32768, 65536, 131072], 131072)
+    ax.set_ylabel("Prefill (token/s)", labelpad=14, color=MUTED, fontsize=10)
+    for key, color, label in [("halo", BLUE, "Halo best recorded"), ("upstream", ORANGE, "Local upstream")]:
+        pp = [r[key] for r in selection["points"]]
+        ax.plot([p["context_tokens"] for p in pp], [p["prefill_tps"] for p in pp],
+                color=color, lw=2.6, marker="o", markersize=5,
+                markerfacecolor="white", markeredgewidth=1.5, clip_on=False)
+        end_label(ax, pp[-1], label, color)
+        for p in pp[:-1]:
+            ax.annotate(f"{p['prefill_tps']:.2f}", (p["context_tokens"], p["prefill_tps"]),
+                        xytext=(0, 12), textcoords="offset points", ha="center", color=color, fontsize=10)
+    for r in selection["points"]:
+        p = r["halo"]
+        ax.annotate(r["halo_configuration"], (p["context_tokens"], p["prefill_tps"]),
+                    xytext=(0, -22), textcoords="offset points", ha="center", color=BLUE, fontsize=9)
+    fig.text(.07, .075, "Complete empty-context prompts. Best results from archived campaigns; chunk selection is shown at each point.", fontsize=9.5, color=MUTED)
+    fig.text(.07, .035, "Upstream best setting: 2K chunks. First-use preparation included, model loading excluded. K = 1,024 tokens.", fontsize=9.5, color=MUTED)
+    save(fig, output)
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -131,8 +175,13 @@ def main():
                          "svg.fonttype": "none", "pdf.fonttype": 42})
     args.output_dir.mkdir(parents=True, exist_ok=True)
     render_incremental(data, args.output_dir / "prefill-context-incremental")
-    render_fresh(data, False, args.output_dir / "prefill-context-four-variants")
-    render_fresh(data, True, args.output_dir / "prefill-context-indexer-update")
+    selection = json.loads((HERE / "best-recorded-selection.json").read_text(encoding="utf-8"))
+    for row in selection["points"]:
+        for key in ["halo", "upstream"]:
+            assert row[key] in data["points"]
+    render_previous(data, args.output_dir / "prefill-context-four-variants")
+    render_current(data, args.output_dir / "prefill-context-indexer-update")
+    render_best(selection, args.output_dir / "prefill-context-best-recorded")
 
 
 if __name__ == "__main__":

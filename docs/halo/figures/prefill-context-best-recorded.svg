@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-10-05T12:21:56.795550</dc:date>
+    <dc:date>2026-10-05T12:21:57.242877</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -65,7 +65,7 @@ z
      <g id="line2d_4">
       <path d="M 59.472 338.184
 L 679.68 338.184
-" clip-path="url(#pa51ccc1725)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p1f52404249)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_5"/>
      <g id="text_5">
@@ -76,7 +76,7 @@ L 679.68 338.184
      <g id="line2d_6">
       <path d="M 59.472 285.48
 L 679.68 285.48
-" clip-path="url(#pa51ccc1725)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p1f52404249)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_7"/>
      <g id="text_6">
@@ -87,7 +87,7 @@ L 679.68 285.48
      <g id="line2d_8">
       <path d="M 59.472 232.776
 L 679.68 232.776
-" clip-path="url(#pa51ccc1725)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p1f52404249)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_9"/>
      <g id="text_7">
@@ -98,7 +98,7 @@ L 679.68 232.776
      <g id="line2d_10">
       <path d="M 59.472 180.072
 L 679.68 180.072
-" clip-path="url(#pa51ccc1725)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p1f52404249)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_11"/>
      <g id="text_8">
@@ -109,7 +109,7 @@ L 679.68 180.072
      <g id="line2d_12">
       <path d="M 59.472 127.368
 L 679.68 127.368
-" clip-path="url(#pa51ccc1725)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p1f52404249)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_13"/>
      <g id="text_9">
@@ -121,12 +121,12 @@ L 679.68 127.368
     </g>
    </g>
    <g id="line2d_14">
-    <path d="M 76.457275 131.93575
+    <path d="M 76.457275 127.064882
 L 277.531517 147.463932
 L 679.68 169.903961
 " style="fill: none; stroke: #0868b2; stroke-width: 2.6; stroke-linecap: square"/>
     <defs>
-     <path id="m8e5afe7f3f" d="M 0 2.5
+     <path id="m660f54a781" d="M 0 2.5
 C 0.663008 2.5 1.29895 2.236584 1.767767 1.767767
 C 2.236584 1.29895 2.5 0.663008 2.5 0
 C 2.5 -0.663008 2.236584 -1.29895 1.767767 -1.767767
@@ -139,9 +139,9 @@ z
 " style="stroke: #0868b2; stroke-width: 1.5"/>
     </defs>
     <g>
-     <use xlink:href="#m8e5afe7f3f" x="76.457275" y="131.93575" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
-     <use xlink:href="#m8e5afe7f3f" x="277.531517" y="147.463932" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
-     <use xlink:href="#m8e5afe7f3f" x="679.68" y="169.903961" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
+     <use xlink:href="#m660f54a781" x="76.457275" y="127.064882" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
+     <use xlink:href="#m660f54a781" x="277.531517" y="147.463932" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
+     <use xlink:href="#m660f54a781" x="679.68" y="169.903961" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
     </g>
    </g>
    <g id="line2d_15">
@@ -150,7 +150,7 @@ L 277.531517 205.521806
 L 679.68 223.261254
 " style="fill: none; stroke: #a75b20; stroke-width: 2.6; stroke-linecap: square"/>
     <defs>
-     <path id="m67bb661f5d" d="M 0 2.5
+     <path id="m60337f5dcc" d="M 0 2.5
 C 0.663008 2.5 1.29895 2.236584 1.767767 1.767767
 C 2.236584 1.29895 2.5 0.663008 2.5 0
 C 2.5 -0.663008 2.236584 -1.29895 1.767767 -1.767767
@@ -163,9 +163,9 @@ z
 " style="stroke: #a75b20; stroke-width: 1.5"/>
     </defs>
     <g>
-     <use xlink:href="#m67bb661f5d" x="76.457275" y="194.715989" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
-     <use xlink:href="#m67bb661f5d" x="277.531517" y="205.521806" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
-     <use xlink:href="#m67bb661f5d" x="679.68" y="223.261254" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
+     <use xlink:href="#m60337f5dcc" x="76.457275" y="194.715989" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
+     <use xlink:href="#m60337f5dcc" x="277.531517" y="205.521806" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
+     <use xlink:href="#m60337f5dcc" x="679.68" y="223.261254" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
     </g>
    </g>
    <g id="patch_3">
@@ -174,11 +174,11 @@ L 679.68 338.184
 " style="fill: none; stroke: #b9c8d4; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_11">
-    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #0868b2" transform="translate(693.68 165.944649)">Halo + indexer</text>
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #0868b2" transform="translate(693.68 165.944649)">Halo best recorded</text>
     <text style="font-size: 11px; font-family: 'DejaVu Sans'; fill: #0868b2" transform="translate(693.68 179.933899)">319.29 token/s</text>
    </g>
    <g id="text_12">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #0868b2" x="76.457275" y="119.93575" transform="rotate(-0 76.457275 119.93575)">391.33</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #0868b2" x="76.457275" y="115.064882" transform="rotate(-0 76.457275 115.064882)">400.58</text>
    </g>
    <g id="text_13">
     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #0868b2" x="277.531517" y="135.463932" transform="rotate(-0 277.531517 135.463932)">361.87</text>
@@ -193,22 +193,31 @@ L 679.68 338.184
    <g id="text_16">
     <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #a75b20" x="277.531517" y="193.521806" transform="rotate(-0 277.531517 193.521806)">251.71</text>
    </g>
-  </g>
-  <g id="text_17">
-   <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182d42" x="59.472" y="32.94" transform="rotate(-0 59.472 32.94)">Full-prompt prefill with the indexer upgrade</text>
-  </g>
-  <g id="text_18">
-   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="59.472" y="58.8528" transform="rotate(-0 59.472 58.8528)">DeepSeek V4 Flash 0731  ·  AMD Strix Halo, 128 GB  ·  2K chunks</text>
-  </g>
-  <g id="text_19">
-   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="59.472" y="406.26" transform="rotate(-0 59.472 406.26)">Complete empty-context prompts. First-use preparation included; model loading excluded.</text>
+   <g id="text_17">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #0868b2" x="76.457275" y="149.064882" transform="rotate(-0 76.457275 149.064882)">4K chunks</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #0868b2" x="277.531517" y="169.463932" transform="rotate(-0 277.531517 169.463932)">2K + indexer</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #0868b2" x="679.68" y="191.903961" transform="rotate(-0 679.68 191.903961)">2K + indexer</text>
+   </g>
   </g>
   <g id="text_20">
-   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="59.472" y="423.828" transform="rotate(-0 59.472 423.828)">Recorded campaigns: upstream September 25, indexer upgrade September 26. K = 1,024 tokens.</text>
+   <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182d42" x="59.472" y="32.94" transform="rotate(-0 59.472 32.94)">Best recorded full-prompt prefill</text>
+  </g>
+  <g id="text_21">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="59.472" y="58.8528" transform="rotate(-0 59.472 58.8528)">DeepSeek V4 Flash 0731  ·  AMD Strix Halo, 128 GB  ·  Best chunk at each context</text>
+  </g>
+  <g id="text_22">
+   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="59.472" y="406.26" transform="rotate(-0 59.472 406.26)">Complete empty-context prompts. Best results from archived campaigns; chunk selection is shown at each point.</text>
+  </g>
+  <g id="text_23">
+   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="59.472" y="423.828" transform="rotate(-0 59.472 423.828)">Upstream best setting: 2K chunks. First-use preparation included, model loading excluded. K = 1,024 tokens.</text>
   </g>
  </g>
  <defs>
-  <clipPath id="pa51ccc1725">
+  <clipPath id="p1f52404249">
    <rect x="59.472" y="101.016" width="620.208" height="237.168"/>
   </clipPath>
  </defs>

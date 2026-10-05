@@ -2,11 +2,12 @@
 
 Reconstructed from recorded September 25–26 measurements. The renderer uses local data only.
 
-- [Incremental chart](prefill-context-incremental.png): two continuous curves from 2K to 64K. Each frontier adds 2K tokens; rates measure that increment. Every one of the 32 frontiers per engine uses two ordinary observations.
-- [Full-prompt chart with indexer update](prefill-context-indexer-update.png): complete empty-context prefill at 32K, 64K and 128K. Separate panels for 2K and 4K chunks, with equal linear axes. Updated indexer observations appear only in the 2K panel.
-- [Preceding four-variant comparison](prefill-context-four-variants.png): the same layout using only the preceding matched campaign.
+- [Best recorded full-prompt chart](prefill-context-best-recorded.png): 400.58 / 361.87 / 319.29 token/s at 32K / 64K / 128K. It selects 4K chunks at 32K and 2K + indexer at 64K/128K. [Selection and source records](best-recorded-selection.json) bind every chosen point to the full-precision data. This is a best-result curve across archived configurations, not a fixed-chunk A/B.
+- [Fixed 2K + indexer chart](prefill-context-indexer-update.png): 391.33 / 361.87 / 319.29 token/s at 32K / 64K / 128K. Only the measured indexer-upgraded Halo series and its recorded 2K upstream control are shown.
+- [Earlier incremental chart](prefill-context-incremental.png): two continuous curves from 2K to 64K, before the indexer upgrade. Each frontier adds 2K tokens. Every one of the 32 frontiers per engine uses two ordinary observations. These are interval rates, not updated complete-prompt rates.
+- [Preceding four-variant comparison](prefill-context-four-variants.png): retained supplementary pre-indexer 2K/4K comparison; it is not the headline result.
 
-Series names and final rates are placed at the ends of the curves. Incremental curves have no point symbols; full-prompt curves mark each of their three actual measurements. Axes are linear. Connecting segments do not add observations or estimate missing results. No smoothing or extrapolation is applied. PNG, SVG and PDF are available for every chart.
+Series names and final rates are placed at the ends of the curves. The current full-prompt charts label the earlier context values above the measured points; the best-result chart also identifies each chosen chunk. Incremental curves have no point symbols; full-prompt curves mark each of their three actual measurements. Axes are linear. Connecting segments do not add observations or estimate missing results. No smoothing or extrapolation is applied. PNG, SVG and PDF are available for every chart.
 
 [CSV](prefill-context-data.csv) and [JSON](prefill-context-data.json) retain all 86 records with full precision, including the short-prompt controls and contemporary indexer A observations. Those supplementary records remain available without being mixed into the plotted curves. JSON retains individual observations, protocols, allocations, source IDs and SHA256 bindings.
 
@@ -26,7 +27,7 @@ With Python 3.11+ and matplotlib already installed:
 python3 docs/halo/figures/render_prefill_context.py
 ```
 
-Optional `--output-dir /path/to/exports` writes all three figures in PNG, SVG and PDF. The renderer checks rate arithmetic before rendering. No model, ROCm installation or remote host is needed.
+Optional `--output-dir /path/to/exports` writes all four figures in PNG, SVG and PDF. The renderer checks rate arithmetic before rendering. No model, ROCm installation or remote host is needed.
 
 ## Provenance
 

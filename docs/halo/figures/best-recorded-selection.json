@@ -1,0 +1,119 @@
+{
+  "scope": "Best existing complete empty-context prefill observation/mean at each prompt length; per-point chunk chosen from archived campaigns, not a fixed-chunk A/B or an updated incremental series.",
+  "source_data": "prefill-context-data.json",
+  "points": [
+    {
+      "context_tokens": 32768,
+      "halo": {
+        "protocol": "fresh",
+        "series": "C",
+        "context_tokens": 32768,
+        "added_tokens": 32768,
+        "chunk_tokens": 4096,
+        "context_allocation": 32897,
+        "individual_seconds": [
+          81.802381795977
+        ],
+        "mean_seconds": 81.802381795977,
+        "prefill_tps": 400.57513339558426,
+        "source": "inputs/01-final-fresh-series.json",
+        "sample_ids": [
+          "final32-4096-C"
+        ]
+      },
+      "upstream": {
+        "protocol": "fresh",
+        "series": "P",
+        "context_tokens": 32768,
+        "added_tokens": 32768,
+        "chunk_tokens": 2048,
+        "context_allocation": 32897,
+        "individual_seconds": [
+          120.375592089986
+        ],
+        "mean_seconds": 120.375592089986,
+        "prefill_tps": 272.2146527470826,
+        "source": "inputs/01-final-fresh-series.json",
+        "sample_ids": [
+          "final32-2048-P"
+        ]
+      },
+      "halo_configuration": "4K chunks",
+      "recorded_throughput_ratio": 1.471541408051104
+    },
+    {
+      "context_tokens": 65536,
+      "halo": {
+        "protocol": "indexer_fresh",
+        "series": "indexer_B",
+        "context_tokens": 65536,
+        "added_tokens": 65536,
+        "chunk_tokens": 2048,
+        "context_allocation": 65665,
+        "individual_seconds": [
+          180.922379182011,
+          181.284847430012
+        ],
+        "mean_seconds": 181.1036133060115,
+        "prefill_tps": 361.8701957606089,
+        "source": "inputs/04-summary.json"
+      },
+      "upstream": {
+        "protocol": "fresh",
+        "series": "P",
+        "context_tokens": 65536,
+        "added_tokens": 65536,
+        "chunk_tokens": 2048,
+        "context_allocation": 65665,
+        "individual_seconds": [
+          260.361241720006
+        ],
+        "mean_seconds": 260.361241720006,
+        "prefill_tps": 251.71181227687416,
+        "source": "inputs/01-final-fresh-series.json",
+        "sample_ids": [
+          "final64-2048-P"
+        ]
+      },
+      "halo_configuration": "2K + indexer",
+      "recorded_throughput_ratio": 1.4376369248915677
+    },
+    {
+      "context_tokens": 131072,
+      "halo": {
+        "protocol": "indexer_fresh",
+        "series": "indexer_B",
+        "context_tokens": 131072,
+        "added_tokens": 131072,
+        "chunk_tokens": 2048,
+        "context_allocation": 131201,
+        "individual_seconds": [
+          410.627998034994,
+          410.386631791975
+        ],
+        "mean_seconds": 410.5073149134845,
+        "prefill_tps": 319.2927269216232,
+        "source": "inputs/05-performance-summary.json"
+      },
+      "upstream": {
+        "protocol": "fresh",
+        "series": "P",
+        "context_tokens": 131072,
+        "added_tokens": 131072,
+        "chunk_tokens": 2048,
+        "context_allocation": 131201,
+        "individual_seconds": [
+          601.101082691021
+        ],
+        "mean_seconds": 601.101082691021,
+        "prefill_tps": 218.05317570418327,
+        "source": "inputs/01-final-fresh-series.json",
+        "sample_ids": [
+          "final128-2048-P"
+        ]
+      },
+      "halo_configuration": "2K + indexer",
+      "recorded_throughput_ratio": 1.4642883594357012
+    }
+  ]
+}

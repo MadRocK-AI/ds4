@@ -14,23 +14,21 @@
 
 ## Prefill across context lengths
 
-![Incremental prefill from 2K to 64K](halo/figures/prefill-context-incremental.png)
+![Best recorded full-prompt Halo prefill, using the best chunk at each context](halo/figures/prefill-context-best-recorded.png)
 
-Each measurement adds **2K tokens**. The curves cover all 32 measured frontiers from 2K to 64K. **Local upstream** is the rebuilt upstream8db control on the same Halo machine.
+**Best recorded complete-prefill rates at each prompt length.** At 32K the best result uses 4K chunks; at 64K and 128K it uses **2K + indexer**. Local upstream is the rebuilt upstream8db control on the same Halo machine, whose best recorded chunk is 2K.
 
-![Full-prompt prefill, with 2K and 4K chunks compared separately](halo/figures/prefill-context-indexer-update.png)
+| Full prompt | Local upstream, best chunk | Halo, 2K + indexer | Halo, best recorded | Best Halo setting |
+|---|---:|---:|---:|---|
+| 32K | 272.21 | 391.33 | **400.58** | 4K chunks |
+| 64K | 251.71 | 361.87 | **361.87** | 2K + indexer |
+| 128K | 218.05 | 319.29 | **319.29** | 2K + indexer |
 
-Complete empty-context prompts at **32K, 64K and 128K**, grouped by chunk size. The updated 2K curve includes the resident-key indexer; the 4K curve retains its preceding campaign.
+Rates are token/s, from the archived complete empty-context campaigns. Required first-use preparation is included; model loading is excluded. **400.58 at 32K belongs to 4K chunks; the fixed 2K + indexer result is 391.33.** The best-result curve selects a recorded configuration at each context; it is not a fixed-chunk A/B series.
 
-| Full prompt | Local upstream, best chunk (2K) | Halo, previous 4K | Halo, 2K + indexer | Indexer gain over its contemporary 2K control |
-|---|---:|---:|---:|---:|
-| 32K | 272.21 | 400.58 | 391.33 | +4.57% |
-| 64K | 251.71 | 354.53 | 361.87 | +7.84% |
-| 128K | 218.05 | 288.48 | 319.29 | +14.46% |
+[Fixed 2K + indexer chart](halo/figures/prefill-context-indexer-update.png) · [Best-result selection and source times](halo/figures/best-recorded-selection.json) · [CSV measurements](halo/figures/prefill-context-data.csv) · [Sources and plotting method](halo/figures/README.md) · [SVG](halo/figures/prefill-context-best-recorded.svg) · [PDF](halo/figures/prefill-context-best-recorded.pdf).
 
-Rates are token/s. The indexer gain uses its own matched A/B measurements; the preceding curves are from the earlier campaign. All necessary first-use preparation is included, model loading is excluded. The new indexer was measured with 2K chunks; the 4K curve retains its preceding results.
-
-[CSV measurements](halo/figures/prefill-context-data.csv) · [Sources and plotting method](halo/figures/README.md) · Incremental: [SVG](halo/figures/prefill-context-incremental.svg), [PDF](halo/figures/prefill-context-incremental.pdf) · Full prompt: [SVG](halo/figures/prefill-context-indexer-update.svg), [PDF](halo/figures/prefill-context-indexer-update.pdf).
+The [archived incremental chart from 2K to 64K](halo/figures/prefill-context-incremental.png) measures each added 2K interval in the **preceding campaign, before the indexer upgrade**; it is not the updated full-prompt curve.
 
 ## Quality
 
