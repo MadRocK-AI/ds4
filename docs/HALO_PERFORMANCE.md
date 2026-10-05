@@ -6,31 +6,34 @@
 
 | Result | Prefill |
 |---|---:|
-| Halo best recorded mean, resident 4K | **449.03 token/s** |
-| Halo controlled resident 4K test | **447.51 token/s** |
-| Official DS4 published 4K interval | 295.27 token/s |
+| DS4 Halo best recorded mean, resident 4K | **449.03 token/s** |
+| DS4 Halo controlled resident 4K test | **447.51 token/s** |
+| DS4 official published 4K interval | 295.27 token/s |
 
-**Measured improvement: +43.78%** in the controlled resident 4K comparison against upstream DS4 rebuilt on the same machine. The official published value uses 2K increments; it is context, not the denominator of that controlled gain. [Official DS4 source](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md) - [Measurement records](halo/peak-performance.json).
+The official value comes from [DS4 main](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md). It measures a 2K increment at the 4K frontier; the Halo peak measures a prepared complete 4K request. These published figures use different protocols. [The archived matched A/B record](halo/peak-performance.json) separately documents the **+43.78%** internal gain against original DS4 code on the same machine.
 
 ## Prefill across context lengths
 
-![Recorded Halo prefill from 2K to 128K, including the resident 4K peak and controlled result](halo/figures/prefill-context-overview.png)
+![DS4 Halo versus official DS4, starting at 2K](halo/figures/prefill-context-overview.png)
 
-**Recorded prefill from 2K to 128K, including both 4K results above: 449.03 best mean and 447.51 controlled.** The 2K point is an initial request; 4K follows native preparation/warmup; long prompts include first-use preparation. Each point identifies its setting. The connecting lines summarize recorded means across those protocols; they are not a controlled context-scaling experiment. Local upstream is the rebuilt upstream8db control on Halo.
+**DS4 Halo** is this repository; **DS4 official** uses only the gfx1151 results published in [antirez/ds4 main](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md), including integrated upstream tuning. It uses no unmerged PR or local rebuilt timing. The official report supplies 2K, 4K and 16K values; its curve stops at 16K.
 
-| Context | Local upstream | Halo, 2K + indexer | Halo shown in chart | Measurement / setting |
-|---|---:|---:|---:|---|
-| 2K | 202.66 | — | **354.23** | Initial 2K request |
-| 4K | 311.24 | — | **449.03** | Prepared 4K; controlled result **447.51** |
-| 32K | 272.21 | 391.33 | **400.58** | 4K chunks |
-| 64K | 251.71 | 361.87 | **361.87** | 2K + indexer |
-| 128K | 218.05 | 319.29 | **319.29** | 2K + indexer |
+| Context | DS4 official, published | DS4 Halo, recorded | Halo setting |
+|---|---:|---:|---|
+| 2K | 231.91 | **354.23** | Initial 2K request |
+| 4K | 295.27 | **449.03** | Prepared 4K; controlled result **447.51** |
+| 16K | 268.51 | — | No matching full-prompt point in this dataset |
+| 32K | — | **400.58** | 4K chunks |
+| 64K | — | **361.87** | 2K + indexer |
+| 128K | — | **319.29** | 2K + indexer |
 
-Rates are token/s; model loading is excluded. The 4K measurement follows native preparation/warmup and has no prefix reuse; initial 2K and long complete prompts include first-use preparation. **400.58 at 32K belongs to 4K chunks; the fixed 2K + indexer result is 391.33.** The long-context points select the best recorded chunk at each prompt length.
+Rates are token/s. Official values measure **2K increments**; Halo points use an initial 2K request, prepared resident 4K and complete first-use long prompts. Both series summarize archived campaigns, with the protocols shown. Connecting lines do not establish a controlled speedup. Missing values remain unfilled.
 
-[Fixed 2K + indexer chart](halo/figures/prefill-context-indexer-update.png) · [Overview source times and protocol bindings](halo/figures/prefill-context-overview.json) · [CSV measurements](halo/figures/prefill-context-data.csv) · [Sources and plotting method](halo/figures/README.md) · [SVG](halo/figures/prefill-context-overview.svg) · [PDF](halo/figures/prefill-context-overview.pdf).
+**Fixed 2K + indexer:** 391.33 / 361.87 / 319.29 at 32K / 64K / 128K. The best 32K result, 400.58, belongs to 4K chunks.
 
-The [archived incremental chart from 2K to 64K](halo/figures/prefill-context-incremental.png) measures each added 2K interval in the **preceding campaign, before the indexer upgrade**; it is not the updated full-prompt curve.
+[Official data and source binding](halo/figures/official-ds4-published-context.json) · [Overview source records](halo/figures/prefill-context-overview.json) · [Sources and plotting method](halo/figures/README.md) · [SVG](halo/figures/prefill-context-overview.svg) · [PDF](halo/figures/prefill-context-overview.pdf).
+
+[Supplementary internal controls and indexer measurements](halo/figures/README.md) retain the matched local-original-code comparisons and the earlier incremental series separately from the official published reference.
 
 ## Quality
 

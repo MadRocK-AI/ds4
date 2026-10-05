@@ -1,0 +1,44 @@
+{
+  "repository": "antirez/ds4",
+  "branch": "main",
+  "commit": "0aaea5a238fb41a35106a551e73c8409dfb751ac",
+  "path": "speed-bench/gfx1151-prefill-results.md",
+  "url": "https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md",
+  "file_sha256": "43e8ed3584a2c8ab5d7d98a6bd63664bfff1e6801c3a9b278a713cb9658fd225",
+  "selection": "Only values published in official main for the integrated default gfx1151 path; no unmerged PR or local rebuilt speed is used.",
+  "points": [
+    {
+      "series": "official",
+      "context_tokens": 2048,
+      "prefill_tps": 231.91,
+      "added_tokens": 2048,
+      "protocol": "published2K_increment",
+      "runtime": "ROCm7.14",
+      "source_location": "Result table, Tuned gfx1151 path, 2K prefill"
+    },
+    {
+      "series": "official",
+      "context_tokens": 4096,
+      "prefill_tps": 295.27,
+      "added_tokens": 2048,
+      "protocol": "published2K_increment",
+      "runtime": "ROCm10.0 follow-up",
+      "source_location": "Last paragraph, pure-prefill4K interval"
+    },
+    {
+      "series": "official",
+      "context_tokens": 16384,
+      "prefill_tps": 268.51,
+      "added_tokens": 2048,
+      "protocol": "published2K_increment",
+      "runtime": "ROCm10.0 follow-up",
+      "source_location": "Retained stock launch follow-up,16K2K-step pure-prefill"
+    }
+  ],
+  "not_published_contexts": [
+    32768,
+    65536,
+    131072
+  ],
+  "scope": "Published values from multiple official campaigns, not one same-software scaling run. 2K-increment rates, not complete empty-context prompt rates."
+}

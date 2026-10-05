@@ -22,15 +22,15 @@ The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8d
 
 | Result | Prefill |
 |---|---:|
-| Halo best recorded mean, resident 4K | **449.03 token/s** |
-| Halo controlled resident 4K test | **447.51 token/s** |
-| Official DS4 published 4K interval | 295.27 token/s |
+| DS4 Halo best recorded mean, resident 4K | **449.03 token/s** |
+| DS4 Halo controlled resident 4K test | **447.51 token/s** |
+| DS4 official published 4K interval | 295.27 token/s |
 
-**Measured improvement: +43.78%** in the controlled resident 4K comparison against upstream DS4 rebuilt on the same machine. The official published value uses 2K increments; it is context, not the denominator of that controlled gain. [Official DS4 source](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md) - [Measurement records](docs/halo/peak-performance.json).
+The official value comes from [DS4 main](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md). It measures a 2K increment at the 4K frontier; the Halo peak measures a prepared complete 4K request. These published figures use different protocols. [The archived matched A/B record](docs/halo/peak-performance.json) separately documents the **+43.78%** internal gain against original DS4 code on the same machine.
 
-![Recorded Halo prefill from 2K to 128K, including 449.03 and 447.51 at 4K](docs/halo/figures/prefill-context-overview.png)
+![DS4 Halo versus official DS4 from 2K, including 449.03 and 447.51 at 4K](docs/halo/figures/prefill-context-overview.png)
 
-The chart starts at **2K**, includes **449.03 / 447.51 at prepared 4K**, and shows **400.58 / 361.87 / 319.29** at 32K / 64K / 128K. Preparation and chunk settings are identified at the points. [Measurements, protocols and downloadable figures](docs/HALO_PERFORMANCE.md#prefill-across-context-lengths).
+The chart starts at **2K** and compares **DS4 Halo** with **DS4 official** published results. Halo includes **449.03 / 447.51 at prepared 4K** and **400.58 / 361.87 / 319.29** at 32K / 64K / 128K. The official curve ends at 16K, where the published data ends. Protocols and chunk choices are indicated. [Measurements, protocols and downloadable figures](docs/HALO_PERFORMANCE.md#prefill-across-context-lengths).
 
 ## Quality
 

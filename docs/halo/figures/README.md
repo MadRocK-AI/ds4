@@ -2,7 +2,7 @@
 
 Reconstructed from recorded September 25–26 measurements. The renderer uses local data only.
 
-- [Main overview from 2K to 128K](prefill-context-overview.png): initial 2K request, prepared resident 4K peak **449.03** and controlled result **447.51**, then best long-context results **400.58 / 361.87 / 319.29**. Protocols and chunk settings are identified at the points. [Overview records](prefill-context-overview.json) bind each mean, its protocol, observations and source. This cross-campaign summary connects different preparation regimes; it is not a controlled scaling curve. No incremental interval at a frontier beyond 2K is substituted for a full-prompt timing.
+- [Main overview: DS4 Halo versus official DS4](prefill-context-overview.png): starts at 2K; includes Halo prepared 4K **449.03 / 447.51** and long-context **400.58 / 361.87 / 319.29**. The official curve uses only [antirez/ds4 main](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md): **231.91 / 295.27 / 268.51** at 2K / 4K / 16K. It stops at 16K; no local rebuilt control is relabelled official. [Official reference](official-ds4-published-context.json) and [overview records](prefill-context-overview.json) bind every plotted value to its source. Official rates count 2K increments, while Halo preparation and complete-prompt conditions vary. These cross-campaign curves do not establish a controlled A/B or scaling result.
 
 - [Best recorded full-prompt chart](prefill-context-best-recorded.png): 400.58 / 361.87 / 319.29 token/s at 32K / 64K / 128K. It selects 4K chunks at 32K and 2K + indexer at 64K/128K. [Selection and source records](best-recorded-selection.json) bind every chosen point to the full-precision data. This is a best-result curve across archived configurations, not a fixed-chunk A/B.
 - [Fixed 2K + indexer chart](prefill-context-indexer-update.png): 391.33 / 361.87 / 319.29 token/s at 32K / 64K / 128K. Only the measured indexer-upgraded Halo series and its recorded 2K upstream control are shown.
@@ -15,7 +15,7 @@ Series names and final rates are placed at the ends of the curves. The current f
 
 ## Reading the measurements
 
-P is the local rebuilt upstream8db reference, C the qualified preceding Halo chain. Local upstream is not the remote official DS4 published speed figure. Indexer A/B measures the resident-key upgrade relative to its contemporary optimized control. Updated 2K and preceding 4K belong to different campaigns; the latter has no measured indexer update.
+In supplementary internal-control figures, P is the local rebuilt upstream8db reference and C the qualified preceding Halo chain. Those figures are labelled DS4 control and are separate from the official published comparison. Local upstream is not the remote official DS4 published speed figure. Indexer A/B measures the resident-key upgrade relative to its contemporary optimized control. Updated 2K and preceding 4K belong to different campaigns; the latter has no measured indexer update.
 
 Each rate is tokens divided by the arithmetic mean complete-prefill seconds. Incremental rates count only the added 2K tokens; decode, snapshot and restore remain outside the timer. Model loading is excluded, required first-use preparation is included. Long prompts allocate length+129 context slots. The archived short 2K/4K controls allocate 65,665 slots and are retained only in the data files; the short 2K control is the first incremental frontier, not an independent measurement.
 

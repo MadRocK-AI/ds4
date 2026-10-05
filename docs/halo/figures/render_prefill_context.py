@@ -6,6 +6,7 @@ from pathlib import Path
 import argparse
 import json
 import statistics
+import hashlib
 
 import matplotlib
 matplotlib.use("Agg")
@@ -78,7 +79,7 @@ def render_incremental(data, output):
            "DeepSeek V4 Flash 0731  ·  AMD Strix Halo, 128 GB  ·  2K → 64K")
     style(ax, [2048, 8192, 16384, 32768, 49152, 65536], 65536)
     ax.set_ylabel("Prefill (token/s)", labelpad=14, color=MUTED, fontsize=10)
-    for series, color, label in [("C", BLUE, "Halo"), ("P", ORANGE, "Local upstream")]:
+    for series, color, label in [("C", BLUE, "Halo"), ("P", ORANGE, "DS4 control")]:
         pp = selected(data, "incremental", series, 2048)
         assert [p["context_tokens"] for p in pp] == list(range(2048, 65537, 2048))
         ax.plot([p["context_tokens"] for p in pp], [p["prefill_tps"] for p in pp],
@@ -100,7 +101,7 @@ def render_previous(data, output):
         style(ax, [32768, 65536, 131072], 131072)
         ax.set_title(f"{chunk // 1024}K chunks", loc="left", fontsize=12, weight="bold", color=INK, pad=16)
         ax.set_ylabel("Prefill (token/s)", labelpad=12, color=MUTED, fontsize=10)
-        specs = [("fresh", "P", ORANGE, "Local upstream", "-"),
+        specs = [("fresh", "P", ORANGE, "DS4 control", "-"),
                  ("fresh", "C", BLUE,
                   "Halo preceding", "-")]
         for protocol, series, color, label, line in specs:
@@ -125,7 +126,7 @@ def render_current(data, output):
     style(ax, [32768, 65536, 131072], 131072)
     ax.set_ylabel("Prefill (token/s)", labelpad=14, color=MUTED, fontsize=10)
     for protocol, series, color, label in [("indexer_fresh", "indexer_B", BLUE, "Halo + indexer"),
-                                         ("fresh", "P", ORANGE, "Local upstream")]:
+                                         ("fresh", "P", ORANGE, "DS4 control")]:
         pp = selected(data, protocol, series, 2048)
         ax.plot([p["context_tokens"] for p in pp], [p["prefill_tps"] for p in pp],
                 color=color, lw=2.6, marker="o", markersize=5,
@@ -146,7 +147,7 @@ def render_best(selection, output):
            "DeepSeek V4 Flash 0731  ·  AMD Strix Halo, 128 GB  ·  Best chunk at each context")
     style(ax, [32768, 65536, 131072], 131072)
     ax.set_ylabel("Prefill (token/s)", labelpad=14, color=MUTED, fontsize=10)
-    for key, color, label in [("halo", BLUE, "Halo best recorded"), ("upstream", ORANGE, "Local upstream")]:
+    for key, color, label in [("halo", BLUE, "Halo best recorded"), ("upstream", ORANGE, "DS4 control")]:
         pp = [r[key] for r in selection["points"]]
         ax.plot([p["context_tokens"] for p in pp], [p["prefill_tps"] for p in pp],
                 color=color, lw=2.6, marker="o", markersize=5,
@@ -166,8 +167,8 @@ def render_best(selection, output):
 def render_overview(overview, output):
     fig = plt.figure(figsize=(12.4, 6.7))
     ax = fig.add_axes([.07, .26, .75, .49])
-    header(fig, "Recorded prefill from 2K to 128K",
-           "DeepSeek V4 Flash 0731  ·  AMD Strix Halo, 128 GB  ·  Archived measured results")
+    header(fig, "DS4 Halo vs official DS4",
+           "DeepSeek V4 Flash 0731  ·  AMD Strix Halo, 128 GB  ·  Published and recorded results")
     ax.set_xscale("log", base=2)
     ax.set_xlim(2048 / 1.12, 131072)
     ax.set_ylim(0, 510)
@@ -185,7 +186,7 @@ def render_overview(overview, output):
     ax.tick_params(axis="both", length=0, pad=9, colors=MUTED, labelsize=10)
     # A visible band identifies the prepared resident workload at4K.
     ax.axvspan(4096 / 1.10, 4096 * 1.10, color="#EEF4FA", zorder=0)
-    for series, color, label in [("halo", BLUE, "Halo"), ("upstream", ORANGE, "Local upstream")]:
+    for series, color, label in [("halo", BLUE, "DS4 Halo"), ("official", ORANGE, "DS4 official")]:
         pp = sorted([p for p in overview["points"] if p["series"] == series], key=lambda p: p["context_tokens"])
         ax.plot([p["context_tokens"] for p in pp], [p["prefill_tps"] for p in pp],
                 color=color, lw=2.6, marker="o", markersize=5,
@@ -205,9 +206,9 @@ def render_overview(overview, output):
                 label = {2048: "Initial 2K", 4096: "Prepared 4K"}.get(p["context_tokens"], p.get("halo_configuration", ""))
                 ax.annotate(label, (p["context_tokens"], p["prefill_tps"]), xytext=(0, -22),
                             textcoords="offset points", ha="center", fontsize=8.5, color=BLUE)
-    fig.text(.07, .11, "Protocols: 2K initial request; 4K after native preparation / warmup; 32K–128K complete first-use prompts.", fontsize=9.5, color=MUTED)
-    fig.text(.07, .075, "Cross-campaign overview. Lines link recorded means; they do not imply identical preparation or a controlled scaling test.", fontsize=9.5, color=MUTED)
-    fig.text(.07, .04, "Local upstream = rebuilt upstream8db. Best measured chunk shown at each long-context point. K = 1,024 tokens.", fontsize=9.5, color=MUTED)
+    fig.text(.07, .11, "DS4 Halo: initial 2K, prepared resident 4K, complete first-use long prompts. Official DS4: published 2K increments.", fontsize=9.5, color=MUTED)
+    fig.text(.07, .075, "Official main publishes gfx1151 results at 2K, 4K and 16K; 32K/64K/128K values are unavailable in that report.", fontsize=9.5, color=MUTED)
+    fig.text(.07, .04, "Different campaigns and protocols; no controlled speedup is inferred from these curves. K = 1,024 tokens.", fontsize=9.5, color=MUTED)
     save(fig, output)
 
 
@@ -231,6 +232,8 @@ def main():
     render_current(data, args.output_dir / "prefill-context-indexer-update")
     render_best(selection, args.output_dir / "prefill-context-best-recorded")
     overview = json.loads((HERE / "prefill-context-overview.json").read_text(encoding="utf-8"))
+    for name, sha in overview["source_bindings"].items():
+        assert hashlib.sha256((HERE / name).read_bytes()).hexdigest() == sha
     render_overview(overview, args.output_dir / "prefill-context-overview")
 
 

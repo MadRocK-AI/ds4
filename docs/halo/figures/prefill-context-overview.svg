@@ -6,7 +6,7 @@
   <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
-    <dc:date>2026-10-05T12:28:53.624559</dc:date>
+    <dc:date>2026-10-05T12:38:55.868288</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -43,7 +43,7 @@ L 203.836357 356.976
 L 203.836357 120.6
 L 173.959703 120.6
 z
-" clip-path="url(#p944f41307b)" style="fill: #eef4fa; stroke: #eef4fa; stroke-linejoin: miter"/>
+" clip-path="url(#p78e2312315)" style="fill: #eef4fa; stroke: #eef4fa; stroke-linejoin: miter"/>
    </g>
    <g id="matplotlib.axis_1">
     <g id="xtick_1">
@@ -97,7 +97,7 @@ z
      <g id="line2d_8">
       <path d="M 62.496 356.976
 L 732.096 356.976
-" clip-path="url(#p944f41307b)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p78e2312315)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_9"/>
      <g id="text_9">
@@ -108,7 +108,7 @@ L 732.096 356.976
      <g id="line2d_10">
       <path d="M 62.496 310.627765
 L 732.096 310.627765
-" clip-path="url(#p944f41307b)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p78e2312315)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_11"/>
      <g id="text_10">
@@ -119,7 +119,7 @@ L 732.096 310.627765
      <g id="line2d_12">
       <path d="M 62.496 264.279529
 L 732.096 264.279529
-" clip-path="url(#p944f41307b)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p78e2312315)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_13"/>
      <g id="text_11">
@@ -130,7 +130,7 @@ L 732.096 264.279529
      <g id="line2d_14">
       <path d="M 62.496 217.931294
 L 732.096 217.931294
-" clip-path="url(#p944f41307b)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p78e2312315)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_15"/>
      <g id="text_12">
@@ -141,7 +141,7 @@ L 732.096 217.931294
      <g id="line2d_16">
       <path d="M 62.496 171.583059
 L 732.096 171.583059
-" clip-path="url(#p944f41307b)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p78e2312315)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_17"/>
      <g id="text_13">
@@ -152,7 +152,7 @@ L 732.096 171.583059
      <g id="line2d_18">
       <path d="M 62.496 125.234824
 L 732.096 125.234824
-" clip-path="url(#p944f41307b)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+" clip-path="url(#p78e2312315)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
      </g>
      <g id="line2d_19"/>
      <g id="text_14">
@@ -171,7 +171,7 @@ L 623.456406 189.25555
 L 732.096 208.989456
 " style="fill: none; stroke: #0868b2; stroke-width: 2.6; stroke-linecap: square"/>
     <defs>
-     <path id="m11700c77da" d="M 0 2.5
+     <path id="m9323f04b7d" d="M 0 2.5
 C 0.663008 2.5 1.29895 2.236584 1.767767 1.767767
 C 2.236584 1.29895 2.5 0.663008 2.5 0
 C 2.5 -0.663008 2.236584 -1.29895 1.767767 -1.767767
@@ -184,22 +184,20 @@ z
 " style="stroke: #0868b2; stroke-width: 1.5"/>
     </defs>
     <g>
-     <use xlink:href="#m11700c77da" x="80.258436" y="192.795054" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
-     <use xlink:href="#m11700c77da" x="188.89803" y="148.856798" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
-     <use xlink:href="#m11700c77da" x="514.816812" y="171.316495" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
-     <use xlink:href="#m11700c77da" x="623.456406" y="189.25555" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
-     <use xlink:href="#m11700c77da" x="732.096" y="208.989456" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
+     <use xlink:href="#m9323f04b7d" x="80.258436" y="192.795054" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
+     <use xlink:href="#m9323f04b7d" x="188.89803" y="148.856798" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
+     <use xlink:href="#m9323f04b7d" x="514.816812" y="171.316495" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
+     <use xlink:href="#m9323f04b7d" x="623.456406" y="189.25555" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
+     <use xlink:href="#m9323f04b7d" x="732.096" y="208.989456" style="fill: #ffffff; stroke: #0868b2; stroke-width: 1.5"/>
     </g>
    </g>
    <g id="line2d_21">
-    <path d="M 80.258436 263.047392
-L 188.89803 212.721004
-L 514.816812 230.809312
-L 623.456406 240.312017
-L 732.096 255.912201
+    <path d="M 80.258436 249.489808
+L 188.89803 220.123566
+L 406.177218 232.526353
 " style="fill: none; stroke: #a75b20; stroke-width: 2.6; stroke-linecap: square"/>
     <defs>
-     <path id="mdf409ed989" d="M 0 2.5
+     <path id="m48f58ccc88" d="M 0 2.5
 C 0.663008 2.5 1.29895 2.236584 1.767767 1.767767
 C 2.236584 1.29895 2.5 0.663008 2.5 0
 C 2.5 -0.663008 2.236584 -1.29895 1.767767 -1.767767
@@ -212,11 +210,9 @@ z
 " style="stroke: #a75b20; stroke-width: 1.5"/>
     </defs>
     <g>
-     <use xlink:href="#mdf409ed989" x="80.258436" y="263.047392" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
-     <use xlink:href="#mdf409ed989" x="188.89803" y="212.721004" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
-     <use xlink:href="#mdf409ed989" x="514.816812" y="230.809312" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
-     <use xlink:href="#mdf409ed989" x="623.456406" y="240.312017" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
-     <use xlink:href="#mdf409ed989" x="732.096" y="255.912201" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
+     <use xlink:href="#m48f58ccc88" x="80.258436" y="249.489808" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
+     <use xlink:href="#m48f58ccc88" x="188.89803" y="220.123566" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
+     <use xlink:href="#m48f58ccc88" x="406.177218" y="232.526353" style="fill: #ffffff; stroke: #a75b20; stroke-width: 1.5"/>
     </g>
    </g>
    <g id="patch_4">
@@ -225,7 +221,7 @@ L 732.096 356.976
 " style="fill: none; stroke: #b9c8d4; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
    </g>
    <g id="text_16">
-    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #0868b2" transform="translate(746.096 205.210112)">Halo</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #0868b2" transform="translate(746.096 205.210112)">DS4 Halo</text>
     <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #0868b2" transform="translate(746.096 218.563487)">319.29 token/s</text>
    </g>
    <g id="text_17">
@@ -257,40 +253,34 @@ L 732.096 356.976
     <text style="font-size: 8.5px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #0868b2" x="732.096" y="230.989456" transform="rotate(-0 732.096 230.989456)">2K + indexer</text>
    </g>
    <g id="text_26">
-    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #a75b20" transform="translate(746.096 252.132857)">Local upstream</text>
-    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #a75b20" transform="translate(746.096 265.486232)">218.05 token/s</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #a75b20" transform="translate(420.177218 228.74701)">DS4 official</text>
+    <text style="font-size: 10.5px; font-family: 'DejaVu Sans'; fill: #a75b20" transform="translate(420.177218 242.100385)">268.51 token/s</text>
    </g>
    <g id="text_27">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #a75b20" x="80.258436" y="283.047392" transform="rotate(-0 80.258436 283.047392)">202.66</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #a75b20" x="80.258436" y="269.489808" transform="rotate(-0 80.258436 269.489808)">231.91</text>
    </g>
    <g id="text_28">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #a75b20" x="188.89803" y="232.721004" transform="rotate(-0 188.89803 232.721004)">311.24</text>
+    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #a75b20" x="188.89803" y="240.123566" transform="rotate(-0 188.89803 240.123566)">295.27</text>
    </g>
-   <g id="text_29">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #a75b20" x="514.816812" y="250.809312" transform="rotate(-0 514.816812 250.809312)">272.21</text>
-   </g>
-   <g id="text_30">
-    <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #a75b20" x="623.456406" y="260.312017" transform="rotate(-0 623.456406 260.312017)">251.71</text>
-   </g>
+  </g>
+  <g id="text_29">
+   <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182d42" x="62.496" y="36.18" transform="rotate(-0 62.496 36.18)">DS4 Halo vs official DS4</text>
+  </g>
+  <g id="text_30">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="62.496" y="64.6416" transform="rotate(-0 62.496 64.6416)">DeepSeek V4 Flash 0731  ·  AMD Strix Halo, 128 GB  ·  Published and recorded results</text>
   </g>
   <g id="text_31">
-   <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182d42" x="62.496" y="36.18" transform="rotate(-0 62.496 36.18)">Recorded prefill from 2K to 128K</text>
+   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="62.496" y="429.336" transform="rotate(-0 62.496 429.336)">DS4 Halo: initial 2K, prepared resident 4K, complete first-use long prompts. Official DS4: published 2K increments.</text>
   </g>
   <g id="text_32">
-   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="62.496" y="64.6416" transform="rotate(-0 62.496 64.6416)">DeepSeek V4 Flash 0731  ·  AMD Strix Halo, 128 GB  ·  Archived measured results</text>
+   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="62.496" y="446.22" transform="rotate(-0 62.496 446.22)">Official main publishes gfx1151 results at 2K, 4K and 16K; 32K/64K/128K values are unavailable in that report.</text>
   </g>
   <g id="text_33">
-   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="62.496" y="429.336" transform="rotate(-0 62.496 429.336)">Protocols: 2K initial request; 4K after native preparation / warmup; 32K–128K complete first-use prompts.</text>
-  </g>
-  <g id="text_34">
-   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="62.496" y="446.22" transform="rotate(-0 62.496 446.22)">Cross-campaign overview. Lines link recorded means; they do not imply identical preparation or a controlled scaling test.</text>
-  </g>
-  <g id="text_35">
-   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="62.496" y="463.104" transform="rotate(-0 62.496 463.104)">Local upstream = rebuilt upstream8db. Best measured chunk shown at each long-context point. K = 1,024 tokens.</text>
+   <text style="font-size: 9.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="62.496" y="463.104" transform="rotate(-0 62.496 463.104)">Different campaigns and protocols; no controlled speedup is inferred from these curves. K = 1,024 tokens.</text>
   </g>
  </g>
  <defs>
-  <clipPath id="p944f41307b">
+  <clipPath id="p78e2312315">
    <rect x="62.496" y="120.6" width="669.6" height="236.376"/>
   </clipPath>
  </defs>
