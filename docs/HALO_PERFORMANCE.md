@@ -2,14 +2,14 @@
 
 ## Performance
 
-**Latest unpublished candidate: 454.59 token/s mean, +44.12%**, measured on a second Strix Halo system with IOMMU off on 2026-10-06. Fresh complete 4K bitwise checks passed before timing, including full payload equality against the retained IOMMU-on results; the source's recorded cache-lifetime check also passed.
+**Qualified prefill chain: 454.59 token/s mean, +44.12%**, measured on a second Strix Halo system with IOMMU off on 2026-10-06. Fresh complete 4K bitwise checks passed before timing, including full payload equality against the retained IOMMU-on results; the source's recorded cache-lifetime check also passed.
 
 | Prepared complete 4K request, same second system | Mean prefill |
 |---|---:|
 | Original DS4 inference, upstream `8db1d1d` | 315.41 token/s |
-| Latest integration candidate | **454.59 token/s (+44.12%)** |
+| DS4 Halo prefill chain | **454.59 token/s (+44.12%)** |
 
-Candidate samples: **454.52 / 454.65**. Each engine used two independent processes, each with three pure-prefill warmups and one measured position-zero request, capacity 4,352, generation disabled. Timing had no trace, profiler or payload dumps. The retained **440 token/s** minimum passed. The same-binary IOMMU-on mean was 429.79; the before/after improvement is **5.77%**, with complete compared payloads bitwise unchanged. The pinned RC has not been replaced. [Qualification and limits](HALO_RELEASE.md#latest-candidate-qualification-2026-10-06) · [All samples and identities](halo/halo2-qualification.json).
+Candidate samples: **454.52 / 454.65**. Each engine used two independent processes, each with three pure-prefill warmups and one measured position-zero request, capacity 4,352, generation disabled. Timing had no trace, profiler or payload dumps. The retained **440 token/s** minimum passed. The same-binary IOMMU-on mean was 429.79; the before/after improvement is **5.77%**, with complete compared payloads bitwise unchanged. The rc.2 clean installed package passed its complete numerical and API checks. [Qualification and limits](HALO_RELEASE.md#source-and-installed-package-binding) · [All samples and identities](halo/halo2-qualification.json).
 
 ## Historical checkpoint results
 
@@ -42,9 +42,9 @@ The separate **4K-chunk** campaign reached **400.58 / 354.53 / 288.48** at 32K /
 
 ## What official DS4 publishes
 
-The [official gfx1151 report](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md) records **231.91** at the initial 2K request, **295.27** for the added 2K interval ending at 4K, and **268.51** for a 2K interval ending at 16K. These include integrated upstream tuning; no unmerged PR figures are used. The report contains no 32K/64K/128K full-prompt timings on Strix Halo. The official repository does contain 32K/64K interval measurements for other hardware in [its performance documentation](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/docs/PERFORMANCE.md).
+The [official gfx1151 report](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md) records **231.91** at the initial 2K request, **292.86** in its warm 4K result table, **295.27** for the later added 2K interval ending at 4K, and **268.51** for a 2K interval ending at 16K. These include integrated upstream tuning; no unmerged PR figures are used. The report contains no 32K/64K/128K full-prompt timings on Strix Halo. The official repository does contain 32K/64K interval measurements for other hardware in [its performance documentation](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/docs/PERFORMANCE.md).
 
-These published figures are kept separate from our measurements. They do not support a percentage comparison with our prepared 447.51/449.03 results or our complete long-prompt rates. The percentage above comes only from the matched historical 4K comparison. [Provenance audit](halo/figures/PROVENANCE_AUDIT.md).
+These published figures are kept separate from our measurements. They do not support a percentage comparison with our prepared 447.51/449.03 results or our complete long-prompt rates. The current +44.12% comes from the matched October 6 prepared 4K comparison; the historical +43.78% has its own matched 4K control. [Provenance audit](halo/figures/PROVENANCE_AUDIT.md).
 
 ## Quality
 
@@ -54,4 +54,4 @@ These published figures are kept separate from our measurements. They do not sup
 
 Halo adds optimized ROCm prefill paths for routed MoE, attention, projections and the resident-key indexer. Enable them with `DS4_ROCM_HALO_PREFILL=1`; unsupported shapes retain native dispatch. [Implementation and supported configurations](HALO.md).
 
-The context charts and 447.51/449.03 figures remain accepted historical measurements. The new 454.59 candidate result has separate preparation, source and machine identities and does not replace those records. Final acceptance of the actual installer package remains separate. [Release record](HALO_RELEASE.md).
+The context charts and 447.51/449.03 figures remain accepted historical measurements. The new 454.59 candidate result has separate preparation, source and machine identities and does not replace those records. The rc.2 installed-package acceptance is recorded separately from the timing campaign. [Release record](HALO_RELEASE.md).

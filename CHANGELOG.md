@@ -1,10 +1,10 @@
 # Changelog
 
-## Unreleased qualification update — 2026-10-06
+## 0.1.0-rc.2 — 2026-10-06
 
 - The patched integration candidate passed fresh paired 4K token/logit/full-state, prepared-geometry and cache-lifetime checks on a second Strix Halo system.
 - Prepared IOMMU-off mean: **454.59 token/s** versus fresh upstream 315.41 (**+44.12%**), passing the unchanged 440 minimum. The owner-authorized IOMMU contrast improved candidate mean by 5.77% from 429.79, with all complete compared on/off payloads bitwise unchanged.
-- Candidate source/artifact identities, all bounded samples and tested limits are recorded in [the qualification summary](docs/halo/halo2-qualification.json). The published RC, companion pin and installer remain unchanged.
+- Candidate source/artifact identities, all bounded samples and tested limits are recorded in [the qualification summary](docs/halo/halo2-qualification.json). The rc.2 cleaned source passed actual installer-built numerical verification and launcher/API checks; source and executable identities are recorded in [installed acceptance](docs/halo/distribution-acceptance.json).
 
 ## 0.1.0-rc.1
 

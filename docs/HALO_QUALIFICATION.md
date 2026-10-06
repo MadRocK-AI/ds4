@@ -1,6 +1,6 @@
 # Halo verification and reproduction
 
-Historical checkpoints, the pinned RC and the latest unpublished candidate have separate records. The candidate passed recorded fresh 4K numerical, prepared-geometry and cache-lifetime gates on a second Halo system on 2026-10-06. Its IOMMU-off prepared mean reached **454.59 token/s**, passing the unchanged 440 minimum; all complete compared on/off payloads remained bitwise identical. [Build and qualification status](HALO_RELEASE.md) and [portable candidate evidence](halo/halo2-qualification.json) record identities and limits. The pinned RC's installer/API smoke remains a bounded execution check. The wider GPU sequence below is not claimed as newly executed. Keep `DS4_ROCM_HALO_PREFILL` opt-in.
+Historical checkpoints, the pinned RC and the qualified prefill chain have separate records. The candidate passed recorded fresh 4K numerical, prepared-geometry and cache-lifetime gates on a second Halo system on 2026-10-06. Its IOMMU-off prepared mean reached **454.59 token/s**, passing the unchanged 440 minimum; all complete compared on/off payloads remained bitwise identical. [Build and qualification status](HALO_RELEASE.md) and [portable candidate evidence](halo/halo2-qualification.json) record identities and limits. The rc.2 installer-built executable also passed all six complete payloads and bounded API execution; see [installed acceptance](halo/distribution-acceptance.json). The wider GPU sequence below is not claimed as newly executed. Keep `DS4_ROCM_HALO_PREFILL` opt-in.
 
 ## Executed and pending checks
 

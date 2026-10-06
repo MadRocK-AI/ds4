@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "date": "2026-10-06",
-  "scope": "Unpublished integration candidate on a second Strix Halo system; not the unchanged pinned RC or a universal quality claim",
+  "scope": "Recorded October 6 qualification campaign and actual cleaned rc.2 installation on a second Strix Halo system; bitwise equality is scoped to tested cases",
   "source": {
     "upstream_commit": "8db1d1d155cb0400a86a86b9c62d0defb3a6148b",
     "fork_base_commit": "fd77fb67d97f1b40279793dc856af92af71267c9",
@@ -328,9 +328,13 @@
     "original_ten_binary_identities_preserved": true,
     "GPU_idle_and_lock_released": true,
     "new_commit_or_pin": false,
-    "new_installer_acceptance": false,
+    "new_installer_acceptance": true,
     "published_RC_unchanged": true,
-    "publication": false
+    "publication": false,
+    "installed_clean_engine_commit": "c077b9c634d126275035efb8dbd4007f56a45be7",
+    "installed_acceptance_record": "distribution-acceptance.json",
+    "published": false,
+    "publication_state_scope": "published and published_RC_unchanged describe the timing-campaign acquisition snapshot before official rc.2 publication; see release-provenance.json for the published package"
   },
   "human_rounding": "At most two decimals; raw evidence retains precision",
   "IOMMU_contrast": {

@@ -1,6 +1,6 @@
 # Halo prefill implementation
 
-This fork adds the Halo prefill chain to the normal ROCm backend and preserves upstream history from `8db1d1d155cb0400a86a86b9c62d0defb3a6148b`. Historical checkpoints and the latest unpublished candidate have separate evidence. The candidate passed recorded 4K bitwise and cache-lifetime gates and reached **454.59 token/s** prepared prefill on a second Halo system with IOMMU off, passing the unchanged 440 minimum. Complete compared on/off payloads remained bitwise identical. The pinned RC has only its recorded build and bounded live API checks. See [qualification status](HALO_RELEASE.md).
+This fork adds the Halo prefill chain to the normal ROCm backend and preserves upstream history from `8db1d1d155cb0400a86a86b9c62d0defb3a6148b`. Historical checkpoints and the qualified prefill chain have separate evidence. The candidate passed recorded 4K bitwise and cache-lifetime gates and reached **454.59 token/s** prepared prefill on a second Halo system with IOMMU off, passing the unchanged 440 minimum. Complete compared on/off payloads remained bitwise identical. The rc.2 cleaned source also passed actual installer-built numerical and launcher/API acceptance. See [qualification status](HALO_RELEASE.md).
 
 Use the normal build with an existing complete ROCm installation:
 

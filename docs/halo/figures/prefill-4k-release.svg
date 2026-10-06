@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="921.6pt" height="518.4pt" viewBox="0 0 921.6 518.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-06T22:07:00.944046</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.1, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 518.4
+L 921.6 518.4
+L 921.6 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 216.576 344.736
+L 723.456 344.736
+L 723.456 168.48
+L 216.576 168.48
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 216.576 344.736
+L 216.576 168.48
+" clip-path="url(#p4e939a0f38)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2"/>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #586d80" x="216.576" y="365.854125" transform="rotate(-0 216.576 365.854125)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 314.052923 344.736
+L 314.052923 168.48
+" clip-path="url(#p4e939a0f38)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4"/>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #586d80" x="314.052923" y="365.854125" transform="rotate(-0 314.052923 365.854125)">100</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 411.529846 344.736
+L 411.529846 168.48
+" clip-path="url(#p4e939a0f38)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6"/>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #586d80" x="411.529846" y="365.854125" transform="rotate(-0 411.529846 365.854125)">200</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 509.006769 344.736
+L 509.006769 168.48
+" clip-path="url(#p4e939a0f38)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8"/>
+     <g id="text_4">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #586d80" x="509.006769" y="365.854125" transform="rotate(-0 509.006769 365.854125)">300</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 606.483692 344.736
+L 606.483692 168.48
+" clip-path="url(#p4e939a0f38)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10"/>
+     <g id="text_5">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #586d80" x="606.483692" y="365.854125" transform="rotate(-0 606.483692 365.854125)">400</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 703.960615 344.736
+L 703.960615 168.48
+" clip-path="url(#p4e939a0f38)" style="fill: none; stroke: #dee6ed; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12"/>
+     <g id="text_6">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #586d80" x="703.960615" y="365.854125" transform="rotate(-0 703.960615 365.854125)">500</text>
+     </g>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #586d80" x="470.016" y="388.708031" transform="rotate(-0 470.016 388.708031)">Prefill (token/s)</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_13"/>
+     <g id="text_8">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #586d80" transform="translate(129.311625 211.296187)">Original DS4</text>
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; fill: #586d80" transform="translate(151.1985 224.733563)">8db1d1d</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_14"/>
+     <g id="text_9">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #586d80" x="204.576" y="305.231063" transform="rotate(-0 204.576 305.231063)">DS4 Halo</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 216.576 231.93216
+L 524.03153 231.93216
+L 524.03153 193.15584
+L 216.576 193.15584
+z
+" clip-path="url(#p4e939a0f38)" style="fill: #a75b20"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 216.576 320.06016
+L 659.691837 320.06016
+L 659.691837 281.28384
+L 216.576 281.28384
+z
+" clip-path="url(#p4e939a0f38)" style="fill: #0868b2"/>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #a75b20" x="533.03153" y="216.959" transform="rotate(-0 533.03153 216.959)">315.41</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #0868b2" x="668.691837" y="305.087" transform="rotate(-0 668.691837 305.087)">454.59</text>
+   </g>
+  </g>
+  <g id="text_12">
+   <text style="font-weight: 700; font-size: 25px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182d42" x="64.512" y="46.656" transform="rotate(-0 64.512 46.656)">DS4 Halo on AMD Strix Halo</text>
+  </g>
+  <g id="text_13">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="64.512" y="75.168" transform="rotate(-0 64.512 75.168)">DeepSeek V4 Flash 0731 IQ2  ·  Single Radeon 8060S  ·  128 GB RAM</text>
+  </g>
+  <g id="text_14">
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182d42" x="64.512" y="108.864" transform="rotate(-0 64.512 108.864)">Our same-system comparison  ·  Prepared complete 4K prefill  ·  Two samples per engine</text>
+  </g>
+  <g id="text_15">
+   <text style="font-weight: 700; font-size: 22px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #0868b2" x="760.32" y="254.016" transform="rotate(-0 760.32 254.016)">+44.12%</text>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="760.32" y="277.344" transform="rotate(-0 760.32 277.344)">same-machine gain</text>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="64.512" y="412.128" transform="rotate(-0 64.512 412.128)">3 pure warmups + 1 measured request per process  ·  IOMMU off  ·  106 GiB shared GPU limit</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #182d42" x="64.512" y="443.232" transform="rotate(-0 64.512 443.232)">FP32 logits, complete serialized state and token IDs bitwise-identical in the verified cases.</text>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="64.512" y="471.744" transform="rotate(-0 64.512 471.744)">Model loading / generation excluded. No profiler, trace or payload readback during timing.</text>
+  </g>
+  <g id="text_20">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #586d80" x="64.512" y="498.7008" transform="rotate(-0 64.512 498.7008)">Halo samples: 454.52 / 454.65 token/s. Source, installer and evidence: github.com/MadRocK-AI/ds4</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p4e939a0f38">
+   <rect x="216.576" y="168.48" width="506.88" height="176.256"/>
+  </clipPath>
+ </defs>
+</svg>

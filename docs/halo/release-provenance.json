@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "version": "0.1.0-rc.2",
+  "engine_code_pin": "c077b9c634d126275035efb8dbd4007f56a45be7",
+  "tested_companion_commit": "0afd451ee06d57ee03edfae09872edc8219e90e9",
+  "tested_package_identity": "f1825012b8cf395e82d6d94af5216e41d45a553023e8bab7ff01fe25a1e28eb2",
+  "published_package_identity": "e9efb731556de745a839dbbbaf96df13231c25e6c79b88f3046bde63e2c54e64",
+  "publication_delta": "Documentation, figures and unused engine.json qualification metadata only",
+  "engine_inference_and_build_inputs_unchanged": true,
+  "companion_scripts_install_sh_VERSION_LICENSE_unchanged": true,
+  "unchanged_consumed_manifest_fields": [
+    "schema",
+    "commit",
+    "upstream_base",
+    "bench_source_sha256",
+    "source_transport",
+    "dependencies_record",
+    "dependencies_record_sha256",
+    "repository",
+    "companion_repository"
+  ],
+  "updated_unused_manifest_fields": [
+    "compiled_engine_commit",
+    "diagnostic_cleanup",
+    "installed_acceptance_record",
+    "qualification",
+    "tested_companion_commit",
+    "tested_package_identity"
+  ],
+  "actual_Halo_installed_acceptance": "distribution-acceptance.json",
+  "measured_parent_performance_record": "https://github.com/MadRocK-AI/ds4/blob/main/docs/halo/halo2-qualification.json",
+  "new_performance_campaign": false,
+  "public_install_verification": "Fresh public-source CPU build-only installation is recorded in the release assets; actual ROCm numerical/API acceptance is recorded separately"
+}

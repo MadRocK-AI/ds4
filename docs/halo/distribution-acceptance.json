@@ -1,0 +1,151 @@
+{
+  "schema": 1,
+  "date": "2026-10-06",
+  "status": "PASS_ACTUAL_CLEAN_RC2_INSTALLER_NUMERICAL_AND_LAUNCHER_API_ACCEPTANCE",
+  "tested_version": "0.1.0-rc.2",
+  "engine_commit": "c077b9c634d126275035efb8dbd4007f56a45be7",
+  "companion_commit": "0afd451ee06d57ee03edfae09872edc8219e90e9",
+  "package_identity": "f1825012b8cf395e82d6d94af5216e41d45a553023e8bab7ff01fe25a1e28eb2",
+  "scope": "Actual unchanged installer, cleaned source, installed-artifact numerical equality and bounded launcher/server API smoke. No new performance campaign or universal quality claim.",
+  "measured_parent_performance_record": "halo2-qualification.json",
+  "measured_parent_prefill_mean_tok_s": 454.5853752871986,
+  "new_speed_benchmark": false,
+  "source_cleanup": {
+    "functional_patch_sha256": {
+      "cache-layout.diff": "70ff5d29445cd8d0a88fd9ba8d21bc518a627b6871c86647863bd5c81f7d551c",
+      "prefill-warmup.diff": "c3178c74755a097e0f483bfa83c994c386c435d6129d8717a4ec9d64845dca5b",
+      "blas-init-final.diff": "2fd157a19963477ed9034d28eb5441653d0ff1462853323dac893302af74ffce"
+    },
+    "excluded_diagnostic_patch_sha256": "e64d0c23b5bb4570ac05c557c5c6adda8750d16f9a34c3519e553f72d447bc78",
+    "release_source_sha256": {
+      "rocm/ds4_rocm_current_api_compat.cuh": "58552a7cb0a30064d0ce11e397b9ee8c8668e67797a128ed487372c86af2cf0d",
+      "ds4_bench.c": "20a34c751a7197c026ae976caaab31d44c51f8a858f5a9bebec68ffb6f6e1de8",
+      "ds4_help.c": "c2b122308c7017af5547a547d5aa059d4aa1243b7e24113d012f3ae5088e998e",
+      "rocm/ds4_rocm_runtime.cuh": "13d117fc98d25a9d191b262716cd988caba992339fc1d17740f404645696ef4b",
+      "rocm/ds4_rocm_matmul.cuh": "003ef39fffeae9d24826403b40e9a7dd567500916f8f2dc4ed5764a86741a564",
+      "rocm/ds4_rocm_attention_launch.cuh": "00257966671d656a778941b4deda2c0420e5df7b43aad982f74009da052f4ed4"
+    },
+    "comment_executable_tokens_unchanged": true
+  },
+  "installed_build": {
+    "normal_ROCm_build": true,
+    "targets": 5,
+    "all_five_ldd_relocations": "PASS",
+    "binary_SHA256": {
+      "ds4": "deab2787dc01107ae13759995548fedc074a58d137f018c116596782852facf9",
+      "ds4-server": "4d52cdf4148dc09fe694ebcb5a4a465e80c6a975ebea8c9a81029696b6c3343d",
+      "ds4-bench": "f1ffddcc2914e12da977c5e0244ecd48fd991ca885d02cc1e12ee70a453f4c06",
+      "ds4-eval": "b3b9fe7745a0d2f9ac325c4f335c3daa2ef7741bf0d727024c434d151e6aa60a",
+      "ds4-agent": "4f88c6e6cfb4d3e5b089c4095874c50822ea998f03a456c7e93f69d11ec92da1"
+    },
+    "source_pin_clean": true,
+    "doctor": "PASS",
+    "launcher_version_status_preview": "PASS",
+    "actual_library_closure": {
+      "status": "PASS_ACTUAL_INSTALLED_LIBRARY_CLOSURE",
+      "total_files": 30,
+      "all_pinned_SDK_providers_matched": 22,
+      "remaining_host_OS_libraries": 8,
+      "provider_hashes_recorded": true
+    }
+  },
+  "model": {
+    "bytes": 86720111488,
+    "SHA256": "ca22ae2f838e14077c22bc1c1417b71b45b5e5a3687bd96c2ac6e17fdb6261c0",
+    "actual_installer_full_hash_count": 1,
+    "stat_unchanged_after": true
+  },
+  "numerical": {
+    "payloads": {
+      "prefill.tokens.i32": {
+        "bytes": 16384,
+        "sha256": "2baaebf14803af10c47794411ae074322d974e366530a23739742b405e9592bd"
+      },
+      "prefill.logits.f32": {
+        "bytes": 517120,
+        "sha256": "36277585aefed5c098c87559f1409fca097baca69ae0bba3668646aaa0e34229"
+      },
+      "prefill.state": {
+        "bytes": 80373132,
+        "sha256": "c2a20645d3649ce8aa5adbb9a106501f44f807e7b781185c48ec9f25f90ce7bc"
+      },
+      "decode.tokens.i32": {
+        "bytes": 64,
+        "sha256": "058eeb632028373e8a54a50f5a1cc62c90bfbf703b284eeb29fe53152b70e627"
+      },
+      "decode.logits.f32": {
+        "bytes": 517120,
+        "sha256": "af2577d6d230a70f4332c478ddcb45cace25ebcf1143665c0e235b9f2c673b87"
+      },
+      "decode.state": {
+        "bytes": 80588236,
+        "sha256": "da83c72a157d26f849aa492b5dd26d1888cbe353c4baa26217b8e585c9996752"
+      }
+    },
+    "manifests": {
+      "prefill": {
+        "frontier": 4096,
+        "phase": "prefill",
+        "state_bytes": 80373132,
+        "logits_count": 129280,
+        "token_count": 4096,
+        "session_pos": 4096,
+        "context_alloc": 4352,
+        "restore_kind": "none",
+        "snapshot_bytes": 0
+      },
+      "decode": {
+        "frontier": 4096,
+        "phase": "decode",
+        "state_bytes": 80588236,
+        "logits_count": 129280,
+        "token_count": 16,
+        "session_pos": 4112,
+        "context_alloc": 4352,
+        "restore_kind": "none",
+        "snapshot_bytes": 0
+      }
+    },
+    "retained_reference_status": "PASS_IOMMU_OFF_PREPARED_GEOMETRY_AND_ON_MODE_PAYLOADS",
+    "status": "PASS_ALL_SIX_INSTALLED_COMPLETE_PAYLOADS_AND_MANIFESTS"
+  },
+  "API": {
+    "models_HTTP_200": true,
+    "requests": [
+      {
+        "name": "short",
+        "prompt_tokens": 14,
+        "completion_tokens": 8,
+        "status": "PASS_HTTP_200_NONEMPTY"
+      },
+      {
+        "name": "complete-4k-and-native-tail",
+        "prompt_tokens": 4214,
+        "completion_tokens": 8,
+        "status": "PASS_HTTP_200_NONEMPTY"
+      }
+    ]
+  },
+  "hardware": {
+    "ISA": "gfx1151",
+    "visible_GPU_count": 1,
+    "IOMMU": "off",
+    "shared_GPU_limit_GiB": 106,
+    "kernel": "7.0.0-38-generic",
+    "runpm": 0
+  },
+  "actual_compute_processes": 2,
+  "installer_seconds": 139.02372497499982,
+  "installed_numerical_seconds": 57.524338068999896,
+  "server_seconds": 42.531716823999886,
+  "total_seconds": 247.36230166099995,
+  "execution_finished_UTC": "2026-10-06T19:18:31Z",
+  "independent_release_status": "PASS_INDEPENDENT_DISTRIBUTION_RELEASE_AND_ARTIFACT_IDENTITY",
+  "independent_release_UTC": "2026-10-06T19:19:52Z",
+  "KFD_idle": true,
+  "lock_released": true,
+  "loopback_port_no_listener": true,
+  "original_qualified_binaries_preserved": true,
+  "primary_pins_promoted": false,
+  "published": false
+}

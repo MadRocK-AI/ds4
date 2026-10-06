@@ -35,3 +35,5 @@ Use `--overview-only` to update the latest overview without rewriting the four a
 Portable archived inputs are in [inputs](inputs/). The JSON manifest binds original source IDs and SHA256 to portable filenames and SHA256; portable text uses UTF-8 and LF. For the short 4K control, only two selected ordinary rows are copied, with the original CSV hash and selection rule retained.
 
 [Long-context cases](../longcontext-cases.json) and [indexer observations](../indexer-observations.csv) preserve numerical checks and observation identities. [Quality evidence](../../HALO_EVIDENCE.md) scopes the bitwise claim. Diagnostics, rejected candidates and other hardware are not plotted as Halo performance.
+
+The [rc.2 announcement figure](prefill-4k-release.png) isolates the latest paired prepared-4K result. Reproduce it with `--release-only`; SVG/PDF exports retain the same values and tested scope.

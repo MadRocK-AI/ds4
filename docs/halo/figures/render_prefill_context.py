@@ -228,10 +228,38 @@ def render_overview(overview, output):
     save(fig, output)
 
 
+def render_release(latest, output):
+    fig = plt.figure(figsize=(12.8, 7.2))
+    fig.text(.07, .91, "DS4 Halo on AMD Strix Halo", fontsize=25, weight="bold", color=INK)
+    fig.text(.07, .855, "DeepSeek V4 Flash 0731 IQ2  ·  Single Radeon 8060S  ·  128 GB RAM", fontsize=12, color=MUTED)
+    fig.text(.07, .79, "Our same-system comparison  ·  Prepared complete 4K prefill  ·  Two samples per engine", fontsize=13, color=INK)
+    ax = fig.add_axes([.235, .335, .55, .34])
+    timing = latest["timing"]
+    rates = [timing["summary"]["upstream"]["mean_tok_s"], timing["summary"]["fork"]["mean_tok_s"]]
+    ax.barh([1, 0], rates, height=.44, color=[ORANGE, BLUE])
+    ax.set_xlim(0, 520); ax.set_ylim(-.5, 1.5)
+    ax.set_yticks([1, 0], ["Original DS4\n8db1d1d", "DS4 Halo"])
+    ax.set_xticks([0, 100, 200, 300, 400, 500])
+    ax.tick_params(axis="both", length=0, pad=12, colors=MUTED, labelsize=12)
+    for spine in ax.spines.values(): spine.set_visible(False)
+    ax.grid(axis="x", color="#DEE6ED", lw=.8); ax.set_axisbelow(True)
+    ax.set_xlabel("Prefill (token/s)", labelpad=12, color=MUTED, fontsize=11)
+    for y, rate, color in zip([1, 0], rates, [ORANGE, BLUE]):
+        ax.annotate(f"{rate:.2f}", (rate, y), xytext=(9, 0), textcoords="offset points", va="center", fontsize=16, weight="bold", color=color)
+    fig.text(.825, .51, f"+{timing['mean_gain_percent']:.2f}%", fontsize=22, weight="bold", color=BLUE)
+    fig.text(.825, .465, "same-machine gain", fontsize=10, color=MUTED)
+    fig.text(.07, .205, "3 pure warmups + 1 measured request per process  ·  IOMMU off  ·  106 GiB shared GPU limit", fontsize=11, color=MUTED)
+    fig.text(.07, .145, "FP32 logits, complete serialized state and token IDs bitwise-identical in the verified cases.", fontsize=11, color=INK)
+    fig.text(.07, .09, "Model loading / generation excluded. No profiler, trace or payload readback during timing.", fontsize=10, color=MUTED)
+    fig.text(.07, .038, "Halo samples: 454.52 / 454.65 token/s. Source, installer and evidence: github.com/MadRocK-AI/ds4", fontsize=10, color=MUTED)
+    save(fig, output)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, default=HERE)
     parser.add_argument("--overview-only", action="store_true", help="update the overview without rewriting archived plots")
+    parser.add_argument("--release-only", action="store_true", help="render only the latest prepared-4K announcement figure")
     args = parser.parse_args()
     data = json.loads((HERE / "prefill-context-data.json").read_text(encoding="utf-8"))
     for p in data["points"]:
@@ -240,6 +268,11 @@ def main():
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "svg.fonttype": "none", "pdf.fonttype": 42})
     args.output_dir.mkdir(parents=True, exist_ok=True)
+    if args.release_only:
+        latest = json.loads((HERE.parent / "halo2-qualification.json").read_text(encoding="utf-8"))
+        assert latest["timing"]["IOMMU"] == "off" and latest["timing"]["minimum_pass"]
+        render_release(latest, args.output_dir / "prefill-4k-release")
+        return
     if not args.overview_only:
         render_incremental(data, args.output_dir / "prefill-context-incremental")
     selection = json.loads((HERE / "best-recorded-selection.json").read_text(encoding="utf-8"))
