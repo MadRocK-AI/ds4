@@ -3,7 +3,7 @@
 ## 0.1.0-rc.2 — 2026-10-06
 
 - The patched integration candidate passed fresh paired 4K token/logit/full-state, prepared-geometry and cache-lifetime checks on a second Strix Halo system.
-- Prepared IOMMU-off mean: **454.59 token/s** versus fresh upstream 315.41 (**+44.12%**), passing the unchanged 440 minimum. The owner-authorized IOMMU contrast improved candidate mean by 5.77% from 429.79, with all complete compared on/off payloads bitwise unchanged.
+- Prepared IOMMU-off mean: **454.59 token/s**, passing the unchanged 440 minimum. The recorded IOMMU contrast improved candidate mean by 5.77% from 429.79, with all complete compared on/off payloads bitwise unchanged.
 - Candidate source/artifact identities, all bounded samples and tested limits are recorded in [the qualification summary](docs/halo/halo2-qualification.json). The rc.2 cleaned source passed actual installer-built numerical verification and launcher/API checks; source and executable identities are recorded in [installed acceptance](docs/halo/distribution-acceptance.json).
 
 ## 0.1.0-rc.1
@@ -14,6 +14,6 @@
 - Normal ROCm build/link checked for ds4, ds4-server, ds4-bench, ds4-eval and ds4-agent in WSL.
 - Pinned installation and launcher provided by [ds4-on-halo](https://github.com/MadRocK-AI/ds4-on-halo).
 
-Historical checkpoints reached 447.51 token/s in a matched prepared-4K comparison (+43.78%) and 449.03 token/s in a separate best recorded mean. These are not new measurements of the integrated release executable. Bitwise equality is scoped to the documented historical test cases. Native dispatch remains the default; Halo paths require DS4_ROCM_HALO_PREFILL=1.
+Historical checkpoints reached 447.51 token/s in a matched prepared-4K comparison  and 449.03 token/s in a separate best recorded mean. These are not new measurements of the integrated release executable. Bitwise equality is scoped to the documented historical test cases. Native dispatch remains the default; Halo paths require DS4_ROCM_HALO_PREFILL=1.
 
 Post-publication validation on 2026-10-05: installation, live launcher/API generation and hardware release passed on Halo for the pinned RC. The two requests used 14- and 4,214-token prompts with eight generated tokens each; the generation budget ended during thinking. This adds no new answer-quality, bitwise or throughput claim. See [validation scope](docs/HALO_RELEASE.md).

@@ -23,7 +23,7 @@ Historical checkpoints, the pinned RC and the qualified prefill chain have separ
 | Candidate GPU token/logit/state equality | PASS for recorded 4K cases | Fresh paired reference at capacities 65,665 and 4,352, including 16 generated tokens; wider context and new snapshot checks remain pending |
 | Candidate cache demotion/re-promotion | PASS for recorded lifetime case | Same session 4K → +32 → invalidate → fresh 4K; nine paired payloads and existing layout witnesses. Alias/fault injection, resource failures and peak memory remain pending |
 | Candidate IOMMU on/off payload equality | PASS at recorded prepared geometry | Six complete payloads and manifests match both engines and each arm's retained on-mode result; source/binaries unchanged |
-| Candidate ordinary prepared prefill timing | PASS with IOMMU off | Mean 454.59 versus fresh upstream 315.41 token/s (+44.12%); unchanged minimum 440 passed; no payloads, trace or profiler. Initial on-mode 429.79 remains recorded |
+| Candidate ordinary prepared prefill timing | PASS with IOMMU off | Mean 454.59; unchanged minimum 440 passed; no payloads, trace or profiler. Initial on-mode 429.79 remains recorded |
 | Metal/CUDA model and SSD inference regressions | SKIP here | Required platform/model executors unavailable; shared changes are guarded by `DS4_ROCM_BUILD` |
 | Full upstream/model suites | PENDING | No claim that `make test` or `make test-rocm` completed |
 

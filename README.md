@@ -2,7 +2,7 @@
 
 An opt-in **single-device ROCm prefill fork** of [antirez/ds4](https://github.com/antirez/ds4), targeting Ryzen AI Max+ 395 / Radeon 8060S (`gfx1151`) with 128 GB unified memory. The Halo work accelerates routed MoE, attention, projections and indexer scoring while preserving **bitwise logits and complete state in the documented test cases**.
 
-**DS4 Strix Halo rc.2: 454.59 token/s prepared prefill, +44.12% over original DS4, with bitwise-identical complete payloads in the tested cases.** The rc.2 source passed the prepared performance gate and actual installer, complete-payload numerical and launcher/API checks on a second Strix Halo system with IOMMU off. [Installed release evidence](docs/halo/distribution-acceptance.json). [Validation scope](docs/HALO_RELEASE.md).
+**DS4 Strix Halo rc.2: 454.59 token/s prepared prefill, with bitwise-identical complete payloads in the tested cases.** The rc.2 source passed the prepared performance gate and actual installer, complete-payload numerical and launcher/API checks on a second Strix Halo system with IOMMU off. [Installed release evidence](docs/halo/distribution-acceptance.json). [Validation scope](docs/HALO_RELEASE.md).
 
 The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8db1d1d155cb0400a86a86b9c62d0defb3a6148b), which already contains gfx1151 tuning. This repository adds the compatible Halo prefill chain to the normal ROCm source build. The pinned setup/verification companion is [ds4-on-halo](https://github.com/MadRocK-AI/ds4-on-halo).
 
@@ -20,24 +20,18 @@ The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8d
 
 ## Performance
 
-**Official DS4 published results:** 231.91 token/s at 2K, 292.86 for its warm 4K result and 295.27 in the later 2K→4K interval. [Official Strix Halo report](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md). Those are different workloads/SDK conditions. The **315.41** control below is our measurement of pinned original DS4 on the same machine and protocol as Halo; **+44.12%** refers to that matched comparison.
+| Strix Halo, DeepSeek V4 Flash 0731 IQ2, 128 GB | Prefill |
+| --- | ---: |
+| Original DS4 — official published 2K→4K interval | **295.27 token/s** |
+| DS4 Halo — prepared complete 4K request | **454.59 token/s** |
 
-**Qualified prefill chain, 2026-10-06: 454.59 token/s mean, +44.12% against the original DS4 code measured on the same second Strix Halo system.** Complete position-zero 4K requests, capacity 4,352, IOMMU off, no generation; two independent processes per engine, each with three pure-prefill warmups and one measured request. Timing used no profiler, trace or payload dumps. [All samples and identities](docs/halo/halo2-qualification.json).
+The original DS4 number comes directly from its [official gfx1151 report](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md). The protocols differ: the published reference is a 2K increment ending at 4K; Halo is a complete prepared 4K request. No speedup percentage is inferred between them.
 
-| Prepared complete 4K request, second Strix Halo system | Mean prefill |
-|---|---:|
-| Original DS4 inference, upstream `8db1d1d` | 315.41 token/s |
-| DS4 Halo prefill chain | **454.59 token/s (+44.12%)** |
+Halo samples: **454.52 / 454.65 token/s**, mean **454.59**. Two independent processes each used three pure-prefill warmups and one measured request, capacity 4,352, generation disabled, IOMMU off and a 106 GiB shared GPU ceiling. Loading is excluded; timing has no profiler, trace or payload readback. The cleaned rc.2 installer-built executable passed all six complete numerical payloads and launcher/API checks.
 
-Candidate samples: **454.52 and 454.65 token/s**; the retained 440 minimum passed. Turning IOMMU off improved the same candidate's measured mean by **5.77%** from 429.79, with all compared complete on/off payloads unchanged bitwise. This is a before/after policy comparison. The cleaned rc.2 installer-built executable also matched all six complete reference payloads and passed its launcher/API smoke.
+![DS4 Halo 454.59 token/s and the separately labeled official DS4 reference](docs/halo/figures/prefill-4k-release.png)
 
-Historical 447.51/449.03 and long-context measurements remain separately documented in [HALO_PERFORMANCE.md](docs/HALO_PERFORMANCE.md).
-
-![Original DS4 315.41 vs DS4 Halo 454.59 token/s: prepared 4K prefill](docs/halo/figures/prefill-4k-release.png)
-
-[Context overview, starting at 2K](docs/halo/figures/prefill-context-overview.png).
-
-The first panel starts at **2K context**. The middle panel shows the latest **315.41 → 454.59** prepared complete-4K comparison; the surrounding historical panels retain incremental 2K additions and first-use long prompts with fixed 2K chunks. Dates, systems and protocols remain distinct. Original DS4 is pinned to `8db1d1d`; these are our measurements, not timings published for today's upstream main. [Results and provenance](docs/HALO_PERFORMANCE.md).
+Historical Halo records and context curves starting at **2K**, including 32K/64K/128K with the indexer, remain in [the performance documentation](docs/HALO_PERFORMANCE.md).
 
 ## Quality
 

@@ -1397,5 +1397,12 @@
       "contemporary_upstream_retimed": false
     },
     "note": "Only the controlled pair is compared. Separate best mean is a note, not an additional paired gain."
+  },
+  "presentation": "Halo curves only; official published DS4 295.27 token/s is the sole displayed reference. Raw archived paired controls remain in the data, never substituted for the official reference.",
+  "official_reference": {
+    "token_s": 295.27,
+    "source": "https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md",
+    "protocol": "2K increment ending at 4K",
+    "cross_protocol_speedup_percent": null
   }
 }

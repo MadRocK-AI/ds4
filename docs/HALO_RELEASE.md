@@ -4,14 +4,11 @@
 
 ## Performance
 
-| Prepared complete 4K prefill, same machine and SDK | Mean token/s |
-| --- | ---: |
-| Original DS4 inference, upstream `8db1d1d` | 315.41 |
-| Qualified Halo prefill chain | **454.59 (+44.12%)** |
+**Halo prepared complete 4K prefill: 454.59 token/s mean**, samples **454.52 / 454.65**. Two independent Halo processes each performed three pure position-zero warmups then one measured complete 4,096-token request, capacity 4,352, generation disabled. Loading is excluded; timing had no profiler, trace, payload readback or private preload.
 
-Samples were **454.52 / 454.65** for Halo and **316.05 / 314.78** for original DS4. Four independent processes ran original–Halo–Halo–original; each performed three pure position-zero warmups then one measured complete 4,096-token request, capacity 4,352, generation disabled. Model loading is excluded; first-use and all warmup costs are retained. Timing had no profiler, trace, payload readback or private preload. These are our measurements of pinned original DS4, not upstream-published rates. [All observations and configuration](halo/halo2-qualification.json).
+The single original-DS4 reference shown in public performance tables is **295.27 token/s**, copied from the [official gfx1151 report](https://github.com/antirez/ds4/blob/0aaea5a238fb41a35106a551e73c8409dfb751ac/speed-bench/gfx1151-prefill-results.md). It is a 2K incremental interval ending at 4K, so no percentage speedup is inferred against Halo's complete prepared 4K result. [Samples and identities](halo/halo2-qualification.json).
 
-The measured configuration used Ryzen AI Max+395/Radeon 8060S (`gfx1151`), 128 GB RAM, Ubuntu 26.04.1/kernel 7.0.0-38, a 106 GiB shared GPU ceiling, IOMMU off and GPU policy auto. Drivers, clocks and hardware power limits were not tuned. A same-binary before/after IOMMU comparison improved Halo from 429.79 by 5.77%, preserving complete compared payloads; it was not an interleaved on/off/on experiment. The installer does not change these host settings.
+The measured configuration used Ryzen AI Max+395/Radeon 8060S (`gfx1151`), 128 GB RAM, Ubuntu 26.04.1/kernel 7.0.0-38, a 106 GiB shared GPU ceiling, IOMMU off and GPU policy auto. The installer does not change these host settings. Complete compared on/off payloads remained bitwise identical.
 
 ## Source and installed-package binding
 
