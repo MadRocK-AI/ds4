@@ -1,6 +1,6 @@
 {
-  "schema": 3,
-  "title": "Original DS4 and DS4 Halo: separate benchmark protocols",
+  "schema": 4,
+  "title": "Original DS4 and DS4 Halo: latest prepared 4K and separate historical context curves",
   "supersedes": "Schema 2 mixed official published interval rates, prepared 4K and first-use full-prompt rates into connected curves; that presentation is withdrawn.",
   "upstream_base": "8db1d1d155cb0400a86a86b9c62d0defb3a6148b",
   "reference_origin": "Our measurements of original DS4 code at the pinned upstream commit, not upstream-published performance or current upstream main.",
@@ -1239,33 +1239,22 @@
     },
     {
       "id": "resident_4k",
-      "protocol": "resident4K_after_preparation_and_warmup",
+      "protocol": "prepared_complete_position_zero",
+      "date": "2026-10-06",
+      "machine": "second Strix Halo",
       "context_tokens": 4096,
+      "context_allocation": 4352,
+      "chunk_tokens": 4096,
+      "generation_tokens": 0,
+      "IOMMU": "off",
+      "warmups_per_process": 3,
+      "independent_samples_per_engine": 2,
+      "source": "../halo2-qualification.json",
       "comparison": {
-        "upstream_commit": "8db1d1d155cb0400a86a86b9c62d0defb3a6148b",
-        "control_tps": 311.2416145183508,
-        "halo_tps": 447.5068677410654,
-        "throughput_gain_percent": 43.781180557614796,
-        "source_record": "baseline-attribution.json",
-        "scope": "Matching resident fresh4096 protocol on same hardware; historical local rebuilt upstream control, not the remote published baseline"
-      },
-      "separate_unpaired_best": {
-        "prefill_tps": 449.03371257444996,
-        "mean_complete_prefill_seconds": 9.121809533,
-        "individual_complete_prefill_seconds": [
-          9.080935692,
-          9.101184074,
-          9.149177336,
-          9.15594103
-        ],
-        "workload": "Resident fresh4096 requests after native cache fill, first preparation and warmup; no prefix reuse or speculation",
-        "checkpoint_sha256": "9405793e0ad534c747a2036fc2e807554691031ebc68b8a240bf0805779fac71",
-        "executable_sha256": "4aca3038672d86937bf000dc28eff6ef56118f2f82687b5e4b4b0ca8d69400b8",
-        "source_id": "halo-deepseek-structural9-profile-20260925.md",
-        "source_sha256": "08ade802da2965bd32d20c118b7aaeb9e58104091c6237caae2f4eebe91792c1",
-        "contemporary_upstream_retimed": false
-      },
-      "note": "Only the controlled pair is compared. Separate best mean is a note, not an additional paired gain."
+        "control_tps": 315.4136595653155,
+        "halo_tps": 454.5853752871986,
+        "throughput_gain_percent": 44.12355378447506
+      }
     },
     {
       "id": "fresh_2k_indexer",
@@ -1375,7 +1364,38 @@
   "source_bindings": {
     "prefill-context-data.json": "72737a3c82cd618ed3b858c002c6180aa1b0f6e0ea0d39a4a0d44d748c9f90da",
     "../peak-performance.json": "7a4bbf1ebabc1e4072a31a12026fc8bf8048c1f1756773daa2e839ade7dd3556",
-    "../baseline-attribution.json": "47d1bb2addd7bdb0a7d6927627061e4630e061d471bccb3d878cc361fb91fb30"
+    "../baseline-attribution.json": "47d1bb2addd7bdb0a7d6927627061e4630e061d471bccb3d878cc361fb91fb30",
+    "../halo2-qualification.json": "d10c19b28a28284756b5b6ed8a1244df7cb49dbf96e080569634d4dfb44fa61b"
   },
-  "benchmark_rerun": false
+  "benchmark_rerun": false,
+  "historical_resident_4k": {
+    "id": "resident_4k",
+    "protocol": "resident4K_after_preparation_and_warmup",
+    "context_tokens": 4096,
+    "comparison": {
+      "upstream_commit": "8db1d1d155cb0400a86a86b9c62d0defb3a6148b",
+      "control_tps": 311.2416145183508,
+      "halo_tps": 447.5068677410654,
+      "throughput_gain_percent": 43.781180557614796,
+      "source_record": "baseline-attribution.json",
+      "scope": "Matching resident fresh4096 protocol on same hardware; historical local rebuilt upstream control, not the remote published baseline"
+    },
+    "separate_unpaired_best": {
+      "prefill_tps": 449.03371257444996,
+      "mean_complete_prefill_seconds": 9.121809533,
+      "individual_complete_prefill_seconds": [
+        9.080935692,
+        9.101184074,
+        9.149177336,
+        9.15594103
+      ],
+      "workload": "Resident fresh4096 requests after native cache fill, first preparation and warmup; no prefix reuse or speculation",
+      "checkpoint_sha256": "9405793e0ad534c747a2036fc2e807554691031ebc68b8a240bf0805779fac71",
+      "executable_sha256": "4aca3038672d86937bf000dc28eff6ef56118f2f82687b5e4b4b0ca8d69400b8",
+      "source_id": "halo-deepseek-structural9-profile-20260925.md",
+      "source_sha256": "08ade802da2965bd32d20c118b7aaeb9e58104091c6237caae2f4eebe91792c1",
+      "contemporary_upstream_retimed": false
+    },
+    "note": "Only the controlled pair is compared. Separate best mean is a note, not an additional paired gain."
+  }
 }

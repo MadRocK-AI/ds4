@@ -114,7 +114,7 @@ struct cuda_q8_f16_transpose_range {
     uint64_t in_dim;
     uint64_t out_dim;
     __half *device_ptr;
-    int halo_donor; // One allocation: DonorW or native Wt, demotion is one-way.
+    int halo_donor; // One allocation: DonorW or native Wt; rebuild from Q8 on a layout change.
 };
 
 struct cuda_stream_selected_cache {
@@ -5157,14 +5157,26 @@ static const __half *cuda_q8_f16_transpose_ptr(
     if (!cached) for (auto &r:g_q8_f16_transpose_ranges) if(matches(r)) {cached=&r;break;}
     if (cached) {
         auto &r=*cached;
-        if (r.halo_donor && !donor) {
+        if (r.halo_donor != (int)donor) {
             const char *q8 = cuda_model_range_ptr(model_map, offset, weight_bytes, "q8_0");
             if (!q8) return NULL;
+            uint64_t view_bytes = 0;
+            if (!cuda_u64_mul3_checked(in_dim, out_dim, sizeof(__half), &view_bytes) ||
+                halo_overlap(q8, weight_bytes, r.device_ptr, view_bytes)) return NULL;
             const uint64_t count = in_dim * out_dim;
-            dequant_q8_0_to_f16_transpose_kernel<<<(count+255u)/256u,256>>>(
-                r.device_ptr, (const unsigned char *)q8, in_dim, out_dim, (in_dim+31u)/32u);
-            if (!cuda_ok(cudaGetLastError(), "Halo output-B cache demotion")) return NULL;
-            r.halo_donor = 0;
+            /* Decode/unsupported rows need native Wt. A later admitted prefill
+             * needs DonorW again. Rebuild either view from the original Q8 on
+             * the same stream as its consumer; never reinterpret the other
+             * layout or allocate a second copy of every layer's weights. */
+            if (donor) {
+                dequant_q8_0_to_f16_kernel<<<(count+255u)/256u,256>>>(
+                    r.device_ptr, (const unsigned char *)q8, in_dim, out_dim, (in_dim+31u)/32u);
+            } else {
+                dequant_q8_0_to_f16_transpose_kernel<<<(count+255u)/256u,256>>>(
+                    r.device_ptr, (const unsigned char *)q8, in_dim, out_dim, (in_dim+31u)/32u);
+            }
+            if (!cuda_ok(cudaGetLastError(), "Halo output-B cache layout conversion")) return NULL;
+            r.halo_donor = (int)donor;
         }
         if (donor_view) *donor_view = r.halo_donor != 0;
         return r.device_ptr;

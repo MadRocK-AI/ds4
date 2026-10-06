@@ -1,6 +1,6 @@
 # Halo prefill implementation
 
-This fork adds the Halo prefill chain to the normal ROCm backend and preserves upstream history from `8db1d1d155cb0400a86a86b9c62d0defb3a6148b`. Numerical and performance results describe the documented historical checkpoints. The normal WSL build/link passed; the integrated executable has not received a new GPU run. See [build and qualification status](HALO_RELEASE.md).
+This fork adds the Halo prefill chain to the normal ROCm backend and preserves upstream history from `8db1d1d155cb0400a86a86b9c62d0defb3a6148b`. Historical checkpoints and the latest unpublished candidate have separate evidence. The candidate passed recorded 4K bitwise and cache-lifetime gates and reached **454.59 token/s** prepared prefill on a second Halo system with IOMMU off, passing the unchanged 440 minimum. Complete compared on/off payloads remained bitwise identical. The pinned RC has only its recorded build and bounded live API checks. See [qualification status](HALO_RELEASE.md).
 
 Use the normal build with an existing complete ROCm installation:
 
@@ -29,16 +29,16 @@ The host admits single-device DeepSeek V4 Flash geometry: 43 layers, embedding40
 | KV-half + inverse RoPE + grouped pack | Indexed top512/ratio4; original runtime RoPE parameters; cached float-output chain | Direct/native producer when any lease or cache preflight fails |
 | Cached output-A | 2K/4K, eight groups K4096/rank1024, heads-first FP16 epilogue | Native cached grouped projection |
 | Uncached output-A | 2K/4K at capacities32897/65665/131201, original Q8 W/XQ/scales and unchanged quantizer | Native warp8 elsewhere |
-| Output-B S4+D2 | 2K/4K K8192/N4096; one typed native cache allocation | Native Wt after one-way demotion |
+| Output-B S4+D2 | 2K/4K K8192/N4096; one typed cache allocation | Native Wt for unsupported rows; candidate rebuilds DonorW again for a later admitted prefill |
 | Shared-down K32 | 2K/4K K2048/N4096, original FP16 inputs and native FMA order | Original GEMM |
 | S9 IQ2 producers | 2K/4K, IQ2_XXS K4096/mid2048, 256 experts/top6; original MMQ quantizer | Original gate/up, activation and middle producer |
 | Q2 down | Original cold1..7; compact direct-X4K/Wstage64-2K for8..511; prepared-store>=512 | Original scalar/hot/prepared paths when preflight fails |
 
-Arithmetic bodies retain original operand roles, K ordering, rounding and native routing/top6. Host bindings and lifetime code are new and remain unqualified on GPU. A selected path reports enqueue failure to its caller; a dead-heads attention lease cannot replay a native FP32 consumer after mutation.
+Arithmetic bodies retain original operand roles, K ordering, rounding and native routing/top6. Host bindings and lifetime code are new. The latest candidate's recorded 4K numerical and cache-lifetime checks passed; wider branch, model and context coverage remains separate. A selected path reports enqueue failure to its caller; a dead-heads attention lease cannot replay a native FP32 consumer after mutation.
 
 ## Memory and source build
 
-The indexer adds no tensor scratch. Cooperative Q8 uses the existing temporary allocator. Shared-GU borrows dead attention heads; the attention half view and copied sorted indices also borrow dead heads, while the grouped packet uses the native output temporary. S9 retains a lazy2K arena (9,454,600 payload bytes plus guards) and borrows the qualified4K up-buffer reservation18,894,848B. Q2 retains the original96MiB arena and recurring W reconstruction/X gathering. Cache limits, native allocations and cleanup own these lifetimes; peak memory and cache demotion/reuse need hardware tests.
+The indexer adds no tensor scratch. Cooperative Q8 uses the existing temporary allocator. Shared-GU borrows dead attention heads; the attention half view and copied sorted indices also borrow dead heads, while the grouped packet uses the native output temporary. S9 retains a lazy2K arena (9,454,600 payload bytes plus guards) and borrows the qualified4K up-buffer reservation18,894,848B. Q2 retains the original96MiB arena and recurring W reconstruction/X gathering. Cache limits, native allocations and cleanup own these lifetimes. Candidate cache demotion/re-promotion passed the recorded 4K/32-row/4K sequence; peak memory, alias/fault injection and wider reuse cases remain unqualified.
 
 Output-B is redistributable assembly source. The normal Makefile assembles, links and embeds a newly built code object. It does not ship an experimental object/HSACO or load private paths. With the cached core10 compiler this assembly reconstructs the archived S4+D2 module SHA256 `4c3997d9bcf4763c81a444aad0e1894bf7331b1ff14963d0390dfe35fa51e162`. That module identity does not qualify the new host composition or complete executable.
 

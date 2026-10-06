@@ -174,11 +174,11 @@ def render_overview(overview, output):
     """Independent protocol panels, never a curve across different workloads."""
     fig = plt.figure(figsize=(12.8, 12.8))
     fig.text(.07, .955, "Original DS4 vs DS4 Halo", fontsize=23, weight="bold", color=INK)
-    fig.text(.07, .925, "DeepSeek V4 Flash 0731  ·  Strix Halo, 128 GB  ·  Our archived measurements", fontsize=11, color=MUTED)
-    fig.text(.07, .902, "Original DS4 source: upstream 8db1d1d. Each panel uses a separate benchmark protocol.", fontsize=10, color=MUTED)
+    fig.text(.07, .925, "DeepSeek V4 Flash 0731  ·  Strix Halo, 128 GB  ·  Recorded September / October campaigns", fontsize=11, color=MUTED)
+    fig.text(.07, .902, "Original DS4: upstream 8db1d1d. Panels separate protocols, dates and the two Strix Halo systems.", fontsize=10, color=MUTED)
     panels = {p["id"]: p for p in overview["panels"]}
 
-    fig.text(.07, .855, "Incremental prefill · context starts at 2K", fontsize=15, weight="bold", color=INK)
+    fig.text(.07, .855, "Historical incremental prefill · context starts at 2K", fontsize=15, weight="bold", color=INK)
     ax = fig.add_axes([.07, .655, .72, .165])
     style(ax, [2048, 8192, 16384, 32768, 49152, 65536], 65536)
     ax.set_ylabel("Prefill (token/s)", labelpad=14, color=MUTED, fontsize=10)
@@ -189,7 +189,7 @@ def render_overview(overview, output):
         end_label(ax, pp[-1], label, color, fontsize=10)
     fig.text(.07, .585, "Each interval adds 2,048 tokens; two observations per frontier. Pre-indexer Halo checkpoint.", fontsize=9.5, color=MUTED)
 
-    fig.text(.07, .555, "Prepared complete 4K request · controlled comparison", fontsize=15, weight="bold", color=INK)
+    fig.text(.07, .555, "Latest prepared complete 4K request · October 6 · IOMMU off", fontsize=15, weight="bold", color=INK)
     ax = fig.add_axes([.20, .405, .59, .11])
     pair = panels["resident_4k"]["comparison"]
     rates = [pair["control_tps"], pair["halo_tps"]]
@@ -207,10 +207,9 @@ def render_overview(overview, output):
     for y, rate, color in zip([1, 0], rates, [ORANGE, BLUE]):
         ax.annotate(f"{rate:.2f}", (rate, y), xytext=(8, 0), textcoords="offset points", va="center", fontsize=11, color=color)
     fig.text(.82, .45, f"+{pair['throughput_gain_percent']:.2f}%", fontsize=16, weight="bold", color=BLUE)
-    best = panels["resident_4k"]["separate_unpaired_best"]["prefill_tps"]
-    fig.text(.07, .35, f"Separate best mean: {best:.2f} token/s; no contemporary upstream retiming. Preparation and warmup precede timing.", fontsize=9.5, color=MUTED)
+    fig.text(.07, .35, "Second Halo system: two independent processes per engine, each with 3 pure warmups + 1 sample; generation disabled.", fontsize=9.5, color=MUTED)
 
-    fig.text(.07, .295, "Complete first-use prompts · fixed 2K chunks + indexer", fontsize=15, weight="bold", color=INK)
+    fig.text(.07, .295, "Historical complete first-use prompts · 2K chunks + indexer", fontsize=15, weight="bold", color=INK)
     ax = fig.add_axes([.07, .125, .72, .135])
     style(ax, [32768, 65536, 131072], 131072)
     ax.set_xlabel("Complete prompt (tokens)", labelpad=15, color=MUTED, fontsize=10)
@@ -232,6 +231,7 @@ def render_overview(overview, output):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, default=HERE)
+    parser.add_argument("--overview-only", action="store_true", help="update the overview without rewriting archived plots")
     args = parser.parse_args()
     data = json.loads((HERE / "prefill-context-data.json").read_text(encoding="utf-8"))
     for p in data["points"]:
@@ -240,18 +240,26 @@ def main():
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "svg.fonttype": "none", "pdf.fonttype": 42})
     args.output_dir.mkdir(parents=True, exist_ok=True)
-    render_incremental(data, args.output_dir / "prefill-context-incremental")
+    if not args.overview_only:
+        render_incremental(data, args.output_dir / "prefill-context-incremental")
     selection = json.loads((HERE / "best-recorded-selection.json").read_text(encoding="utf-8"))
     for row in selection["points"]:
         for key in ["halo", "upstream"]:
             assert row[key] in data["points"]
-    render_previous(data, args.output_dir / "prefill-context-four-variants")
-    render_current(data, args.output_dir / "prefill-context-indexer-update")
-    render_best(selection, args.output_dir / "prefill-context-best-recorded")
+    if not args.overview_only:
+        render_previous(data, args.output_dir / "prefill-context-four-variants")
+        render_current(data, args.output_dir / "prefill-context-indexer-update")
+        render_best(selection, args.output_dir / "prefill-context-best-recorded")
     overview = json.loads((HERE / "prefill-context-overview.json").read_text(encoding="utf-8"))
     for name, sha in overview["source_bindings"].items():
         assert hashlib.sha256((HERE / name).read_bytes()).hexdigest() == sha
-    assert overview["schema"] == 3
+    assert overview["schema"] == 4
+    latest = json.loads((HERE.parent / "halo2-qualification.json").read_text(encoding="utf-8"))
+    assert latest["timing"]["IOMMU"] == "off" and latest["timing"]["minimum_pass"]
+    pair = next(p for p in overview["panels"] if p["id"] == "resident_4k")["comparison"]
+    assert pair["control_tps"] == latest["timing"]["summary"]["upstream"]["mean_tok_s"]
+    assert pair["halo_tps"] == latest["timing"]["summary"]["fork"]["mean_tok_s"]
+    assert pair["throughput_gain_percent"] == latest["timing"]["mean_gain_percent"]
     for panel in overview["panels"]:
         for point in panel.get("points", []):
             assert point in data["points"]

@@ -32,4 +32,6 @@ Absence is scoped to this audited commit and the matching hardware/workload. It 
 
 The historical prepared complete-4K comparison is **311.24 → 447.51 token/s (+43.78%)**. **449.03** is a separate best recorded mean with no contemporary upstream retiming. Neither is comparable to the official published 295.27 incremental rate. [Prepared benchmark attribution](../baseline-attribution.json).
 
+The October 6 overview update uses the independently qualified current prepared-4K comparison **315.41 → 454.59 (+44.12%)**, IOMMU off, on the second Halo system. Schema 4 binds [the current source/sample record](../halo2-qualification.json) separately and retains the historical prepared block. The surrounding context curves remain historical; their data and numerical claims are not replaced by the new 4K point.
+
 All claims describe recorded checkpoints and tested numerical cases. They are not new speed or numerical measurements of the integrated release binary. [Quality evidence](../../HALO_EVIDENCE.md). No benchmark was rerun and no remote machine was contacted for this audit.

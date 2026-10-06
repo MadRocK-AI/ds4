@@ -51,6 +51,7 @@ typedef struct {
     int ctx_alloc;
     int step_incr;
     int gen_tokens;
+    int prefill_warmups;
     int power_percent;
     uint32_t prefill_chunk;
     uint32_t ssd_streaming_cache_experts;
@@ -371,6 +372,8 @@ static bench_config parse_options(int argc, char **argv) {
             }
         } else if (!strcmp(arg, "--warm-weights")) {
             c.warm_weights = true;
+        } else if (!strcmp(arg, "--prefill-warmup")) {
+            c.prefill_warmups = parse_nonnegative_int(need_arg(&i, argc, argv, arg), arg);
         } else if (!strcmp(arg, "--show-output")) {
             c.show_output = true;
         } else if (!strcmp(arg, "--teacher-forced-decode")) {
@@ -398,6 +401,11 @@ static bench_config parse_options(int argc, char **argv) {
     }
     if (c.ctx_start > c.ctx_max) {
         fprintf(stderr, "ds4-bench: --ctx-start must be <= --ctx-max\n");
+        exit(2);
+    }
+    if (c.prefill_warmups && (c.dspark || c.ssd_streaming || c.cuda_tensor_parallel ||
+                             c.tp.role != DS4_TP_NONE || c.dist.role != DS4_DISTRIBUTED_NONE)) {
+        fprintf(stderr, "ds4-bench: --prefill-warmup requires local resident inference\n");
         exit(2);
     }
     if (c.step_mul < 1.0) {
@@ -692,6 +700,38 @@ static void close_engine(ds4_engine *engine, ds4_tp *tp) {
     ds4_tp_free(tp);
 }
 
+static int warmup_prefill(const bench_config *cfg, ds4_session *session,
+                         const ds4_tokens *prompt) {
+    ds4_tokens prefix = {.v = prompt->v, .len = cfg->ctx_start, .cap = cfg->ctx_start};
+    char err[256] = {0};
+    for (int i = 0; i < cfg->prefill_warmups; i++) {
+        ds4_session_invalidate(session);
+        if (ds4_session_pos(session) != 0 ||
+            ds4_session_common_prefix(session, &prefix) != 0) {
+            fprintf(stderr, "ds4-bench: prefill warmup reset retained a prefix\n");
+            return 1;
+        }
+        const double start = bench_now_sec();
+        if (ds4_session_sync(session, &prefix, err, sizeof(err)) != 0) {
+            fprintf(stderr, "ds4-bench: prefill warmup failed: %s\n", err);
+            return 1;
+        }
+        fprintf(stderr, "ds4-bench: prefill warmup %d/%d: %d tokens, %.9fs (outside measured CSV)\n",
+                i + 1, cfg->prefill_warmups, prefix.len, bench_now_sec() - start);
+    }
+    /* Keep model/cache preparation, but exclude warmup KV from every measured
+     * token. The retained resident checkpoint used complete fresh prefixes. */
+    if (cfg->prefill_warmups) {
+        ds4_session_invalidate(session);
+        if (ds4_session_pos(session) != 0 ||
+            ds4_session_common_prefix(session, &prefix) != 0) {
+            fprintf(stderr, "ds4-bench: prefill warmup left a reusable prefix\n");
+            return 1;
+        }
+    }
+    return 0;
+}
+
 int main(int argc, char **argv) {
     bench_config cfg = parse_options(argc, argv);
 
@@ -837,6 +877,12 @@ int main(int argc, char **argv) {
         return 1;
     }
     maybe_warn_distributed_step_shape(&cfg, session);
+    if (warmup_prefill(&cfg, session, &prompt) != 0) {
+        ds4_session_free(session);
+        ds4_tokens_free(&prompt);
+        close_engine(engine, tp_leader);
+        return 1;
+    }
 
     FILE *out = stdout;
     if (cfg.csv_path) {

@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "status": "PASS_LIVE_RC_INSTALL_LAUNCHER_API_SMOKE",
+  "version": "0.1.0-rc.1",
+  "scope": "Live installation, launcher, prefill and bounded API generation; no new performance or bitwise qualification",
+  "tested_engine_commit": "fd77fb67d97f1b40279793dc856af92af71267c9",
+  "tested_companion_commit": "c1ecb6b7927789751c1b790c6961b5278fa84ee1",
+  "package_identity": "26a721c7e4b884cb385d745ca531a65a61de99ad2dc6977632632cc40ce3b29e",
+  "started_utc": "2026-10-05T14:23:08Z",
+  "finished_utc": "2026-10-05T14:27:38Z",
+  "hardware": {
+    "gpu": "AMD Radeon 8060S gfx1151",
+    "visible_devices": 1,
+    "HIP_ordinal": 0
+  },
+  "model": {
+    "bytes": 86720111488,
+    "sha256": "ca22ae2f838e14077c22bc1c1417b71b45b5e5a3687bd96c2ac6e17fdb6261c0"
+  },
+  "model_hash_verification": "PASS_FULL_SHA256",
+  "build": {
+    "backend": "rocm",
+    "targets": 5,
+    "binary_sha256": {
+      "ds4": "d7aeb67b6d9f2863d543c21a0d9191019730af8e44d465758d7c52c192e98c04",
+      "ds4-server": "f4006a786e6ebd4828c4a9792fc138b1f614dfc9f8574a3edfac1ccfe9fdfb10",
+      "ds4-bench": "ec99ffad1e8868dc2d2cc20834fba22540e967499724dc560724cff8b3614498",
+      "ds4-eval": "029123741c705c6481e9544ff07d9ac8eb561b6aad8183e687dfe8d860566c3f",
+      "ds4-agent": "e8e49b23275351bed12cb06fe3a721585bb30798e739f1c1ef8cf791d08008b6"
+    },
+    "compiler": "AMD clang 23 / HIP 7.15",
+    "rocWMMA": "2.2.1",
+    "warnings": 0
+  },
+  "launcher": {
+    "status_verify": "PASS",
+    "preview": "PASS",
+    "Halo_prefill_enabled": true,
+    "context_tokens": 8192,
+    "prefill_chunk_tokens": 2048,
+    "address": "loopback"
+  },
+  "API": {
+    "models": "PASS_HTTP_200",
+    "completions": [
+      {
+        "case": "short",
+        "prompt_tokens": 14,
+        "generated_tokens": 8,
+        "status": "PASS_HTTP_200_NONEMPTY_GENERATION",
+        "finish_reason": "length",
+        "phase": "thinking"
+      },
+      {
+        "case": "prefill-2k-chunks",
+        "prompt_tokens": 4214,
+        "generated_tokens": 8,
+        "status": "PASS_HTTP_200_NONEMPTY_GENERATION",
+        "finish_reason": "length",
+        "phase": "thinking"
+      }
+    ]
+  },
+  "release": {
+    "owned_processes_stopped": true,
+    "hardware_free": true,
+    "exclusive_lock_released": true
+  },
+  "limits": {
+    "final_answer_quality_checked": false,
+    "new_bitwise_comparison": false,
+    "speed_benchmark_rerun": false,
+    "complete_kernel_branch_coverage": false,
+    "long_context_matrix_rerun": false,
+    "driver_or_power_changes": false,
+    "DSpark_changes": false
+  },
+  "source_receipt_sha256": "cad838ab63a034fccd87b21d6742a037e29b3d396ef87fbc3a0b6ce0bca9f303",
+  "final_receipt_sha256": "77980ae976d3e6892cdba396f5405aa3383aeb83659a96b9e80f5e0a6676dfda",
+  "server_log_sha256": "3036dc451667c48a0ad42a9746bd15e2d0f7f10387dbb04616688435e4c3b722"
+}

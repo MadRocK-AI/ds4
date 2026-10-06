@@ -2,7 +2,18 @@
 
 ## Performance
 
-**Best recorded prefill: 449.03 token/s.** DeepSeek V4 Flash 0731 on AMD Strix Halo (`gfx1151`), 128 GB unified memory. Bitwise logits and state are preserved in the verified cases.
+**Latest unpublished candidate: 454.59 token/s mean, +44.12%**, measured on a second Strix Halo system with IOMMU off on 2026-10-06. Fresh complete 4K bitwise checks passed before timing, including full payload equality against the retained IOMMU-on results; the source's recorded cache-lifetime check also passed.
+
+| Prepared complete 4K request, same second system | Mean prefill |
+|---|---:|
+| Original DS4 inference, upstream `8db1d1d` | 315.41 token/s |
+| Latest integration candidate | **454.59 token/s (+44.12%)** |
+
+Candidate samples: **454.52 / 454.65**. Each engine used two independent processes, each with three pure-prefill warmups and one measured position-zero request, capacity 4,352, generation disabled. Timing had no trace, profiler or payload dumps. The retained **440 token/s** minimum passed. The same-binary IOMMU-on mean was 429.79; the before/after improvement is **5.77%**, with complete compared payloads bitwise unchanged. The pinned RC has not been replaced. [Qualification and limits](HALO_RELEASE.md#latest-candidate-qualification-2026-10-06) · [All samples and identities](halo/halo2-qualification.json).
+
+## Historical checkpoint results
+
+**Historical checkpoint prefill: 449.03 token/s.** DeepSeek V4 Flash 0731 on AMD Strix Halo (`gfx1151`), 128 GB unified memory. This older record is separate from the latest 454.59 result above.
 
 | Prepared complete 4K request, same-machine test | Prefill |
 |---|---:|
@@ -15,7 +26,7 @@
 
 ![Original DS4 and DS4 Halo, with each benchmark protocol in a separate panel](halo/figures/prefill-context-overview.png)
 
-The first panel starts at **2K context** and measures each added 2K interval. The middle panel shows the prepared 4K comparison. The final panel measures complete empty-context prompts with **fixed 2K chunks**. No line connects different protocols. All original-engine reference measurements use upstream `8db1d1d` on our Halo.
+The first panel starts at **2K context** and shows the historical added-2K intervals. The middle panel shows the latest **315.41 → 454.59** prepared 4K comparison, on the second Halo system with IOMMU off. The final panel shows historical complete empty-context prompts with **fixed 2K chunks**. Dates and protocols are labeled; no line connects them. Original-engine references use pinned upstream `8db1d1d`, measured by us.
 
 | Complete first-use prompt, 2K chunks | Original DS4 code, measured by us | DS4 Halo + indexer |
 |---|---:|---:|
@@ -37,10 +48,10 @@ These published figures are kept separate from our measurements. They do not sup
 
 ## Quality
 
-**Full FP32 logits, complete serialized state and token IDs are bitwise identical to the reference in the verified cases.** Model weights and quantization are preserved. Coverage includes fresh32K/64K/128K prompts, 223 incremental payload comparisons and 31 snapshot restorations. [Verification evidence](HALO_EVIDENCE.md).
+**The latest candidate matches fresh reference token IDs, full FP32 logits and complete states bitwise in the tested 4K cases**, including generation and the short-continuation/cache-reuse sequence. Model weights and quantization are preserved. The fresh32K/64K/128K, 223 incremental payload and 31 snapshot comparisons belong to historical checkpoints; that wider matrix has not been rerun on this candidate. [Verification evidence](HALO_EVIDENCE.md).
 
 ## What changes
 
 Halo adds optimized ROCm prefill paths for routed MoE, attention, projections and the resident-key indexer. Enable them with `DS4_ROCM_HALO_PREFILL=1`; unsupported shapes retain native dispatch. [Implementation and supported configurations](HALO.md).
 
-Figures are the accepted historical measurements; the integrated release's ROCm build/link passed in WSL. [Release record](HALO_RELEASE.md). Exact measurements and benchmark conditions remain in the linked evidence files.
+The context charts and 447.51/449.03 figures remain accepted historical measurements. The new 454.59 candidate result has separate preparation, source and machine identities and does not replace those records. Final acceptance of the actual installer package remains separate. [Release record](HALO_RELEASE.md).

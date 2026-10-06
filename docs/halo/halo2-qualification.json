@@ -1,0 +1,454 @@
+{
+  "schema": 1,
+  "date": "2026-10-06",
+  "scope": "Unpublished integration candidate on a second Strix Halo system; not the unchanged pinned RC or a universal quality claim",
+  "source": {
+    "upstream_commit": "8db1d1d155cb0400a86a86b9c62d0defb3a6148b",
+    "fork_base_commit": "fd77fb67d97f1b40279793dc856af92af71267c9",
+    "candidate_commit": null,
+    "patch_sha256": {
+      "cache-layout.diff": "70ff5d29445cd8d0a88fd9ba8d21bc518a627b6871c86647863bd5c81f7d551c",
+      "prefill-warmup.diff": "c3178c74755a097e0f483bfa83c994c386c435d6129d8717a4ec9d64845dca5b",
+      "diagnostic-only.diff": "e64d0c23b5bb4570ac05c557c5c6adda8750d16f9a34c3519e553f72d447bc78",
+      "blas-init-final.diff": "2fd157a19963477ed9034d28eb5441653d0ff1462853323dac893302af74ffce"
+    },
+    "fork_source_sha256": {
+      "rocm/ds4_rocm_current_api_compat.cuh": "80d59ca18cefab720591fa613f40126cf2ccc76d5fb4cf0f597e40bcc5ee7c0c",
+      "ds4_bench.c": "20a34c751a7197c026ae976caaab31d44c51f8a858f5a9bebec68ffb6f6e1de8",
+      "ds4_help.c": "c2b122308c7017af5547a547d5aa059d4aa1243b7e24113d012f3ae5088e998e",
+      "rocm/ds4_rocm_runtime.cuh": "e0580d79e3f8515ff96f176a440dc032011c7e8fec6c48bcd610b8bd2eafc795",
+      "rocm/ds4_rocm_matmul.cuh": "9c6b994ff403e3ba0d4f5ab4c15f38b00ea650148593b49e8987246e05d44ca4",
+      "rocm/ds4_rocm_attention_launch.cuh": "dd4a3b1668f611671d1394ecbfc50aa391f0ee56817a330db13d49431db411b4"
+    },
+    "upstream_inference_modified": false,
+    "common_observation_driver_disclosed": true,
+    "benchmark_source_sha256": "20a34c751a7197c026ae976caaab31d44c51f8a858f5a9bebec68ffb6f6e1de8",
+    "helper_source_sha256": "c2b122308c7017af5547a547d5aa059d4aa1243b7e24113d012f3ae5088e998e"
+  },
+  "artifacts": {
+    "upstream": {
+      "ds4": {
+        "bytes": 31018008,
+        "sha256": "6c5740196b024264424a1e20a2d515f8a6597a8dafdc6101539f919d4d400271",
+        "ldd_relocations": "PASS"
+      },
+      "ds4-server": {
+        "bytes": 32152216,
+        "sha256": "a889b9a2ac690476ba1a06a7a7a65fcad678cd957f4e4bd486948df5009757fd",
+        "ldd_relocations": "PASS"
+      },
+      "ds4-bench": {
+        "bytes": 30833072,
+        "sha256": "3f4b15b5842f3b4853c498d2079699a5cee9202f6cb89c3cba62fde7d4d831ed",
+        "ldd_relocations": "PASS"
+      },
+      "ds4-eval": {
+        "bytes": 31162672,
+        "sha256": "cd93044ee0866b186a9311acfd52676a2c4c125d482a8bc683c9b79617137eef",
+        "ldd_relocations": "PASS"
+      },
+      "ds4-agent": {
+        "bytes": 31908672,
+        "sha256": "3be05c9e9cef0cc51fd061a2b970496429210e4e5e76c50970cf577e3cbcf6ef",
+        "ldd_relocations": "PASS"
+      }
+    },
+    "fork": {
+      "ds4": {
+        "bytes": 34534280,
+        "sha256": "69bcbb0f72938023f257290bb0134b6fe3e7d6084c1faf2faddce2a756a6218e",
+        "ldd_relocations": "PASS"
+      },
+      "ds4-server": {
+        "bytes": 35664376,
+        "sha256": "03331cdd8945faf9546ab334c0ffabc31ff8cb022a9e61d226eeb7fe38103d00",
+        "ldd_relocations": "PASS"
+      },
+      "ds4-bench": {
+        "bytes": 34349360,
+        "sha256": "6ae9a4d9f86ba624ab074f578bbb1f66f29a7c015f308ba8db25a254e086001d",
+        "ldd_relocations": "PASS"
+      },
+      "ds4-eval": {
+        "bytes": 34678952,
+        "sha256": "6148b712a337d68b2fb5360bc0b8ee20a1f8d6faa0a7ab17b751ccbb9177c7fc",
+        "ldd_relocations": "PASS"
+      },
+      "ds4-agent": {
+        "bytes": 35424944,
+        "sha256": "6eb6ae99329aea0a54d334ec995c2272a87d55a62349578a883fd2c17a79acbe",
+        "ldd_relocations": "PASS"
+      }
+    }
+  },
+  "hardware": {
+    "CPU": "AMD RYZEN AI MAX+ 395 w/ Radeon 8060S",
+    "iGPU": "AMD Radeon 8060S Graphics",
+    "ISA": "gfx1151",
+    "physical_memory_GB": 128,
+    "Linux_MemTotal_bytes": 131209965568,
+    "shared_GPU_limit_bytes": 113816633344,
+    "shared_GPU_limit_GiB": 106,
+    "nominal_Linux_headroom_GiB": 16.198802947998047,
+    "kernel": "7.0.0-38-generic",
+    "os": "Ubuntu 26.04.1 LTS",
+    "driver": "amdgpu",
+    "ttm_pages_limit": 27787264,
+    "amdgpu_runpm": 0,
+    "GPU_policy": "auto",
+    "power_state": "performance",
+    "effective_clock_series": null,
+    "hardware_power_limit_series": null,
+    "IOMMU_readonly_followup": {
+      "same_boot_as_timing": true,
+      "global_initialized": true,
+      "boot_default_domain": "Translated",
+      "group_count": 34,
+      "iGPU_default_domain": "identity",
+      "scope": "Pre-contrast observation of the earlier boot; retained as the on-mode state",
+      "global_off_performance_contrast_executed": false
+    },
+    "GPU_count_per_process": 1,
+    "other_GPU_excluded": true,
+    "active_IOMMU": "off",
+    "active_IOMMU_group_count": 0,
+    "only_boot_delta_from_initial_timing": "amd_iommu=off"
+  },
+  "SDK": {
+    "compiler": {
+      "version": "AMD clang 23.0.0git / HIP 7.15.26333",
+      "source_commit": "8f497e0992fb7513f7f78a6f6b6f1056c375e961",
+      "hipcc_sha256": "7b95d430bb8c4d4237f9b4935dbd6440e2067fde0979cc69bffb26ebd021464c",
+      "clang_sha256": "241bf4da7ec39bc00b68ed74f6be751516d9892ed990e8c7fa372bad18500247"
+    },
+    "rocBLAS_family": "5.6.0.8d1ae90e",
+    "required_headers": {
+      "rocWMMA": "2.2.1",
+      "hipCUB": "4.6.0",
+      "rocPRIM": "4.6.0",
+      "hipBLASLt": "1.4.1"
+    },
+    "rocWMMA_tree_sha256": "d50bce369b112d205fb8f9daf3c077bcfab9b59b2b7a0a750ba1d6adb0ae5cb6",
+    "provider_SHA256_verified": true,
+    "host_compiler": "same SDK clang 23",
+    "host_GCC_development_headers": "14",
+    "runtime_or_driver_global_install": false,
+    "host_libc_replaced": false
+  },
+  "model": {
+    "bytes": 86720111488,
+    "SHA256": "ca22ae2f838e14077c22bc1c1417b71b45b5e5a3687bd96c2ac6e17fdb6261c0",
+    "copied_target_full_hash_accepted": true,
+    "stat_identity_unchanged": true,
+    "full_hash_repeated_per_run": false
+  },
+  "input": {
+    "canonical_text_SHA256": "f53e0d80cb2d4492d24ebd63c7000c397b16ae70f9bf09b3763e5d8323ec209f",
+    "prefix4096_SHA256": "2baaebf14803af10c47794411ae074322d974e366530a23739742b405e9592bd"
+  },
+  "numerical_gates": {
+    "initial": {
+      "status": "PASS_FRESH_UPSTREAM_FORK_SIX_COMPLETE_PAYLOADS",
+      "capacity": 65665,
+      "prompt_tokens": 4096,
+      "chunk": 4096,
+      "generated_tokens": 16,
+      "warmups": 0,
+      "complete_paired_payloads": 6
+    },
+    "prepared_geometry": {
+      "status": "PASS_PREPARED_GEOMETRY_SIX_COMPLETE_PAYLOADS",
+      "capacity": 4352,
+      "prompt_tokens": 4096,
+      "chunk": 4096,
+      "generated_tokens": 16,
+      "warmups": 3,
+      "complete_paired_payloads": 6
+    },
+    "cache_lifetime": {
+      "status": "PASS_LIFETIME_NINE_COMPLETE_PAYLOADS_AND_LAYOUT_WITNESSES",
+      "capacity": 4352,
+      "sequence": "4096 -> +32 -> invalidate -> fresh4096",
+      "generated_tokens": 0,
+      "warmups": 0,
+      "complete_paired_payloads": 9,
+      "first_and_final_payloads_equal_in_each_arm": true,
+      "existing_layout_witness_layers": [
+        2,
+        32,
+        33,
+        34
+      ],
+      "layout_witness": "DonorW -> native Wt -> DonorW",
+      "all_witnesses_pass": true,
+      "IOMMU_policy_when_tested": "on globally, iGPU identity default domain; not repeated during off contrast"
+    },
+    "all_API_manifests_and_byte_extents_verified": true,
+    "whole_long_context_matrix_of_current_candidate_executed": false,
+    "fresh_reference_compared": true,
+    "old_Halo1_oracle_not_reused_as_fresh_reference": true,
+    "historical_frontier_SHA256_matched": "36277585aefed5c098c87559f1409fca097baca69ae0bba3668646aaa0e34229",
+    "IOMMU_off_prepared_geometry": {
+      "status": "PASS_IOMMU_OFF_PREPARED_GEOMETRY_AND_ON_MODE_PAYLOADS",
+      "capacity": 4352,
+      "prompt_tokens": 4096,
+      "chunk": 4096,
+      "generated_tokens": 16,
+      "warmups": 3,
+      "complete_paired_payloads": 6,
+      "all_paired_manifests_and_extents_equal": true,
+      "both_arms_vs_on_mode_complete_payloads_and_manifests_equal": true
+    }
+  },
+  "timing": {
+    "status": "COMPLETED_IOMMU_OFF_BOUNDED_TIMING_TARGET_PASS",
+    "boundary": "Two independent processes per engine; each has exactly three pure-prefill warmups then one measured full position-zero prefill. Total six warmups and two samples per engine.",
+    "order": [
+      "upstream",
+      "fork",
+      "fork",
+      "upstream"
+    ],
+    "prompt_tokens": 4096,
+    "capacity": 4352,
+    "chunk": 4096,
+    "generation": 0,
+    "warmups_per_process": 3,
+    "samples_per_process": 1,
+    "processes_per_engine": 2,
+    "profiler": false,
+    "trace": false,
+    "payloads": false,
+    "private_preload": false,
+    "lifetime_observer_binary_used": false,
+    "samples": [
+      {
+        "arm": "upstream",
+        "engine_sample": 1,
+        "campaign_index": 1,
+        "binary_sha256": "3f4b15b5842f3b4853c498d2079699a5cee9202f6cb89c3cba62fde7d4d831ed",
+        "process_wall_seconds": 75.91323342200002,
+        "pure_prefill_warmups_seconds": [
+          18.156942089,
+          12.893683587,
+          12.994323423
+        ],
+        "first_use_prefill_seconds": 18.156942089,
+        "reported_model_span_preparation_seconds": 13.976,
+        "measured_prefill_seconds": 12.960102352,
+        "measured_prefill_tok_s": 316.04688672600696,
+        "other_process_overhead_seconds": 4.932181971000018
+      },
+      {
+        "arm": "fork",
+        "engine_sample": 1,
+        "campaign_index": 2,
+        "binary_sha256": "6ae9a4d9f86ba624ab074f578bbb1f66f29a7c015f308ba8db25a254e086001d",
+        "process_wall_seconds": 55.24578316599997,
+        "pure_prefill_warmups_seconds": [
+          9.350074137,
+          8.90562936,
+          8.997912721
+        ],
+        "first_use_prefill_seconds": 9.350074137,
+        "reported_model_span_preparation_seconds": 13.974,
+        "measured_prefill_seconds": 9.011747349,
+        "measured_prefill_tok_s": 454.51784669202004,
+        "other_process_overhead_seconds": 5.006419598999965
+      },
+      {
+        "arm": "fork",
+        "engine_sample": 2,
+        "campaign_index": 3,
+        "binary_sha256": "6ae9a4d9f86ba624ab074f578bbb1f66f29a7c015f308ba8db25a254e086001d",
+        "process_wall_seconds": 55.34697386299996,
+        "pure_prefill_warmups_seconds": [
+          9.356892343,
+          8.954901051,
+          9.033600498
+        ],
+        "first_use_prefill_seconds": 9.356892343,
+        "reported_model_span_preparation_seconds": 13.97,
+        "measured_prefill_seconds": 9.009070359,
+        "measured_prefill_tok_s": 454.65290388237713,
+        "other_process_overhead_seconds": 5.022509611999956
+      },
+      {
+        "arm": "upstream",
+        "engine_sample": 2,
+        "campaign_index": 4,
+        "binary_sha256": "3f4b15b5842f3b4853c498d2079699a5cee9202f6cb89c3cba62fde7d4d831ed",
+        "process_wall_seconds": 74.46464465199995,
+        "pure_prefill_warmups_seconds": [
+          16.630030444,
+          12.918554244,
+          12.997183825
+        ],
+        "first_use_prefill_seconds": 16.630030444,
+        "reported_model_span_preparation_seconds": 13.97,
+        "measured_prefill_seconds": 13.012244658,
+        "measured_prefill_tok_s": 314.7804324046241,
+        "other_process_overhead_seconds": 4.936631480999948
+      }
+    ],
+    "summary": {
+      "upstream": {
+        "samples_tok_s": [
+          316.04688672600696,
+          314.7804324046241
+        ],
+        "mean_tok_s": 315.4136595653155,
+        "min_tok_s": 314.7804324046241,
+        "max_tok_s": 316.04688672600696,
+        "aggregate_rate_tok_s": 315.41238829305166,
+        "total_warmup_count": 6,
+        "independent_process_count": 2
+      },
+      "fork": {
+        "samples_tok_s": [
+          454.51784669202004,
+          454.65290388237713
+        ],
+        "mean_tok_s": 454.5853752871986,
+        "min_tok_s": 454.51784669202004,
+        "max_tok_s": 454.65290388237713,
+        "aggregate_rate_tok_s": 454.585365255835,
+        "total_warmup_count": 6,
+        "independent_process_count": 2
+      }
+    },
+    "mean_gain_percent": 44.12355378447506,
+    "minimum_mean_tok_s": 440,
+    "minimum_pass": true,
+    "approximately_450_tok_s_demonstrated": true,
+    "threshold_lowered": false,
+    "IOMMU": "off"
+  },
+  "release": {
+    "original_ten_binary_identities_preserved": true,
+    "GPU_idle_and_lock_released": true,
+    "new_commit_or_pin": false,
+    "new_installer_acceptance": false,
+    "published_RC_unchanged": true,
+    "publication": false
+  },
+  "human_rounding": "At most two decimals; raw evidence retains precision",
+  "IOMMU_contrast": {
+    "authorized_by_owner": true,
+    "only_changed_parameter": "amd_iommu=off",
+    "source_binary_SDK_memory_kernel_inputs_preserved": true,
+    "on_timing_status": "COMPLETED_BOUNDED_TIMING_TARGET_NOT_MET",
+    "on_timing_summary": {
+      "upstream": {
+        "samples_tok_s": [
+          299.716520892367,
+          298.5591912605768
+        ],
+        "mean_tok_s": 299.1378560764719,
+        "min_tok_s": 298.5591912605768,
+        "max_tok_s": 299.716520892367,
+        "aggregate_rate_tok_s": 299.1367366829804,
+        "total_warmup_count": 6,
+        "independent_process_count": 2
+      },
+      "fork": {
+        "samples_tok_s": [
+          429.16168655665297,
+          430.42116466749144
+        ],
+        "mean_tok_s": 429.7914256120722,
+        "min_tok_s": 429.16168655665297,
+        "max_tok_s": 430.42116466749144,
+        "aggregate_rate_tok_s": 429.79050290572144,
+        "total_warmup_count": 6,
+        "independent_process_count": 2
+      }
+    },
+    "on_timing_samples": [
+      {
+        "arm": "upstream",
+        "engine_sample": 1,
+        "campaign_index": 1,
+        "binary_sha256": "3f4b15b5842f3b4853c498d2079699a5cee9202f6cb89c3cba62fde7d4d831ed",
+        "process_wall_seconds": 76.66249406500037,
+        "pure_prefill_warmups_seconds": [
+          16.824770125,
+          13.611521493,
+          13.682776008
+        ],
+        "first_use_prefill_seconds": 16.824770125,
+        "reported_model_span_preparation_seconds": 13.832,
+        "measured_prefill_seconds": 13.666246985,
+        "measured_prefill_tok_s": 299.716520892367,
+        "other_process_overhead_seconds": 5.045179454000369
+      },
+      {
+        "arm": "fork",
+        "engine_sample": 1,
+        "campaign_index": 2,
+        "binary_sha256": "6ae9a4d9f86ba624ab074f578bbb1f66f29a7c015f308ba8db25a254e086001d",
+        "process_wall_seconds": 57.38593930199977,
+        "pure_prefill_warmups_seconds": [
+          9.871915331,
+          9.457959358,
+          9.530676535
+        ],
+        "first_use_prefill_seconds": 9.871915331,
+        "reported_model_span_preparation_seconds": 13.828,
+        "measured_prefill_seconds": 9.544188422,
+        "measured_prefill_tok_s": 429.16168655665297,
+        "other_process_overhead_seconds": 5.153199655999774
+      },
+      {
+        "arm": "fork",
+        "engine_sample": 2,
+        "campaign_index": 3,
+        "binary_sha256": "6ae9a4d9f86ba624ab074f578bbb1f66f29a7c015f308ba8db25a254e086001d",
+        "process_wall_seconds": 57.385828933000084,
+        "pure_prefill_warmups_seconds": [
+          9.876337432,
+          9.472545093,
+          9.545415139
+        ],
+        "first_use_prefill_seconds": 9.876337432,
+        "reported_model_span_preparation_seconds": 13.822,
+        "measured_prefill_seconds": 9.516260668,
+        "measured_prefill_tok_s": 430.42116466749144,
+        "other_process_overhead_seconds": 5.153270601000084
+      },
+      {
+        "arm": "upstream",
+        "engine_sample": 2,
+        "campaign_index": 4,
+        "binary_sha256": "3f4b15b5842f3b4853c498d2079699a5cee9202f6cb89c3cba62fde7d4d831ed",
+        "process_wall_seconds": 76.26433998099992,
+        "pure_prefill_warmups_seconds": [
+          16.289527126,
+          13.652055122,
+          13.709072292
+        ],
+        "first_use_prefill_seconds": 16.289527126,
+        "reported_model_span_preparation_seconds": 13.82,
+        "measured_prefill_seconds": 13.719222586,
+        "measured_prefill_tok_s": 298.5591912605768,
+        "other_process_overhead_seconds": 5.074462854999922
+      }
+    ],
+    "on_off_comparison": {
+      "upstream": {
+        "on_mean_tok_s": 299.1378560764719,
+        "off_mean_tok_s": 315.4136595653155,
+        "mean_gain_percent": 5.440903970603728
+      },
+      "fork": {
+        "on_mean_tok_s": 429.7914256120722,
+        "off_mean_tok_s": 454.5853752871986,
+        "mean_gain_percent": 5.768833019369102
+      }
+    },
+    "comparison_kind": "Same-binary before/after one reboot; not an interleaved on/off/on causal campaign",
+    "on_off_on_control_executed": false,
+    "additional_sweep_or_samples": false,
+    "configuration_rollback_available": true
+  }
+}

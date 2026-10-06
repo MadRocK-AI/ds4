@@ -2,7 +2,7 @@
 
 An opt-in **single-device ROCm prefill fork** of [antirez/ds4](https://github.com/antirez/ds4), targeting Ryzen AI Max+ 395 / Radeon 8060S (`gfx1151`) with 128 GB unified memory. The Halo work accelerates routed MoE, attention, projections and indexer scoring while preserving **bitwise logits and complete state on the documented historical test cases**.
 
-**Release candidate 0.1.0-rc.1.** The integrated ROCm engine builds and links in WSL. Performance and bitwise results below describe the verified historical checkpoints; the integrated executable has not had a new GPU model run. [Validation scope](docs/HALO_RELEASE.md).
+**Latest tested candidate: 454.59 token/s prepared prefill, +44.12% over original DS4, with bitwise-identical complete payloads in the tested cases.** This unpublished integration build passed the retained performance threshold on a second Strix Halo system with IOMMU off. The published 0.1.0-rc.1 package remains unchanged; final distribution acceptance is open. [Validation scope](docs/HALO_RELEASE.md).
 
 The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8db1d1d155cb0400a86a86b9c62d0defb3a6148b), which already contains gfx1151 tuning. This repository adds the compatible Halo prefill chain to the normal ROCm source build. The pinned setup/verification companion is [ds4-on-halo](https://github.com/MadRocK-AI/ds4-on-halo).
 
@@ -20,7 +20,16 @@ The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8d
 
 ## Performance
 
-**Best recorded prefill: 449.03 token/s.** DeepSeek V4 Flash 0731 on AMD Strix Halo (`gfx1151`), 128 GB unified memory. Bitwise logits and state are preserved in the verified cases.
+**Latest candidate, 2026-10-06: 454.59 token/s mean, +44.12% against the original DS4 code measured on the same second Strix Halo system.** Complete position-zero 4K requests, capacity 4,352, IOMMU off, no generation; two independent processes per engine, each with three pure-prefill warmups and one measured request. Timing used no profiler, trace or payload dumps. [All samples and identities](docs/halo/halo2-qualification.json).
+
+| Prepared complete 4K request, second Strix Halo system | Mean prefill |
+|---|---:|
+| Original DS4 inference, upstream `8db1d1d` | 315.41 token/s |
+| Unpublished DS4 Halo integration candidate | **454.59 token/s (+44.12%)** |
+
+Candidate samples: **454.52 and 454.65 token/s**; the retained 440 minimum passed. Turning IOMMU off improved the same candidate's measured mean by **5.77%** from 429.79, with all compared complete on/off payloads unchanged bitwise. This is a before/after policy comparison; final installer/package acceptance remains separate.
+
+**Historical checkpoint record: 449.03 token/s.** DeepSeek V4 Flash 0731 on AMD Strix Halo (`gfx1151`), 128 GB unified memory. These checkpoint results do not qualify the current packaged build.
 
 | Prepared complete 4K request, same-machine test | Prefill |
 |---|---:|
@@ -31,11 +40,11 @@ The source base is upstream [`8db1d1d`](https://github.com/antirez/ds4/commit/8d
 
 ![Original DS4 and DS4 Halo: separate incremental, prepared 4K and full-prompt benchmarks](docs/halo/figures/prefill-context-overview.png)
 
-The first panel starts at **2K context**. Each panel keeps its own benchmark protocol: incremental 2K additions, prepared complete 4K requests, or complete first-use long prompts with fixed 2K chunks. The original engine is explicitly pinned to `8db1d1d`; these are our measurements, not published timings for today's upstream main. [Results, official published figures and provenance](docs/HALO_PERFORMANCE.md).
+The first panel starts at **2K context**. The middle panel shows the latest **315.41 → 454.59** prepared complete-4K comparison; the surrounding historical panels retain incremental 2K additions and first-use long prompts with fixed 2K chunks. Dates, systems and protocols remain distinct. Original DS4 is pinned to `8db1d1d`; these are our measurements, not timings published for today's upstream main. [Results and provenance](docs/HALO_PERFORMANCE.md).
 
 ## Quality
 
-**Full FP32 logits, complete serialized state and token IDs are bitwise identical to the reference in the verified cases.** Model weights and quantization are preserved. Coverage includes fresh32K/64K/128K prompts, 223 incremental payload comparisons and 31 snapshot restorations. [Verification evidence](docs/HALO_EVIDENCE.md).
+**The latest candidate matched fresh original-DS4 token IDs, full FP32 logits and complete serialized state bitwise in the tested 4K cases**, including after 16 generated tokens. Its 4K → 32-token continuation → fresh 4K cache lifetime check also passed. These results apply to the recorded unpublished candidate and configuration. Historical coverage includes fresh32K/64K/128K prompts, 223 incremental payload comparisons and 31 snapshot restorations; that wider matrix has not been rerun on this candidate. [Verification evidence](docs/HALO_EVIDENCE.md).
 
 ## Start Here
 
@@ -52,7 +61,7 @@ Required SDK components include HIP, hipBLAS, hipBLASLt, rocBLAS, hipCUB, rocPRI
 
 ## Release state and documentation
 
-Normal gfx1151 ROCm build/link passed in local WSL for **ds4, ds4-server, ds4-bench, ds4-eval and ds4-agent**, with all five ELF relocation checks passing. Numerical/performance acceptance uses the documented historical evidence. The integrated executable has not received a new GPU model/timing run. [Release acceptance and build record](docs/HALO_RELEASE.md).
+Normal gfx1151 build/link passed for all five targets in WSL and for both fresh candidate/reference builds on the second Halo system. The latest candidate passed the recorded 4K numerical, cache-lifetime and prepared performance gates; complete on/off payloads also matched. Live installation and API generation passed for the older pinned RC: 14- and 4,214-token prompts, eight generated tokens each, with 2K chunks. The patched candidate is not the unchanged companion pin; final distribution acceptance remains open. [Release acceptance and build record](docs/HALO_RELEASE.md).
 
 - [Halo differences, measurements and bitwise checks](docs/HALO_PERFORMANCE.md)
 - [Operator admission, fallback and memory contracts](docs/HALO.md)

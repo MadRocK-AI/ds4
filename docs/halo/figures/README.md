@@ -1,8 +1,8 @@
-# Archived prefill charts
+# Prefill charts and recorded campaigns
 
-Reconstructed from recorded September 25–26 measurements. The renderer uses local data only. **Original DS4** means the upstream `8db1d1d` engine measured by us on the same Halo, not an upstream-published number or today's main. [Provenance audit](PROVENANCE_AUDIT.md).
+The overview includes the latest October 6 prepared-4K result and separately labeled September 25–26 historical context curves. The renderer uses local recorded data only. **Original DS4** means pinned upstream `8db1d1d` measured by us on the corresponding system, not an upstream-published number or today's main. [Historical provenance audit](PROVENANCE_AUDIT.md) · [Latest candidate source and samples](../halo2-qualification.json).
 
-- [Main overview](prefill-context-overview.png): three independent panels. Incremental prefill starts at **2K context**; the prepared complete-4K panel shows **311.24 → 447.51 (+43.78%)**, with **449.03** identified separately as an unpaired best mean; the full-prompt panel keeps **fixed 2K chunks**. No line joins different protocols.
+- [Main overview](prefill-context-overview.png): three independent panels. Historical incremental prefill starts at **2K context**; latest prepared complete-4K shows **315.41 → 454.59 (+44.12%)**, two independent processes per engine with three pure warmups each, IOMMU off; historical full prompts retain **fixed 2K chunks**. No line joins protocols or machines. Historical prepared **311.24 → 447.51** and the unpaired **449.03** remain in the overview JSON and their original evidence.
 - [Fixed 2K + indexer](prefill-context-indexer-update.png): **391.33 / 361.87 / 319.29** at 32K / 64K / 128K, against the original engine's recorded same-chunk full-prompt rates. Different archived days; not contemporary alternating A/B.
 - [Earlier incremental](prefill-context-incremental.png): 32 frontiers from 2K to 64K, two ordinary observations per engine/frontier. Each measurement adds 2K tokens. This preceding checkpoint has no indexer upgrade.
 - [Preceding four-variant comparison](prefill-context-four-variants.png): the same full-prompt campaign, with separate 2K- and 4K-chunk panels. The 4K campaign reached **400.58 / 354.53 / 288.48**.
@@ -14,9 +14,9 @@ The old overview joined official published interval rates with our prepared and 
 
 P is original DS4 code; C is the preceding optimized checkpoint. Indexer B adds the resident-key update; indexer A is its contemporary optimized control. Full-prompt reference observations are from September 25 and the indexer upgrade from September 26. They match model, chunk, prompt length and allocation rule, but the whole-fork comparison is not contemporary alternating A/B.
 
-Each rate is token count divided by arithmetic mean seconds. Incremental rates count only added tokens; full-prompt rates count the complete empty-context request. Model loading is excluded. Required first-use preparation is included in the full-prompt curves; the resident 4K panel explicitly measures after preparation and warmup. Decode, snapshot and restore are outside prefill timers. Long prompts allocate length+129 context slots. Bitwise identity is verified at matching chunks, not between different chunk sizes.
+Archived rates use token count divided by arithmetic mean seconds. The latest prepared panel uses the mean of two per-process rates; its aggregate-time rate rounds to the same 454.59. Incremental rates count added tokens; full-prompt rates count the complete empty-context request. Loading is excluded. First-use preparation is included in historical long-prompt curves; latest 4K timing follows explicit pure warmups. Decode, snapshot and restore are outside prefill timers. Long prompts allocate length+129 slots. Bitwise identity is verified at matching chunks, not across different chunks.
 
-[CSV](prefill-context-data.csv) and [JSON](prefill-context-data.json) retain all 86 original records, individual observations, source IDs, protocols, allocations and SHA256 bindings. The short controls retain their original allocations and are not spliced into full-prompt curves. Connecting segments add no measurements; no smoothing, extrapolation or missing points are inferred. [Overview panel records](prefill-context-overview.json) bind to the canonical data and prepared benchmark attribution.
+[CSV](prefill-context-data.csv) and [JSON](prefill-context-data.json) retain all 86 original records unchanged. [Latest evidence](../halo2-qualification.json) retains current and IOMMU-on samples separately. Short controls are not spliced into full-prompt curves; no smoothing, extrapolation or missing points are inferred. [Overview schema 4](prefill-context-overview.json) binds both sources by SHA256 and retains the former historical prepared panel.
 
 ## Reproduce the figures
 
@@ -27,6 +27,8 @@ python3 docs/halo/figures/render_prefill_context.py
 ```
 
 Optional `--output-dir /path/to/exports` writes all five figures in PNG, SVG and PDF. The renderer checks rate arithmetic, source bindings and label layout. No model, ROCm installation or remote host is needed.
+
+Use `--overview-only` to update the latest overview without rewriting the four archived plots.
 
 ## Provenance
 

@@ -2,7 +2,7 @@
 
 [Performance and quality summary](HALO_PERFORMANCE.md). The detailed historical controls, source/harness attribution and exact values remain in [baseline-attribution.json](halo/baseline-attribution.json); the peak and controlled headline figures are bound in [peak-performance.json](halo/peak-performance.json). The secondary incremental comparison remains in [published-performance.json](halo/published-performance.json).
 
-The source/evidence matrix binds the documented measurements to their implementation. [sources.json](halo/sources.json) binds each component to its original source SHA256, port path/SHA256, historical checkpoint and upstream base. New integrated GPU executions remain **NOT RUN**. [Build and qualification status](HALO_RELEASE.md) distinguishes the historical numerical results from the successful local build/link. The accompanying source records include transformations such as namespace changes, architecture guards, extracted helpers and new native lifetime bindings; whole-file hash differences are expected.
+The source/evidence matrix binds the documented measurements to their implementation. [sources.json](halo/sources.json) binds each component to its original source SHA256, port path/SHA256, historical checkpoint and upstream base. A bounded live installer/launcher/API smoke passed for the pinned RC. The latest unpublished candidate subsequently passed fresh paired 4K numerical and cache-lifetime gates on a second Halo system; its wider matrix and final package acceptance remain open. [Build and qualification status](HALO_RELEASE.md) distinguishes these candidate checks from historical evidence and the unchanged pinned package. Whole-file hash differences are expected for the recorded source and host bindings.
 
 ## Historical chain
 
@@ -20,9 +20,9 @@ Here A is the preceding optimized longcontext chain and B adds the resident-key 
 
 | Fresh tokens; chunk2048 | A prefill mean; min..max (s) | B prefill mean; min..max (s) | Throughput gain from mean times |
 |---|---|---|---|
-|32768|87.56;87.388420..87.725711|83.73;83.686994..83.781547|4.57%|
-|65536|195.29;195.042467..195.545880|181.10;180.922379..181.284847|7.84%|
-|131072|469.85;469.465110..470.237979|410.51;410.386632..410.627998|14.46%|
+|32768|87.56;87.39..87.73|83.73;83.69..83.78|4.57%|
+|65536|195.29;195.04..195.55|181.10;180.92..181.28|7.84%|
+|131072|469.85;469.47..470.24|410.51;410.39..410.63|14.46%|
 
 Use [all18 observations](halo/indexer-observations.csv), including initialization/decode, qualification-only and short4K fallback control rows. [Original official CSVs](halo/historical-csv/) retain their rounded upstream fields; [provenance](halo/historical-provenance.json) binds the original records/CSV/config/environment hashes. [Numerical hashes](halo/historical-numeric-hashes.json) contain hashes/extents only. The decisive pool excludes separate32K/64K qualification runs and the short fallback control. Ranges are not confidence intervals. The16-token decode checks are regressions after readbacks, not an optimized decode claim.
 
@@ -30,4 +30,10 @@ Do not pool this table with incremental suffix, resident4K, first-load, ordinary
 
 ## New integrated candidate
 
-CPU build, focused CPU checks, ROCm C frontend, production kernel compilation and source/module reconstruction have separate statuses in [qualification](HALO_QUALIFICATION.md). Full SDK linking passed for all five targets in local WSL. Numerical and performance acceptance uses the documented historical evidence; no new GPU numeric/state/restore/decode/cache/memory/performance result is asserted. The historical table is not a performance claim for this fork.
+On 2026-10-06, fresh original-DS4 and patched-candidate runs matched all six complete token/logit/state payloads at 4K/chunk4K with capacities 65,665 and 4,352, including after 16 generated tokens. The 4K → 32-token continuation → fresh 4K lifetime sequence matched nine paired payloads and first/final payloads within each engine; existing four-layer layout witnesses confirmed DonorW → native Wt → DonorW. Manifests and actual byte extents were checked. [Candidate identities and scope](halo/halo2-qualification.json).
+
+The reference was freshly generated on the second system. Both arms differ from the old short-B oracle in four tensor payloads, while token IDs match; that old oracle was not substituted for the fresh reference. The frontier FP32 logit hash matches the historical Structural9 frontier. No new full long-context, snapshot or universal quality claim follows.
+
+Initial IOMMU-on timing averaged 429.79 token/s, below 440. After the owner-authorized single-parameter IOMMU-off change, every complete prepared-geometry payload and manifest also matched its own retained on-mode reference. The same immutable binary and timing recipe then averaged **454.59 token/s**, **44.12%** above its fresh 315.41 original-DS4 control, passing the retained 440 minimum. The candidate's before/after increase is **5.77%**. The old on-mode record is retained; the package and companion pin remain unchanged.
+
+CPU build, focused CPU checks, ROCm C frontend, production kernel compilation and source/module reconstruction have separate statuses in [qualification](HALO_QUALIFICATION.md). Full SDK linking passed for all five targets in local WSL. Live package execution is recorded separately in [the release record](HALO_RELEASE.md). The historical table describes its frozen executables and configurations; it does not certify the integrated package's numerical equivalence or throughput.

@@ -1,6 +1,6 @@
 # Halo verification and reproduction
 
-Numerical and performance evidence describes the retained historical checkpoints. Normal gfx1151 ROCm build/link and ELF relocation checks passed locally in WSL on 2026-10-02. [Build and qualification status](HALO_RELEASE.md) records the scope. The sequence below explains how to reproduce the GPU checks; it does not report a new run of the integrated executable. Keep `DS4_ROCM_HALO_PREFILL` opt-in. Untested cases remain explicitly untested.
+Historical checkpoints, the pinned RC and the latest unpublished candidate have separate records. The candidate passed recorded fresh 4K numerical, prepared-geometry and cache-lifetime gates on a second Halo system on 2026-10-06. Its IOMMU-off prepared mean reached **454.59 token/s**, passing the unchanged 440 minimum; all complete compared on/off payloads remained bitwise identical. [Build and qualification status](HALO_RELEASE.md) and [portable candidate evidence](halo/halo2-qualification.json) record identities and limits. The pinned RC's installer/API smoke remains a bounded execution check. The wider GPU sequence below is not claimed as newly executed. Keep `DS4_ROCM_HALO_PREFILL` opt-in.
 
 ## Executed and pending checks
 
@@ -19,9 +19,11 @@ Numerical and performance evidence describes the retained historical checkpoints
 | Normal Makefile object recipes | PASS | All10 Halo objects, full runtime and native quantizer for gfx1151/gfx1100; real gfx1100 template entries verified |
 | S4+D2 source reconstruction | PASS | Newly assembled/linked module has original SHA256; no undefined symbols |
 | Complete SDK executable link | PASS | Five normal ROCm targets in WSL; five relocation checks pass with real SDK libraries. See [build record](halo/release-build.json) |
-| New GPU logits/state/decode/snapshot equality | PENDING | No GPU access in this preparation |
-| Cache demotion, aliases, resource failures and peak memory | PENDING | New host composition needs hardware checks; fault/alias injection is not automated by the benchmark |
-| Ordinary complete prefill/decode timing | PENDING | Run after numerical admission, without payloads or profiler |
+| Live installed launcher/API smoke | PASS | Existing model SHA256, single-device Halo, 14/4214 prompt tokens, 8 generated tokens each; startup and generation only |
+| Candidate GPU token/logit/state equality | PASS for recorded 4K cases | Fresh paired reference at capacities 65,665 and 4,352, including 16 generated tokens; wider context and new snapshot checks remain pending |
+| Candidate cache demotion/re-promotion | PASS for recorded lifetime case | Same session 4K → +32 → invalidate → fresh 4K; nine paired payloads and existing layout witnesses. Alias/fault injection, resource failures and peak memory remain pending |
+| Candidate IOMMU on/off payload equality | PASS at recorded prepared geometry | Six complete payloads and manifests match both engines and each arm's retained on-mode result; source/binaries unchanged |
+| Candidate ordinary prepared prefill timing | PASS with IOMMU off | Mean 454.59 versus fresh upstream 315.41 token/s (+44.12%); unchanged minimum 440 passed; no payloads, trace or profiler. Initial on-mode 429.79 remains recorded |
 | Metal/CUDA model and SSD inference regressions | SKIP here | Required platform/model executors unavailable; shared changes are guarded by `DS4_ROCM_BUILD` |
 | Full upstream/model suites | PENDING | No claim that `make test` or `make test-rocm` completed |
 
@@ -76,7 +78,7 @@ python3 "$HALO_COMPANION/scripts/compare_payloads.py" "$HALO_RESULTS/$HALO_CASE-
 
 Repeat with case names `fresh-32768-c2048`, `fresh-32768-c4096`, `fresh-65536-c2048`, `fresh-65536-c4096`, `fresh-131072-c2048`, `fresh-131072-c4096`, `incremental-65536-c2048` and `incremental-65536-c4096`. Add `--require-restore` to all three comparisons for incremental cases. Prefix IDs, every FP32 logit and complete serialized state must agree, including after16 emitted greedy IDs. API extent manifests reject equal truncated files. Every intermediate restoration must be an actual serialized snapshot with complete state size; replay is reported separately. Final fresh frontiers do not restore. Results apply to the tested cases, not universal model quality.
 
-After equality, a separate bounded trace must confirm selected kernel names and each qualified2K/4K branch; a passing all-native fallback run cannot prove the optimized paths. Capture producer/output boundaries and compare them to the same native control if a full-state mismatch occurs. Do not use graph-dump mode as coverage evidence because it excludes these selectors. Keep diagnostics out of ordinary timing. Also run native/default and unsupported shape/model checks on available executors; inspect cache native-to-donor admission, donor-to-native one-way demotion during decode, budget exhaustion, repeated engine open/close and lease error paths. The benchmark covers real prefill-to-decode transitions and snapshots, but does not automate allocator fault or alias injection.
+After equality, a separate bounded trace must confirm selected kernel names and each qualified2K/4K branch; a passing all-native fallback run cannot prove the optimized paths. Capture producer/output boundaries and compare them to the same native control if a full-state mismatch occurs. Do not use graph-dump mode as coverage evidence because it excludes these selectors. Keep diagnostics out of ordinary timing. Also run native/default and unsupported shape/model checks on available executors; inspect cache native-to-donor admission, donor-to-native conversion and subsequent re-promotion, budget exhaustion, repeated engine open/close and lease error paths. The recorded candidate lifetime case passed; it does not automate allocator fault or alias injection.
 
 The focused upstream regression command on the GPU executor is:
 
